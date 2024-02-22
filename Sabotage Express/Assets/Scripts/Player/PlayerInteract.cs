@@ -34,7 +34,7 @@ public class PlayerInteract : MonoBehaviour
                 playerUI.UpdateText(interactable.promtMessage);
                 if (inputManager.onFoot.Interact.triggered)
                 {
-                    interactable.BaseInteract();
+                    interactable.BaseInteract(this.gameObject);
                 }
             }
         }

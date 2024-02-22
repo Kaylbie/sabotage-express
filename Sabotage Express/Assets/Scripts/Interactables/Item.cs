@@ -22,15 +22,16 @@ public class Item : Interactable
         
     }
 
-    protected override void Interact()
+    protected override void Interact(GameObject player)
     {
         if (pickable)
         {
-            Inventory.Instance.AddItemToInventory(this);
-            // Since the object is added to the inventory, you might want to disable it instead of destroying it immediately.
-            // This allows for the possibility of dropping the item back into the world.
-            // Object.Destroy(this.gameObject);
-            this.gameObject.SetActive(false);
+            Inventory inventory = player.GetComponent<Inventory>();
+            if (inventory != null && pickable)
+            {
+                inventory.AddItemToInventory(this);
+                
+            }
         }
         else
         {

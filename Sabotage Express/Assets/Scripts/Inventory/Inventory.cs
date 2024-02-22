@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public static Inventory Instance { get; private set; }
+    
     private List<Item> inventoryItems = new List<Item>();
     
     public InventoryData[] inventory;
@@ -17,24 +17,13 @@ public class Inventory : MonoBehaviour
 
     bool inventoryOpen = false;
     public GameObject inventoryUI;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    
     public void AddItemToInventory(Item item)
     {
         inventoryItems.Add(item);
-        // Optionally, update UI or notify the player here
-        Debug.Log($"Added {item.objectName} to inventory");
+        Debug.Log($"{item} added to {this.gameObject.GetComponent<Player>().nickname} inventory");
+        Destroy(item.gameObject);
+
     }
     // Start is called before the first frame update
     void Start()

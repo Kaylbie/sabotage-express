@@ -5,11 +5,11 @@ using UnityEngine;
 public abstract class Interactable : MonoBehaviour
 {
     public string promtMessage;
-    public void BaseInteract()
+    public void BaseInteract(GameObject player)
     {
-        Interact();
+        Interact(player);
     }
-    protected virtual void Interact()
+    protected virtual void Interact(GameObject player)
     {
 
     }
