@@ -13,12 +13,14 @@ public class Inventory : MonoBehaviour
     } 
 
     bool inventoryOpen = false;
-
+    public GameObject inventoryUI;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        
+        inventoryUI.SetActive(false);
         int inventorySize = 20;
         inventory = new InventoryData[inventorySize];
     }
@@ -28,11 +30,13 @@ public class Inventory : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.I)&& inventoryOpen==false){
             Debug.Log("Inventory Opened");
             inventoryOpen = true;
+            inventoryUI.SetActive(true);
         }
         if(Input.GetKeyDown(KeyCode.Escape)&& inventoryOpen==true)
         {
             inventoryOpen = false;
             Debug.Log("Inventory Closed");
+            inventoryUI.SetActive(false);
         }
         if(Input.GetKeyDown(KeyCode.E))
         { 
@@ -65,7 +69,7 @@ public class Inventory : MonoBehaviour
             {
                 if (inventory[i].objectID == obj.objectID)
                 {
-                    inventory[i].objectQuantity++;
+                    inventory[i].objectQuantity= inventory[i].objectQuantity + obj.objectQuantity;
                     Debug.Log("Item Added to Inventory");
                     return;
                 }
@@ -74,7 +78,7 @@ public class Inventory : MonoBehaviour
             {
                 //inventory[i] = new InventoryData();
                 inventory[i].objectID = obj.objectID;
-                inventory[i].objectQuantity = 1;
+                inventory[i].objectQuantity = obj.objectQuantity;
                 inventory[i].objectName = obj.objectName;
                 Debug.Log("Item Added to Inventory");
                 return;
