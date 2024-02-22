@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    
+    private List<Item> inventoryItems = new List<Item>();
+    
     public InventoryData[] inventory;
     [System.Serializable]
     public  class InventoryData{
@@ -14,8 +17,14 @@ public class Inventory : MonoBehaviour
 
     bool inventoryOpen = false;
     public GameObject inventoryUI;
+    
+    public void AddItemToInventory(Item item)
+    {
+        inventoryItems.Add(item);
+        Debug.Log($"{item} added to {this.gameObject.GetComponent<Player>().nickname} inventory");
+        Destroy(item.gameObject);
 
-
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +59,7 @@ public class Inventory : MonoBehaviour
                 }
                 if (hit.collider.gameObject.GetComponent<ObjectData>().pickable)
                 {
-                     Debug.Log("Ray cast hit" + hit.collider.gameObject.name);
+                    Debug.Log("Ray cast hit" + hit.collider.gameObject.name);
                     AddItem(hit.collider.gameObject.GetComponent<ObjectData>());
                     Destroy(hit.collider.gameObject);
                 }
@@ -59,10 +68,8 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    void AddItem(ObjectData obj)
+    public void AddItem(ObjectData obj)
     {
-        
-        //check if object exist already then add quantity if no add new item to inventory
         for (int i = 0; i < inventory.Length; i++)
         {
             if (inventory[i].objectID != 0)
