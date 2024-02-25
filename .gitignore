@@ -11,7 +11,16 @@
 [Uu]ser[Ss]ettings/
 .idea
 .vscode
-
+Low Poly FPS Pack/
+Low Poly FPS Pack.meta
+PolygonPrototype/
+PolygonPrototype.meta
+PolygonSciFiCity/
+PolygonSciFiCity.meta
+PolygonSciFiSpace/
+PolygonSciFiSpace.meta
+PolygonSciFiWorlds/
+PolygonSciFiWorlds.meta
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 [Mm]emoryCaptures/
