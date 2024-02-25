@@ -34,6 +34,7 @@ public class Inventory : MonoBehaviour
         inventory = new InventoryData[inventorySize];
     }
     // Update is called once per frame
+    
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.I)&& inventoryOpen==false){
