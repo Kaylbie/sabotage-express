@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartBtn : Interactable
 {
@@ -18,5 +19,6 @@ public class StartBtn : Interactable
     protected override void Interact(GameObject player)
     {
         Debug.Log("Start button pressed!");
+        SceneManager.LoadScene("Wagon", LoadSceneMode.Additive);
     }
 }
