@@ -16,7 +16,7 @@ public class PlayerMotor : MonoBehaviour
     public float speed = 5f;
     public float gravity = -9.8f;
     public float jumpHeight = 3f;
-
+    
     
     void Start()
     {
@@ -27,7 +27,7 @@ public class PlayerMotor : MonoBehaviour
     
     void Update()
     {
-        isGrounded = controller.isGrounded;
+        
         if (lerpCrouch)
         {
             crouchTimer += Time.deltaTime;
@@ -44,6 +44,31 @@ public class PlayerMotor : MonoBehaviour
                 crouchTimer = 0f;
             }
         }
+        if (!isGrounded && playerVelocity.y > 0)
+        {
+            anim.SetFloat("JumpPhase", 0.5f); // Assuming 0.5 represents the jumping phase
+        }
+        // Check if the player is falling
+        else if (!isGrounded && playerVelocity.y <= 0)
+        {
+            anim.SetFloat("JumpPhase", 0.75f); // Assuming 0.75 represents the falling phase
+        }
+        // Check if the player has landed
+        else if (isGrounded && playerVelocity.y <= 0)
+        {
+            anim.SetFloat("JumpPhase", 1f); // Assuming 1 represents the landing phase
+        }
+        if (isGrounded && anim.GetBool("IsJumping"))
+        {
+            
+            anim.SetBool("IsJumping", false);
+        }
+
+        if (!isGrounded)
+        {
+            anim.SetFloat("JumpPhase", 0.75f);
+        }
+        isGrounded = controller.isGrounded;
     }
     public void ProcessMove(Vector2 input)
     {
@@ -70,7 +95,9 @@ public class PlayerMotor : MonoBehaviour
     {
         if (isGrounded)
         {
+            anim.SetBool("IsJumping", true);
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -0.3f * gravity);
+            isGrounded = false;
         }
     }
     public void Crouch()
