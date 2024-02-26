@@ -8,6 +8,7 @@ public class PlayerMotor : MonoBehaviour
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool isGrounded;
+    private Animator anim;
     bool crouching = false;
     float crouchTimer = 1;
     bool lerpCrouch = false;
@@ -19,6 +20,7 @@ public class PlayerMotor : MonoBehaviour
     
     void Start()
     {
+        anim = gameObject.GetComponent<Animator> ();
         controller = GetComponent<CharacterController>();
     }
 
@@ -48,8 +50,16 @@ public class PlayerMotor : MonoBehaviour
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         moveDirection.z = input.y;
-        controller.Move(transform.TransformDirection(moveDirection) * speed*Time.deltaTime);
-        if(isGrounded && playerVelocity.y<0) {
+
+        // Normalize input to avoid faster diagonal movement
+        input = input.normalized;
+
+        // Set the animation parameters based on input
+        anim.SetFloat("Vertical", input.y, 0.1f, Time.deltaTime);
+        anim.SetFloat("Horizontal", input.x, 0.1f, Time.deltaTime);
+
+        controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
+        if(isGrounded && playerVelocity.y < 0) {
             playerVelocity.y = -2f;
         }
         playerVelocity.y += gravity * Time.deltaTime;
