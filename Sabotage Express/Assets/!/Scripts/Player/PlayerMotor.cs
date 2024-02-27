@@ -7,7 +7,7 @@ public class PlayerMotor : MonoBehaviour
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
-    private bool isGrounded;
+    //private bool isGrounded;
     private Animator anim;
     bool crouching = false;
     float crouchTimer = 1;
@@ -16,8 +16,11 @@ public class PlayerMotor : MonoBehaviour
     public float speed = 5f;
     public float gravity = -9.8f;
     public float jumpHeight = 3f;
-    
-    
+    private Vector2 currentInput;
+    private bool isFalling;
+    private float jumpTimeoutDuration = 0.35f; // Timeout duration in seconds
+    private float timeSinceLastJump = 0;
+    public bool bhop;
     void Start()
     {
         anim = gameObject.GetComponent<Animator> ();
@@ -44,38 +47,61 @@ public class PlayerMotor : MonoBehaviour
                 crouchTimer = 0f;
             }
         }
-        if (!isGrounded && playerVelocity.y > 0)
+
+        isFalling = !controller.isGrounded && playerVelocity.y < 0;
+        UpdateJumpPhase();
+        if (controller.isGrounded)
         {
-            anim.SetFloat("JumpPhase", 0.5f); // Assuming 0.5 represents the jumping phase
+            timeSinceLastJump += Time.deltaTime; // Update the timer
         }
-        // Check if the player is falling
-        else if (!isGrounded && playerVelocity.y <= 0)
+        
+        //isGrounded = controller.isGrounded;
+    }
+    void UpdateJumpPhase()
+    {
+        
+        bool isMoving = currentInput.magnitude > 0.1f;
+        if (isMoving)
         {
-            anim.SetFloat("JumpPhase", 0.75f); // Assuming 0.75 represents the falling phase
+            anim.SetBool("IsMoving", true);
         }
-        // Check if the player has landed
-        else if (isGrounded && playerVelocity.y <= 0)
+        else
         {
-            anim.SetFloat("JumpPhase", 1f); // Assuming 1 represents the landing phase
+            anim.SetBool("IsMoving", false);
         }
-        if (isGrounded && anim.GetBool("IsJumping"))
+        if (controller.isGrounded)
         {
-            
+            anim.SetBool("IsFalling", false);
             anim.SetBool("IsJumping", false);
         }
-
-        if (!isGrounded)
+        else if (playerVelocity.y > 0)
         {
-            anim.SetFloat("JumpPhase", 0.75f);
+            anim.SetBool("IsJumping", true); // Jumping up
         }
-        isGrounded = controller.isGrounded;
+        if (isFalling)
+        {
+            anim.SetBool("IsFalling", true); // Falling
+        }
+        else
+        {
+            anim.SetBool("IsFalling", false);
+        }
+
+        if (controller.isGrounded)
+        {
+            anim.SetBool("IsGrounded", true);
+        }
+        else
+        {
+            anim.SetBool("IsGrounded", false);
+        }
     }
     public void ProcessMove(Vector2 input)
     {
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         moveDirection.z = input.y;
-
+        currentInput = input;
         // Normalize input to avoid faster diagonal movement
         input = input.normalized;
 
@@ -84,7 +110,7 @@ public class PlayerMotor : MonoBehaviour
         anim.SetFloat("Horizontal", input.x, 0.1f, Time.deltaTime);
 
         controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
-        if(isGrounded && playerVelocity.y < 0) {
+        if(controller.isGrounded && playerVelocity.y < 0) {
             playerVelocity.y = -2f;
         }
         playerVelocity.y += gravity * Time.deltaTime;
@@ -93,11 +119,10 @@ public class PlayerMotor : MonoBehaviour
     }
     public void Jump()
     {
-        if (isGrounded)
+        if (controller.isGrounded && !isFalling && timeSinceLastJump >= jumpTimeoutDuration || controller.isGrounded && !isFalling && bhop)
         {
-            anim.SetBool("IsJumping", true);
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -0.3f * gravity);
-            isGrounded = false;
+            timeSinceLastJump = 0;
         }
     }
     public void Crouch()
