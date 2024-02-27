@@ -18,19 +18,29 @@ public class PlayerMotor : MonoBehaviour
     public float jumpHeight = 3f;
     private Vector2 currentInput;
     private bool isFalling;
-    private float jumpTimeoutDuration = 0.35f; // Timeout duration in seconds
+    private float jumpTimeoutDuration = 0.35f;
     private float timeSinceLastJump = 0;
     public bool bhop;
+
+    /// <summary>
+    [SerializeField] private Transform arms;
+
+    [SerializeField] private Vector3 armPosition;
+    /// </summary>
     void Start()
     {
         anim = gameObject.GetComponent<Animator> ();
         controller = GetComponent<CharacterController>();
     }
-
+    private Transform AssignCharactersCamera()
+    {
+        var t = transform;
+        arms.SetPositionAndRotation(t.position, t.rotation);
+        return arms;
+    }
     
     void Update()
     {
-        
         if (lerpCrouch)
         {
             crouchTimer += Time.deltaTime;
@@ -52,7 +62,7 @@ public class PlayerMotor : MonoBehaviour
         UpdateJumpPhase();
         if (controller.isGrounded)
         {
-            timeSinceLastJump += Time.deltaTime; // Update the timer
+            timeSinceLastJump += Time.deltaTime; 
         }
         
         //isGrounded = controller.isGrounded;
@@ -102,10 +112,8 @@ public class PlayerMotor : MonoBehaviour
         moveDirection.x = input.x;
         moveDirection.z = input.y;
         currentInput = input;
-        // Normalize input to avoid faster diagonal movement
         input = input.normalized;
 
-        // Set the animation parameters based on input
         anim.SetFloat("Vertical", input.y, 0.1f, Time.deltaTime);
         anim.SetFloat("Horizontal", input.x, 0.1f, Time.deltaTime);
 
