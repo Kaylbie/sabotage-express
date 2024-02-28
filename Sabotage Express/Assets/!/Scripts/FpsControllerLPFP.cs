@@ -4,10 +4,7 @@ using UnityEngine;
 
 namespace FPSControllerLPFP
 {
-    /// Manages a first person character
-    [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(CapsuleCollider))]
-    [RequireComponent(typeof(AudioSource))]
+    
     public class FpsControllerLPFP : MonoBehaviour
     {
 #pragma warning disable 649
@@ -57,7 +54,7 @@ namespace FPSControllerLPFP
         private FpsInput input;
 #pragma warning restore 649
 
-        private Rigidbody _rigidbody;
+        //private Rigidbody _rigidbody;
         private CapsuleCollider _collider;
         private AudioSource _audioSource;
         private SmoothRotation _rotationX;
@@ -72,8 +69,8 @@ namespace FPSControllerLPFP
         /// Initializes the FpsController on start.
         private void Start()
         {
-            _rigidbody = GetComponent<Rigidbody>();
-            _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            //_rigidbody = GetComponent<Rigidbody>();
+            //_rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             _collider = GetComponent<CapsuleCollider>();
             _audioSource = GetComponent<AudioSource>();
 			arms = AssignCharactersCamera();
@@ -218,9 +215,9 @@ namespace FPSControllerLPFP
 
             var smoothX = _velocityX.Update(velocity.x, movementSmoothness);
             var smoothZ = _velocityZ.Update(velocity.z, movementSmoothness);
-            var rigidbodyVelocity = _rigidbody.velocity;
-            var force = new Vector3(smoothX - rigidbodyVelocity.x, 0f, smoothZ - rigidbodyVelocity.z);
-            _rigidbody.AddForce(force, ForceMode.VelocityChange);
+            //var rigidbodyVelocity = _rigidbody.velocity;
+            //var force = new Vector3(smoothX - rigidbodyVelocity.x, 0f, smoothZ - rigidbodyVelocity.z);
+            //_rigidbody.AddForce(force, ForceMode.VelocityChange);
         }
 
         private bool CheckCollisionsWithWalls(Vector3 velocity)
@@ -249,12 +246,12 @@ namespace FPSControllerLPFP
         {
             if (!_isGrounded || !input.Jump) return;
             _isGrounded = false;
-            _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            //.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
         private void PlayFootstepSounds()
         {
-            if (_isGrounded && _rigidbody.velocity.sqrMagnitude > 0.1f)
+            if (_isGrounded)
             {
                 _audioSource.clip = input.Run ? runningSound : walkingSound;
                 if (!_audioSource.isPlaying)
