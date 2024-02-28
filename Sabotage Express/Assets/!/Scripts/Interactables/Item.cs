@@ -10,7 +10,8 @@ public class Item : Interactable
     public int objectWeight;
     public int objectValue;
     public bool pickable;
-    public int objectQuantity = 1;
+    public int objectQuantity;
+    public Sprite objectImage;
     void Start()
     {
         
@@ -26,10 +27,10 @@ public class Item : Interactable
     {
         if (pickable)
         {
-            Inventory inventory = player.GetComponent<Inventory>();
+            InventoryManager inventory = player.GetComponent<InventoryManager>();
             if (inventory != null && pickable)
             {
-                inventory.AddItemToInventory(this);
+                inventory.AddItem(this);
                 
             }
         }
