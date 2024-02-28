@@ -2289,8 +2289,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b8ce1d432a7554a816aa1a22356bfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keypadManager: {fileID: 0}
-  matchSystemManager: {fileID: 0}
+  keypadManager: {fileID: 5530544542530328123}
+  matchSystemManager: {fileID: 8823769910607153398}
   isAccessGranted: 0
 --- !u!1 &2959264629796230355
 GameObject:

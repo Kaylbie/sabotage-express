@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &533018872 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8823769910607153398, guid: 0b3587afb2d13a343b084bc6820adcff, type: 3}
+  m_PrefabInstance: {fileID: 3687413514906027014}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 393b8809878a3864d8506f5aac0065ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &801156683
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,6 +226,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1758016134 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5530544542530328123, guid: 0b3587afb2d13a343b084bc6820adcff, type: 3}
+  m_PrefabInstance: {fileID: 3687413514906027014}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa78b6fe2e7b27a4e9ea849bb49be7cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2114810996
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,6 +383,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ControlUnit
       objectReference: {fileID: 0}
+    - target: {fileID: 8661109585588904030, guid: 0b3587afb2d13a343b084bc6820adcff, type: 3}
+      propertyPath: keypadManager
+      value: 
+      objectReference: {fileID: 1758016134}
+    - target: {fileID: 8661109585588904030, guid: 0b3587afb2d13a343b084bc6820adcff, type: 3}
+      propertyPath: matchSystemManager
+      value: 
+      objectReference: {fileID: 533018872}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
