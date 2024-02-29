@@ -8,24 +8,34 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventoryUI;
     public bool inventoryOpen = false;
     public ItemSlot[] itemSlot;
+    private InputManager inputManager;
     void Start()
     {
-        
+        inputManager = GetComponent<InputManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)&& inventoryOpen==true||Input.GetKeyDown(KeyCode.I)&& inventoryOpen==true)
+        if (inputManager.onFoot.Inventory.triggered)
         {
-            inventoryOpen = false;
-            Debug.Log("Inventory Closed");
-            inventoryUI.SetActive(false);
+            openInventory();
+            inputManager.onFoot.Movement.Disable();
+            inputManager.onFoot.Look.Disable();
+            inputManager.onFoot.Jump.Disable();
+            inputManager.onFoot.Crouch.Disable();
+            inputManager.onFoot.Sprint.Disable();
+                    
         }
-        if(Input.GetKeyDown(KeyCode.I)&& inventoryOpen==false){
-            Debug.Log("Inventory Opened");
-            inventoryOpen = true;
-            inventoryUI.SetActive(true);
+
+        if (inputManager.onFoot.Escape.triggered)
+        {
+            closeInventory();
+            inputManager.onFoot.Movement.Enable();
+            inputManager.onFoot.Look.Enable();
+            inputManager.onFoot.Jump.Enable();
+            inputManager.onFoot.Crouch.Enable();
+            inputManager.onFoot.Sprint.Enable();
         }
     }
     public void AddItem(Item item)
@@ -42,5 +52,20 @@ public class InventoryManager : MonoBehaviour
         }
         
         Debug.Log(item.objectImage);
+    }
+
+    public void openInventory()
+    {
+        Debug.Log("Inventory Opened");
+        Cursor.visible = true;
+        inventoryOpen = true;
+        inventoryUI.SetActive(true);
+    }
+    public void closeInventory()
+    {
+        inventoryOpen = false;
+        Debug.Log("Inventory Closed");
+        Cursor.visible = false;
+        inventoryUI.SetActive(false);
     }
 }
