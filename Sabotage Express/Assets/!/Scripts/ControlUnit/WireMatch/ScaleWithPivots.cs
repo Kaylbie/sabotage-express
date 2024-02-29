@@ -26,7 +26,7 @@ public class ScaleWithPivots : MonoBehaviour
     }
     private void UpdateTransformForScale()
     {
-        float distance = Vector3.Distance(start.transform.position, end.transform.position);
+        float distance = Vector3.Distance(start.transform.localPosition, end.transform.localPosition);
         transform.localScale = new Vector3(initialScale.x, distance / 2f, initialScale.z);
 
         Vector3 middlePoint = (start.transform.position + end.transform.position) / 2f;

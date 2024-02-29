@@ -10,7 +10,7 @@ public class MovablePair : MonoBehaviour
     private bool isConnected;
     [SerializeField] bool hasPower;
     private const string portTag = "Port";
-    private const float dragResponseThreshold = 2;
+    [SerializeField] private float dragResponseThreshold = 0.2f;
 
     void Start()
     {
@@ -21,7 +21,7 @@ public class MovablePair : MonoBehaviour
     {
         Vector3 screenPostiion = new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraZDistance);
         Vector3 newWorldPosition = mainCamera.ScreenToWorldPoint(screenPostiion);
-
+        Debug.Log(screenPostiion.ToString() + " " + newWorldPosition.ToString() + " " + Vector3.Distance(transform.position, newWorldPosition));
         if (!isConnected)
         {
             transform.position = newWorldPosition;
