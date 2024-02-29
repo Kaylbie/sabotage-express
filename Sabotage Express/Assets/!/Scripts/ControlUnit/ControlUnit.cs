@@ -6,11 +6,13 @@ public class ControlUnit : MonoBehaviour
 {
     [SerializeField] KeypadManager keypadManager;
     [SerializeField] MatchSystemManager matchSystemManager;
-
+    [SerializeField] private GameObject door;
+    [SerializeField] private string password;
     [SerializeField] private bool isAccessGranted = false;
 
     private void Update()
     {
+        password = keypadManager.GetPassword();
         if (matchSystemManager.AccessWasGranted())
         {
             isAccessGranted = matchSystemManager.AccessGranted();
@@ -19,6 +21,8 @@ public class ControlUnit : MonoBehaviour
         {
             isAccessGranted = true;
         }
+
+        door.GetComponent<Animator>().SetBool("IsOpen", isAccessGranted);
     }
 
 }

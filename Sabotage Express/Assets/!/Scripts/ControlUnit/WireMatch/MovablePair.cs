@@ -1,34 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class MovablePair : MonoBehaviour
+public class MovablePair : Interactable
 {
-    private Camera mainCamera;
-    private float cameraZDistance;
     private Vector3 initialPosition;
     private bool isConnected;
-    [SerializeField] bool hasPower;
     private const string portTag = "Port";
+    public GameObject port;
     [SerializeField] private float dragResponseThreshold = 0.2f;
 
-    void Start()
+    private bool isInUse = false;
+    private GameObject player;
+    private RaycastHit hitInfo;
+
+    public void Update()
     {
-        mainCamera = Camera.main;
-        cameraZDistance = mainCamera.WorldToScreenPoint(transform.position).z;
-    }
-    void OnMouseDrag()
-    {
-        Vector3 screenPostiion = new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraZDistance);
-        Vector3 newWorldPosition = mainCamera.ScreenToWorldPoint(screenPostiion);
-        Debug.Log(screenPostiion.ToString() + " " + newWorldPosition.ToString() + " " + Vector3.Distance(transform.position, newWorldPosition));
-        if (!isConnected)
+        if (isInUse)
         {
-            transform.position = newWorldPosition;
+            hitInfo = player.GetComponent<PlayerInteract>().hitInfo;
+            if (hitInfo.transform == null)
+            {
+                ResetPosition();
+                isInUse = false;
+            }
+            else
+            {
+                Vector3 newWorldPosition = hitInfo.point;
+
+                if (!isConnected)
+                {
+                    transform.position = new Vector3(transform.position.x, newWorldPosition.y, newWorldPosition.z);
+                }
+                else if (Vector3.Distance(transform.position, newWorldPosition) > dragResponseThreshold)
+                {
+                    isConnected = false;
+                }
+            }
         }
-        else if (Vector3.Distance(transform.position, newWorldPosition) > dragResponseThreshold)
+        else
         {
-            isConnected = false;
+            if (!isConnected)
+            {
+                ResetPosition();
+            }
+        }
+    }
+
+    protected override void Interact(GameObject player)
+    {
+        if (isInUse)
+        {
+            isInUse = false;
+        }
+        else
+        {
+            isInUse = true;
+        }
+        if (player != null)
+        {
+            this.player = player;
+
         }
     }
 
@@ -51,7 +84,6 @@ public class MovablePair : MonoBehaviour
     {
         initialPosition = newPosition;
         transform.position = initialPosition;
-        // Debug.Log(initialPosition);
     }
 
     private void ResetPosition()
@@ -63,6 +95,7 @@ public class MovablePair : MonoBehaviour
         if (other.gameObject.CompareTag(portTag))
         {
             isConnected = true;
+            isInUse = false;
             transform.position = other.transform.position;
         }
     }

@@ -12,6 +12,11 @@ public class KeypadManager : MonoBehaviour
     [SerializeField] private GameObject frontPlate;
     [SerializeField] private GameObject screw;
 
+    public string GetPassword()
+    {
+        return correctPassword;
+    }
+
     private bool isAccessGranted = false;
 
     private void Start()
@@ -72,19 +77,15 @@ public class KeypadManager : MonoBehaviour
         hinge.autoConfigureConnectedAnchor = true;
         hinge.useLimits = true;
 
-        // Add a HingeJoint for the door to swing
         HingeJoint doorHinge = frontPlate.AddComponent<HingeJoint>();
-        doorHinge.axis = new Vector3(0, 0, 1); // Set hinge axis to Z-axis
+        doorHinge.axis = new Vector3(0, 0, 1);
         doorHinge.useLimits = true;
 
-        // Set the hinge anchor to the edge of the door
-        // This may need adjustment based on your door model's pivot point
         doorHinge.anchor = new Vector3(-0.425f, -0.43f, 0);
 
-        // Configure the swing limits
         JointLimits limits = new JointLimits();
-        limits.min = -180; // Minimum swing angle
-        limits.max = 180;  // Maximum swing angle
+        limits.min = -180;
+        limits.max = 180;
         doorHinge.limits = limits;
 
     }

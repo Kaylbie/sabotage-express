@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Screw : MonoBehaviour
+public class Screw : Interactable
 {
     public KeypadManager keypadManager;
 
-    private void OnMouseUpAsButton()
+    protected override void Interact(GameObject player)
     {
         keypadManager.ScrewRelease();
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class KeyButton : MonoBehaviour
+public class KeyButton : Interactable
 {
     public KeypadManager keypadManager;
     [SerializeField] private TextMeshPro buttonText;
@@ -29,20 +29,21 @@ public class KeyButton : MonoBehaviour
     void Update()
     {
         transform.localScale = Vector3.Lerp(transform.localScale, isPressed ? targetScale : originalScale, Time.deltaTime * animationSpeed);
+        Vector3 currentTargetScale = isPressed ? targetScale : originalScale;
+
+        if (Vector3.Distance(transform.localScale, currentTargetScale) < 0.001f)
+        {
+            if (isPressed)
+            {
+                isPressed = false;
+            }
+        }
     }
 
-    void OnMouseDown()
+    protected override void Interact(GameObject player)
     {
+        keypadManager.ProcessKeyPress(keyValue);
         isPressed = true;
     }
 
-    void OnMouseUp()
-    {
-        isPressed = false;
-    }
-
-    private void OnMouseUpAsButton()
-    {
-        keypadManager.ProcessKeyPress(keyValue);
-    }
 }
