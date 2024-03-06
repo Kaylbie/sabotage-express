@@ -21,6 +21,9 @@ public class PlayerMotor : MonoBehaviour
     private float jumpTimeoutDuration = 0.35f;
     private float timeSinceLastJump = 0;
     public bool bhop;
+    public float transitionSpeed = 5f; // How fast the height changes from standing to crouching and vice versa
+    public float crouchCenterY = 0.5f; // Center Y position when crouching
+    public float standCenterY = 1f;
 
     /// <summary>
     [SerializeField] private Transform arms;
@@ -44,14 +47,20 @@ public class PlayerMotor : MonoBehaviour
         if (lerpCrouch)
         {
             crouchTimer += Time.deltaTime;
-            float p = crouchTimer / 1;
-            p *= p;
-            if (crouching)
-                controller.height = Mathf.Lerp(controller.height, 1, p);
-            else
-                controller.height = Mathf.Lerp(controller.height, 2, p);
+            float p = crouchTimer / transitionSpeed;
+            p = Mathf.Clamp01(p); // Ensure p is clamped between 0 and 1
 
-            if (p > 1)
+            // Determine the target height and center based on the crouching state
+            float targetHeight = crouching ? 1f : 2f;
+            float targetCenterY = crouching ? crouchCenterY : standCenterY;
+
+            // Smoothly interpolate the height and center of the controller
+            controller.height = Mathf.Lerp(controller.height, targetHeight, p);
+            Vector3 newCenter = controller.center;
+            newCenter.y = Mathf.Lerp(newCenter.y, targetCenterY, p);
+            controller.center = newCenter;
+
+            if (p >= 1)
             {
                 lerpCrouch = false;
                 crouchTimer = 0f;
@@ -136,6 +145,7 @@ public class PlayerMotor : MonoBehaviour
     public void Crouch()
     {
         crouching = !crouching;
+        anim.SetBool("IsCrouching", crouching);
         crouchTimer = 0;
         lerpCrouch = true;
     }
