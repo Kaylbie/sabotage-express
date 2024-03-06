@@ -14,6 +14,7 @@ public class PlayerMotor : MonoBehaviour
     bool lerpCrouch = false;
     bool sprinting = false;
     public float speed = 5f;
+    public float croachSpeed = 2f;
     public float gravity = -9.8f;
     public float jumpHeight = 3f;
     private Vector2 currentInput;
@@ -148,6 +149,12 @@ public class PlayerMotor : MonoBehaviour
         anim.SetBool("IsCrouching", crouching);
         crouchTimer = 0;
         lerpCrouch = true;
+        if (crouching)
+            speed = 2;
+        else
+        {
+            speed = 5;
+        }
     }
     public void Sprint()
     {
