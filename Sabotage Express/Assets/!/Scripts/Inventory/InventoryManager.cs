@@ -8,11 +8,17 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventoryUI;
     public bool inventoryOpen = false;
     public ItemSlot[] itemSlot;
-    public int selectedSlot=0;
+    public int selectedSlot;
     private InputManager inputManager;
     void Start()
     {
+        selectedSlot = 1;
         inputManager = GetComponent<InputManager>();
+        selectSlot(selectedSlot);
+    }
+    void lateStart()
+    {
+        selectedSlot = 1;
         selectSlot(selectedSlot);
     }
 
