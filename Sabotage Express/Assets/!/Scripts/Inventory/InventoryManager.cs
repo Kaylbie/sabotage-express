@@ -8,10 +8,12 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventoryUI;
     public bool inventoryOpen = false;
     public ItemSlot[] itemSlot;
+    public int selectedSlot=0;
     private InputManager inputManager;
     void Start()
     {
         inputManager = GetComponent<InputManager>();
+        selectSlot(selectedSlot);
     }
 
     // Update is called once per frame
@@ -36,6 +38,30 @@ public class InventoryManager : MonoBehaviour
             inputManager.onFoot.Jump.Enable();
             inputManager.onFoot.Crouch.Enable();
             inputManager.onFoot.Sprint.Enable();
+        }
+        if(inputManager.onFoot.hotbar1.triggered)
+        {
+            selectSlot(1);
+        }
+        if(inputManager.onFoot.hotbar2.triggered)
+        {
+            selectSlot(2);
+        }
+        if(inputManager.onFoot.hotbar3.triggered)
+        {
+            selectSlot(3);
+        }
+        if(inputManager.onFoot.hotbar4.triggered)
+        {
+            selectSlot(4);
+        }
+        if(inputManager.onFoot.hotbar5.triggered)
+        {
+            selectSlot(5);
+        }
+        if(inputManager.onFoot.hotbar6.triggered)
+        {
+            selectSlot(6);
         }
     }
     public void AddItem(Item item)
@@ -68,4 +94,13 @@ public class InventoryManager : MonoBehaviour
         Cursor.visible = false;
         inventoryUI.SetActive(false);
     }
+
+    public void selectSlot(int slot)
+    {
+        itemSlot[selectedSlot].UnmarkSelected();
+        selectedSlot = slot-1;
+        itemSlot[selectedSlot].MarkSelected();
+        
+    }
+
 }

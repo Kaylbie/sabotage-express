@@ -10,6 +10,7 @@ public class ItemSlot : MonoBehaviour
     public string itemName;
     public int quantity;
     public Sprite itemSprite;
+    public GameObject selectedSprite;
     public bool isFull;
 
     [SerializeField]
@@ -28,5 +29,12 @@ public class ItemSlot : MonoBehaviour
         
         itemImage.enabled = true;
         isFull = true;
+    }
+
+    public void MarkSelected(){
+         selectedSprite.SetActive(true);
+    }
+    public void UnmarkSelected(){
+        selectedSprite.SetActive(false);
     }
 }
