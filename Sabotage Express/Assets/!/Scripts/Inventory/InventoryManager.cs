@@ -7,14 +7,15 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first frame update
     public GameObject inventoryUI;
     public bool inventoryOpen = false;
-    public ItemSlot[] itemSlot;
+    public GameObject[] slots;
+    private GameObject temp_item;
     public int selectedSlot;
     private InputManager inputManager;
     void Start()
     {
         selectedSlot = 1;
         inputManager = GetComponent<InputManager>();
-        selectSlot(selectedSlot);
+
     }
     void lateStart()
     {
@@ -73,17 +74,20 @@ public class InventoryManager : MonoBehaviour
     public void AddItem(Item item)
     {
         Debug.Log($"{item} added to {this.gameObject.GetComponent<Player>().nickname} inventory");
-        foreach (ItemSlot slot in itemSlot)
-        {
-            if (!slot.isFull)
+        foreach (GameObject slot in slots)
+        {   
+            Debug.Log(slot);
+            temp_item = slot.transform.GetChild(0).gameObject;
+            //mark
+           
+            if(!temp_item.GetComponent<ItemSlot>().isFull)
             {
-                slot.AddItem(item);
+                temp_item.GetComponent<ItemSlot>().AddItem(item);
                 Destroy(item.gameObject);
-                return;
+                break;
             }
+            
         }
-        
-        Debug.Log(item.objectImage);
     }
 
     public void openInventory()
@@ -103,9 +107,9 @@ public class InventoryManager : MonoBehaviour
 
     public void selectSlot(int slot)
     {
-        itemSlot[selectedSlot].UnmarkSelected();
+        slots[selectedSlot].transform.GetChild(0).gameObject.GetComponent<ItemSlot>().UnmarkSelected();
         selectedSlot = slot-1;
-        itemSlot[selectedSlot].MarkSelected();
+        slots[selectedSlot].transform.GetChild(0).gameObject.GetComponent<ItemSlot>().MarkSelected();
         
     }
 
