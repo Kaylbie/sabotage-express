@@ -3,9 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
-public class ItemSlot : MonoBehaviour
+using UnityEngine.EventSystems;
+public class ItemSlot : MonoBehaviour,IDragHandler, IEndDragHandler, IBeginDragHandler
 {
+
+    public Transform parentAfterDrag;
+
+    //TO DO 
+    // REMOVE ITEMS MAKE SO WHEN ITS BEING ADDED IT CREATES ITEM PREFAB AND PLACES IT UNDER ITEMSLOT
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        Debug.Log("Begin Drag");
+        itemImage.raycastTarget = false;
+        parentAfterDrag = transform.parent;
+        transform.SetParent(transform.parent);
+        //transform.SetAsLastSibling();
+        
+    }
+    public void OnDrag(PointerEventData eventData)
+    {
+        transform.position = Input.mousePosition;
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        transform.SetParent(parentAfterDrag);
+        itemImage.raycastTarget = true;
+    }
 //Item data
     public string itemName;
     public int quantity;
