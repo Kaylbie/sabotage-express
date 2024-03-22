@@ -802,9 +802,33 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1021904019093540201, guid: ed5aab65f2e707844b64ea8a1d9f6e3e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.008
+      objectReference: {fileID: 0}
+    - target: {fileID: 2954051230132489318, guid: ed5aab65f2e707844b64ea8a1d9f6e3e, type: 3}
+      propertyPath: crouchCenterY
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2954051230132489318, guid: ed5aab65f2e707844b64ea8a1d9f6e3e, type: 3}
+      propertyPath: transitionSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2997752531718356492, guid: ed5aab65f2e707844b64ea8a1d9f6e3e, type: 3}
       propertyPath: m_Name
       value: third_person_character_lpfp@handgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381783457088742683, guid: ed5aab65f2e707844b64ea8a1d9f6e3e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.02038538
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381783457088742683, guid: ed5aab65f2e707844b64ea8a1d9f6e3e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.447281
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381783457088742683, guid: ed5aab65f2e707844b64ea8a1d9f6e3e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.132
       objectReference: {fileID: 0}
     - target: {fileID: 5144842469946204045, guid: ed5aab65f2e707844b64ea8a1d9f6e3e, type: 3}
       propertyPath: m_Enabled

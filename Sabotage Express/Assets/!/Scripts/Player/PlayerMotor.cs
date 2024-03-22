@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerMotor : MonoBehaviour
 {
     private CharacterController controller;
+    private PlayerLook playerLook;
+    private Camera cam;
     private Vector3 playerVelocity;
     //private bool isGrounded;
     private Animator anim;
@@ -25,7 +27,11 @@ public class PlayerMotor : MonoBehaviour
     public float transitionSpeed = 5f; // How fast the height changes from standing to crouching and vice versa
     public float crouchCenterY = 0.5f; // Center Y position when crouching
     public float standCenterY = 1f;
+    
+    public float crouchCameraYOffset = -0.5f; // Camera height offset when crouching
+    public float standCameraYOffset = 0.0f; // Camera height offset when standing
 
+    
     /// <summary>
     [SerializeField] private Transform arms;
 
@@ -35,6 +41,12 @@ public class PlayerMotor : MonoBehaviour
     {
         anim = gameObject.GetComponent<Animator> ();
         controller = GetComponent<CharacterController>();
+        //assign camera
+        playerLook = GetComponent<PlayerLook>();
+        if (playerLook != null)
+        {
+            cam = playerLook.cam;
+        }
     }
     private Transform AssignCharactersCamera()
     {
@@ -60,6 +72,15 @@ public class PlayerMotor : MonoBehaviour
             Vector3 newCenter = controller.center;
             newCenter.y = Mathf.Lerp(newCenter.y, targetCenterY, p);
             controller.center = newCenter;
+            
+            //camera crouch
+            if (cam != null)
+            {
+                Vector3 cameraPosition = cam.transform.localPosition;
+                float targetYOffset = crouching ? crouchCameraYOffset : standCameraYOffset;
+                cameraPosition.y = Mathf.Lerp(cameraPosition.y, targetYOffset, p);
+                cam.transform.localPosition = cameraPosition;
+            }
 
             if (p >= 1)
             {
