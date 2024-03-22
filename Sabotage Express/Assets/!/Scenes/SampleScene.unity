@@ -808,7 +808,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2954051230132489318, guid: ed5aab65f2e707844b64ea8a1d9f6e3e, type: 3}
       propertyPath: crouchCenterY
-      value: 0.35
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 2954051230132489318, guid: ed5aab65f2e707844b64ea8a1d9f6e3e, type: 3}
       propertyPath: transitionSpeed
