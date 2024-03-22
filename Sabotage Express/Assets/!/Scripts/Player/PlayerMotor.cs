@@ -64,7 +64,7 @@ public class PlayerMotor : MonoBehaviour
             p = Mathf.Clamp01(p); // Ensure p is clamped between 0 and 1
 
             // Determine the target height and center based on the crouching state
-            float targetHeight = crouching ? 1f : 2f;
+            float targetHeight = crouching ? 1.5f : 2f;
             float targetCenterY = crouching ? crouchCenterY : standCenterY;
 
             // Smoothly interpolate the height and center of the controller
