@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Glock
   m_EditorClassIdentifier: 
   type: 0
+  itemName: Glock
   actionType: 0
   image: {fileID: 21300008, guid: dccc05b8d01dde54f88f9910329187c2, type: 3}
-  amount: 1
   stackable: 0
