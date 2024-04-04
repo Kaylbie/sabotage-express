@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -13,12 +15,14 @@ public class InventoryManager : MonoBehaviour
     private GunSpawner gunSpawner;
     int selecetedSlot =0;
     private InputManager inputManager;
-    
+    private Transform itemHolder;
+    private GameObject currentHolding;
 
     void Start(){
         inputManager = GetComponent<InputManager>();
         selectSlot(selecetedSlot);
         gunSpawner = GetComponent<GunSpawner>();
+        itemHolder=transform.Find("Armature/root/hips/spine/chest/shoulder_R/upper_arm_R/lower_arm_R/hand_R/ItemHolder");
     }
 
 
@@ -57,6 +61,10 @@ public class InventoryManager : MonoBehaviour
         {
             Destroy(gunSpawner.spawnedGun);
         }
+        if (currentHolding != null)
+        {
+            Destroy(currentHolding);
+        }
         inventorySlots[selecetedSlot].Deselect();
         inventorySlots[slotNo].Select();
         selecetedSlot=slotNo;
@@ -64,8 +72,52 @@ public class InventoryManager : MonoBehaviour
         {
             currentItem = inventorySlots[selecetedSlot].GetComponentInChildren<Item>();
             gunSpawner.SpawnGunBasedOnName(currentItem.item.itemName);
+            // if (currentHandItem != null)
+            // {
+            //     DestroyImmediate(currentHandItem, true);
+            // }
+            AddItemToHandItemHolder(currentItem.item.itemName);
         }
         
+    }
+    private GameObject LoadPrefab(string prefabPath)
+    {
+        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+        return prefab;
+    }
+    public void AddItemToHandItemHolder(String name){
+        string prefabPath = "Assets/!/Prefabs/Models_Only/Guns/"+name+".prefab";
+        GameObject prefab = LoadPrefab(prefabPath);
+        if (prefab != null)
+        {
+            int newLayer = LayerMask.NameToLayer("InvisibleToSelf");
+            SetLayerRecursively(prefab, newLayer);
+            Rigidbody rb = prefab.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = true;
+            }
+            currentHolding = Instantiate(prefab, itemHolder.position, gameObject.transform.rotation, itemHolder);
+        }
+        else
+        {
+            Debug.LogError("Not found " + name);
+        }
+        
+    }
+    void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        if (obj == null)
+        {
+            return;
+        }
+
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
     }
     public void HideInventory(){
        
