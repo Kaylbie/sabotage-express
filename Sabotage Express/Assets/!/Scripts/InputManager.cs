@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour
     
     private PlayerMotor motor;
     private InventoryManager invManager;
+
     private PlayerLook look;
     void Awake()
     {
@@ -24,8 +25,15 @@ public class InputManager : MonoBehaviour
         
         onFoot.Crouch.performed +=ctx => motor.Crouch();
         onFoot.Sprint.performed +=ctx => motor.Sprint();
+        onFoot.hotbar1.performed +=ctx => invManager.selectSlot(0);
+        onFoot.hotbar2.performed +=ctx => invManager.selectSlot(1);
+        onFoot.hotbar3.performed +=ctx => invManager.selectSlot(2);
+        onFoot.hotbar4.performed +=ctx => invManager.selectSlot(3);
+        onFoot.hotbar5.performed +=ctx => invManager.selectSlot(4);
+        onFoot.hotbar6.performed +=ctx => invManager.selectSlot(5);
 
     }
+
     private void LateUpdate()
     {
         look.ProcessLook(onFoot.Look.ReadValue<Vector2>());

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Sabotage Express/Assets/!/Prefabs/LeverEntity.prefab.meta
 guid: 0d59d0eba6a81eb4fb49ed837243772e
+========
+guid: 6a3c0ee750e02254aa5dbabeb3ef2dab
+>>>>>>>> InventoryUI:Sabotage Express/Assets/!/Scripts/Inventory/ItemPrefab.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

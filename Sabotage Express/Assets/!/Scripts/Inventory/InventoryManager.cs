@@ -5,21 +5,26 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject inventoryUI;
-    public bool inventoryOpen = false;
-    public ItemSlot[] itemSlot;
+    public Slot[] inventorySlots;
+    public GameObject ItemPrefab;
+    public GameObject mainInventoryUI;
+    public int maxSlotSize=64;
+    
+
+    int selecetedSlot =0;
     private InputManager inputManager;
-    void Start()
-    {
+
+    void Start(){
         inputManager = GetComponent<InputManager>();
+        selectSlot(selecetedSlot);
     }
 
-    // Update is called once per frame
-    void Update()
+
+        void Update()
     {
         if (inputManager.onFoot.Inventory.triggered)
         {
-            openInventory();
+            ShowInventory();
             inputManager.onFoot.Movement.Disable();
             inputManager.onFoot.Look.Disable();
             inputManager.onFoot.Jump.Disable();
@@ -30,7 +35,7 @@ public class InventoryManager : MonoBehaviour
 
         if (inputManager.onFoot.Escape.triggered)
         {
-            closeInventory();
+            HideInventory();
             inputManager.onFoot.Movement.Enable();
             inputManager.onFoot.Look.Enable();
             inputManager.onFoot.Jump.Enable();
@@ -38,34 +43,50 @@ public class InventoryManager : MonoBehaviour
             inputManager.onFoot.Sprint.Enable();
         }
     }
-    public void AddItem(Item item)
-    {
-        Debug.Log($"{item} added to {this.gameObject.GetComponent<Player>().nickname} inventory");
-        foreach (ItemSlot slot in itemSlot)
-        {
-            if (!slot.isFull)
-            {
-                slot.AddItem(item);
-                Destroy(item.gameObject);
-                return;
+
+    public void selectSlot(int slotNo){
+        inventorySlots[selecetedSlot].Deselect();
+        inventorySlots[slotNo].Select();
+        selecetedSlot=slotNo;
+    }
+    public void HideInventory(){
+       
+        mainInventoryUI.SetActive(false);
+        
+    }
+    public void ShowInventory(){
+        
+        mainInventoryUI.SetActive(true);
+      
+    }
+    public bool AddItem(ItemScript item){
+
+        //Stacking
+        for (int i=0; i<inventorySlots.Length;i++){
+            Slot slot=inventorySlots[i];
+            Item itemInSlot = slot.GetComponentInChildren<Item>();
+            if (itemInSlot!=null&&itemInSlot.item==item&&itemInSlot.amount<maxSlotSize&&itemInSlot.item.stackable==true){
+                itemInSlot.amount++;
+                itemInSlot.RefreshAmount();
+                return true;
             }
         }
         
-        Debug.Log(item.objectImage);
-    }
 
-    public void openInventory()
-    {
-        Debug.Log("Inventory Opened");
-        Cursor.visible = true;
-        inventoryOpen = true;
-        inventoryUI.SetActive(true);
+        //Check for empty slots
+        for (int i=0; i<inventorySlots.Length;i++){
+            Slot slot=inventorySlots[i];
+            Item itemInSlot = slot.GetComponentInChildren<Item>();
+            if (itemInSlot==null){
+                InsertItem(item,slot);
+                return true;
+            }
+        }
+        return false;
     }
-    public void closeInventory()
-    {
-        inventoryOpen = false;
-        Debug.Log("Inventory Closed");
-        Cursor.visible = false;
-        inventoryUI.SetActive(false);
+    void InsertItem(ItemScript item,Slot slot){
+        GameObject newItemGameObject = Instantiate(ItemPrefab,slot.transform);
+        Item inventoryItem = newItemGameObject.GetComponent<Item>();
+        inventoryItem.InitializeItem(item);
     }
 }

@@ -78,9 +78,54 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DropItem",
+                    "name": "hotbar1",
                     "type": "Button",
-                    "id": "04378ff8-bbeb-49e2-8498-fba3f63d76cb",
+                    "id": "982e3714-b89e-4855-affd-01da3cacc595",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "hotbar2",
+                    "type": "Button",
+                    "id": "3ee9715f-b598-4cd7-8644-6239ff58ada7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "hotbar3",
+                    "type": "Button",
+                    "id": "91ed12b7-535d-4684-bbaf-fc214797e926",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "hotbar4",
+                    "type": "Button",
+                    "id": "bcd8cad0-b3cb-496f-aa55-35f45fb16dfb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "hotbar5",
+                    "type": "Button",
+                    "id": "c2fb2229-1f9b-43eb-8312-034edb63b847",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "hotbar6",
+                    "type": "Button",
+                    "id": "012d76de-5332-48cb-baba-4ebf41b90466",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -233,12 +278,67 @@
                 },
                 {
                     "name": "",
-                    "id": "0ae34bba-6baa-4a37-9a78-d2ceef9e7d39",
-                    "path": "<Keyboard>/h",
+                    "id": "64152012-c6ac-4b53-a1da-4bda73489bb2",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "DropItem",
+                    "action": "hotbar1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "513224fe-6257-4519-95fd-c5477c14f8ef",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "hotbar2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "988e85ad-0624-48b5-b68a-fd05450a4d01",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "hotbar3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f7625507-53a8-4506-9d20-bc91ec9b8f4a",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "hotbar4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5e369c74-d27d-4e85-a8db-bd1236cb3820",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "hotbar5",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e949e025-ce20-4156-856f-a1af59585373",
+                    "path": "<Keyboard>/6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "hotbar6",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
