@@ -9,14 +9,16 @@ public class InventoryManager : MonoBehaviour
     public GameObject ItemPrefab;
     public GameObject mainInventoryUI;
     public int maxSlotSize=64;
-    
-
+    private Item currentItem;
+    private GunSpawner gunSpawner;
     int selecetedSlot =0;
     private InputManager inputManager;
+    
 
     void Start(){
         inputManager = GetComponent<InputManager>();
         selectSlot(selecetedSlot);
+        gunSpawner = GetComponent<GunSpawner>();
     }
 
 
@@ -42,12 +44,28 @@ public class InventoryManager : MonoBehaviour
             inputManager.onFoot.Crouch.Enable();
             inputManager.onFoot.Sprint.Enable();
         }
+        
+    }
+
+    public Item GetCurrentItem()
+    {
+        return currentItem;
     }
 
     public void selectSlot(int slotNo){
+        if (gunSpawner != null && gunSpawner.spawnedGun != null)
+        {
+            Destroy(gunSpawner.spawnedGun);
+        }
         inventorySlots[selecetedSlot].Deselect();
         inventorySlots[slotNo].Select();
         selecetedSlot=slotNo;
+        if (inventorySlots[selecetedSlot].GetComponentInChildren<Item>() != null)
+        {
+            currentItem = inventorySlots[selecetedSlot].GetComponentInChildren<Item>();
+            gunSpawner.SpawnGunBasedOnName(currentItem.item.itemName);
+        }
+        
     }
     public void HideInventory(){
        
@@ -68,6 +86,7 @@ public class InventoryManager : MonoBehaviour
             if (itemInSlot!=null&&itemInSlot.item==item&&itemInSlot.amount<maxSlotSize&&itemInSlot.item.stackable==true){
                 itemInSlot.amount++;
                 itemInSlot.RefreshAmount();
+                
                 return true;
             }
         }
@@ -79,6 +98,7 @@ public class InventoryManager : MonoBehaviour
             Item itemInSlot = slot.GetComponentInChildren<Item>();
             if (itemInSlot==null){
                 InsertItem(item,slot);
+                selectSlot(selecetedSlot);
                 return true;
             }
         }

@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 23598256546927380}
   - component: {fileID: -4007177520196908393}
   - component: {fileID: 6912280129760738950}
-  - component: {fileID: -6197200194258826255}
+  - component: {fileID: 5699134065662472379}
   m_Layer: 6
   m_Name: Glock
   m_TagString: Untagged
@@ -303,7 +303,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.027766205, y: 0.13337004, z: 0.22312883}
   m_Center: {x: 0.00002830103, y: -0.021096118, z: 0.016558815}
---- !u!114 &-6197200194258826255
+--- !u!114 &5699134065662472379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -312,18 +312,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1669814075106190}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 503592eb19786d044ba1fad648b47531, type: 3}
+  m_Script: {fileID: 11500000, guid: c8c4db4b9c2b6c4449e9173a497358e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promtMessage: Glockas
-  objectName: Glock
-  objectDescription: 'Glockas '
-  objectID: 2
-  objectWeight: 0
-  objectValue: 0
-  pickable: 1
-  objectQuantity: 1
-  objectImage: {fileID: 21300008, guid: dccc05b8d01dde54f88f9910329187c2, type: 3}
+  promtMessage: Pick
+  itemScript: {fileID: 11400000, guid: 1a6f13983e3bf7b4aac8acfb5446b9d7, type: 2}
 --- !u!1 &1672287814348484
 GameObject:
   m_ObjectHideFlags: 0

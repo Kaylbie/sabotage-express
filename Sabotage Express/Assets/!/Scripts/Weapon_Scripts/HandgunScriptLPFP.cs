@@ -185,12 +185,13 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		//Casing spawn point array
 		public Transform casingSpawnPoint;
 		//Bullet prefab spawn from this point
-		public Transform bulletSpawnPoint;
+		
 		//Grenade prefab spawn from this point
-		public Transform grenadeSpawnPoint;
+		
 	}
+	private Transform grenadeSpawnPoint;
 	public spawnpoints Spawnpoints;
-
+	private Transform bulletSpawnPoint;
 	[System.Serializable]
 	public class soundClips
 	{
@@ -295,7 +296,8 @@ public class HandgunScriptLPFP : MonoBehaviour {
 			<SkinnedMeshRenderer> ().enabled = false;
 		}
 	}
-
+	private GunSpawner gunSpawner;
+	private Transform bulletSpawnPointPlayer;
 	private void Start () {
 		//Save the weapon name
 		storedWeaponName = weaponName;
@@ -309,6 +311,28 @@ public class HandgunScriptLPFP : MonoBehaviour {
 
 		//Set the shoot sound to audio source
 		shootAudioSource.clip = SoundClips.shootSound;
+		
+		GameObject parentObject = transform.parent.parent.parent.gameObject;
+		if (parentObject != null)
+		{
+			//Debug.Log("Found Player GameObject");
+			//Debug.Log(parentObject);
+			gunSpawner = parentObject.GetComponent<GunSpawner>();
+			bulletSpawnPointPlayer = gunSpawner.bulletSpawnPoint;
+			if (bulletSpawnPointPlayer != null)
+			{
+				// bulletSpawnPoint found, you can now access its Transform
+				//Debug.Log("Found bulletSpawnPoint on Player GameObject");
+
+				// Example: Set the position of bulletSpawnPoint
+				//bulletSpawnPoint.position = new Vector3(0, 0, 0);
+			}
+			else
+			{
+				Debug.LogError("bulletSpawnPoint not found on Player GameObject");
+			}
+			bulletSpawnPoint= bulletSpawnPointPlayer;
+		}
 	}
 
 	private void LateUpdate () {
@@ -438,37 +462,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 			randomMuzzleflashValue = Random.Range (minRandomValue, maxRandomValue);
 		}
 
-		//Timescale settings
-		//Change timescale to normal when 1 key is pressed
-		if (Input.GetKeyDown (KeyCode.Alpha1)) 
-		{
-			Time.timeScale = 1.0f;
-			timescaleText.text = "1.0";
-		}
-		//Change timescale to 50% when 2 key is pressed
-		if (Input.GetKeyDown (KeyCode.Alpha2)) 
-		{
-			Time.timeScale = 0.5f;
-			timescaleText.text = "0.5";
-		}
-		//Change timescale to 25% when 3 key is pressed
-		if (Input.GetKeyDown (KeyCode.Alpha3)) 
-		{
-			Time.timeScale = 0.25f;
-			timescaleText.text = "0.25";
-		}
-		//Change timescale to 10% when 4 key is pressed
-		if (Input.GetKeyDown (KeyCode.Alpha4)) 
-		{
-			Time.timeScale = 0.1f;
-			timescaleText.text = "0.1";
-		}
-		//Pause game when 5 key is pressed
-		if (Input.GetKeyDown (KeyCode.Alpha5)) 
-		{
-			Time.timeScale = 0.0f;
-			timescaleText.text = "0.0";
-		}
+		
 
 		//Set current ammo text from ammo int
 		currentAmmoText.text = currentAmmo.ToString ();
@@ -609,8 +603,8 @@ public class HandgunScriptLPFP : MonoBehaviour {
 			//Spawn bullet at bullet spawnpoint
 			var bullet = (Transform)Instantiate (
 				Prefabs.bulletPrefab,
-				Spawnpoints.bulletSpawnPoint.transform.position,
-				Spawnpoints.bulletSpawnPoint.transform.rotation);
+				bulletSpawnPoint.transform.position,
+				bulletSpawnPoint.transform.rotation);
 
 			//Add velocity to the bullet
 			bullet.GetComponent<Rigidbody>().velocity = 
@@ -697,8 +691,8 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		yield return new WaitForSeconds (grenadeSpawnDelay);
 		//Spawn grenade prefab at spawnpoint
 		Instantiate(Prefabs.grenadePrefab, 
-			Spawnpoints.grenadeSpawnPoint.transform.position, 
-			Spawnpoints.grenadeSpawnPoint.transform.rotation);
+			bulletSpawnPoint.transform.position, 
+			bulletSpawnPoint.transform.rotation);
 	}
 
 	private IEnumerator AutoReload () {

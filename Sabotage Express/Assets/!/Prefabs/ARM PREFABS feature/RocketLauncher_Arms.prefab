@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1649147503857815814}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: lower_arm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8488623152258331154}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: arm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6783068401194701932}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bullet Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6010102789547851900}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: middle_finger_01_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4900127329282691904}
   - component: {fileID: 6434644433278066074}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: arms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 973715027482555445}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: arm_target_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 673088270585579343}
   - component: {fileID: 3689051900539470713}
   - component: {fileID: 5374897209805752490}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gun Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -403,7 +403,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3616083593471132202}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: finger_01_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1421849986237811863}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,13 +555,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9079156718548588664}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9079156718548588664
 Transform:
   m_ObjectHideFlags: 0
@@ -588,7 +588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1226106266026044713}
   - component: {fileID: 3399051786655382399}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Muzzleflash Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -681,7 +681,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 548134390760752501}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: lower_arm_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -713,7 +713,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8603797473214356667}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: finger_03_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -744,7 +744,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6298235952533513173}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: thumb_01_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -777,7 +777,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7553721210257404642}
   - component: {fileID: 8247153791720247347}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: rocket_launcher_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -894,7 +894,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8661325089763903777}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: finger_02_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -926,7 +926,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2105981703559488742}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: IK_arm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -957,7 +957,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8846896535635897490}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Components
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1026,7 +1026,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3962334310831141448}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: hand_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1060,7 +1060,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2996443441454890073}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: arm_target_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1091,7 +1091,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1506300917793124850}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1228,7 +1228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3511375945390866918}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: middle_finger_02_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1260,7 +1260,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1549884592441195803}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: finger_02_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1292,7 +1292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7875729997799690786}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: middle_finger_01_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1324,7 +1324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6977225459057769958}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: thumb_02_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1357,7 +1357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6259738795276877503}
   - component: {fileID: 8730208376753177264}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1439,7 +1439,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2492313599252218907}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: middle_finger_03_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1472,7 +1472,7 @@ GameObject:
   - component: {fileID: 4053557976045076521}
   - component: {fileID: 2717804666978502098}
   - component: {fileID: 4709489190840105085}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SparkParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6384,7 +6384,7 @@ GameObject:
   - component: {fileID: 6596186189230475596}
   - component: {fileID: 1520145260818257693}
   - component: {fileID: 1112620863491148684}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: arms_rocket_launcher_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6684,7 +6684,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7712007359703396770}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: middle_finger_03_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6870,7 +6870,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6815171747512896477}
   - component: {fileID: 7173855118923434641}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: knife 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6986,7 +6986,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5950456357375682091}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: arm_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7097,7 +7097,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7887559012480724922}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Grenade_Spawn_Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7128,7 +7128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2192520325123843508}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: hand_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7241,7 +7241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5257218690572979081}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: middle_finger_02_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7273,7 +7273,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2049319923963123477}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: thumb_01_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7305,7 +7305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 876685180827189981}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: thumb_02_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7338,7 +7338,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1450264709189118830}
   - component: {fileID: 7916422034622707538}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: rocket_launcher_01_projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7454,7 +7454,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6516061159310014911}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: thumb_03_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7485,7 +7485,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4861865621640862295}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: finger_03_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7516,7 +7516,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6240811733509002589}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: finger_01_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7548,7 +7548,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3749828454674761455}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: IK_arm_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7579,7 +7579,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8018230728290227778}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: thumb_03_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7610,7 +7610,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4406471885508754016}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: knife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7641,7 +7641,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2370840347611522995}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7675,7 +7675,7 @@ GameObject:
   - component: {fileID: 8084837746006674338}
   - component: {fileID: 2320419482056912700}
   - component: {fileID: 7338325620079531910}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Muzzleflash Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

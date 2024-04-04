@@ -262,9 +262,9 @@ GameObject:
   - component: {fileID: 23294498579475270}
   - component: {fileID: 3397284807150271892}
   - component: {fileID: 2416455033696340900}
-  - component: {fileID: 5527682142575725315}
+  - component: {fileID: 3809560787448760528}
   m_Layer: 6
-  m_Name: AK-47
+  m_Name: Ak-47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,7 +386,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.038359024, y: 0.19727895, z: 0.92186975}
   m_Center: {x: 0.00023280922, y: -0.024052147, z: -0.014078423}
---- !u!114 &5527682142575725315
+--- !u!114 &3809560787448760528
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -395,15 +395,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1719131515888008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 503592eb19786d044ba1fad648b47531, type: 3}
+  m_Script: {fileID: 11500000, guid: c8c4db4b9c2b6c4449e9173a497358e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promtMessage: "Griebk ta kala\u0161\u0105"
-  objectName: AK-47
-  objectDescription: Nu ginklas tikrai
-  objectID: 1
-  objectWeight: 0
-  objectValue: 0
-  pickable: 1
-  objectQuantity: 1
-  objectImage: {fileID: 21300000, guid: dccc05b8d01dde54f88f9910329187c2, type: 3}
+  promtMessage: Pick
+  itemScript: {fileID: 11400000, guid: ae09351ecde366d4faf7a247eb565761, type: 2}

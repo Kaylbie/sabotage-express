@@ -124,7 +124,16 @@ public class ProjectileScript : MonoBehaviour {
 	//If the projectile collides with anything
 	private void OnCollisionEnter (Collision collision) 
 	{
+		if (collision.gameObject.tag == "Player") 
+		{
+			//Physics.IgnoreCollision (collision.collider);
+			Debug.LogWarning("Collides with player");
+			//Physics.IgnoreCollision(GetComponent<Collider>(), GetComponent<Collider>());
 
+
+			Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+			return;
+		}
 		hasCollided = true;
 
 		//Hide projectile
@@ -138,7 +147,7 @@ public class ProjectileScript : MonoBehaviour {
 			flameParticles.GetComponent <ParticleSystem> ().Stop ();
 			smokeParticles.GetComponent<ParticleSystem> ().Stop ();
 		}
-
+		
 		StartCoroutine (DestroyTimerAfterCollision ());
 
 		//Instantiate explosion prefab at collision position

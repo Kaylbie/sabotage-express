@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68ab70d6b3b5a5c429ddd48646b44b6f, type: 3}
-  m_Name: Ak-47
+  m_Name: RocketLauncher
   m_EditorClassIdentifier: 
   type: 0
-  itemID: 1
-  itemName: Ak-47
+  itemID: 0
+  itemName: 
   actionType: 0
-  image: {fileID: 21300000, guid: dccc05b8d01dde54f88f9910329187c2, type: 3}
-  stackable: 0
+  image: {fileID: 0}
+  stackable: 1
