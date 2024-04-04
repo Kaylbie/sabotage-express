@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Sabotage Express/Assets/!/Prefabs/Train.prefab.meta
 guid: 298cd01ff3375704499d28eb04e5fff6
+========
+guid: a2874d4dccad6fe4ebb91e1bca697cd8
+>>>>>>>> InventoryUI:Sabotage Express/Assets/!/Scripts/Inventory/SlotPrefab.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

@@ -98,6 +98,60 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""hotbar1"",
+                    ""type"": ""Button"",
+                    ""id"": ""982e3714-b89e-4855-affd-01da3cacc595"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""hotbar2"",
+                    ""type"": ""Button"",
+                    ""id"": ""3ee9715f-b598-4cd7-8644-6239ff58ada7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""hotbar3"",
+                    ""type"": ""Button"",
+                    ""id"": ""91ed12b7-535d-4684-bbaf-fc214797e926"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""hotbar4"",
+                    ""type"": ""Button"",
+                    ""id"": ""bcd8cad0-b3cb-496f-aa55-35f45fb16dfb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""hotbar5"",
+                    ""type"": ""Button"",
+                    ""id"": ""c2fb2229-1f9b-43eb-8312-034edb63b847"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""hotbar6"",
+                    ""type"": ""Button"",
+                    ""id"": ""012d76de-5332-48cb-baba-4ebf41b90466"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -241,6 +295,72 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""64152012-c6ac-4b53-a1da-4bda73489bb2"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""hotbar1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""513224fe-6257-4519-95fd-c5477c14f8ef"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""hotbar2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""988e85ad-0624-48b5-b68a-fd05450a4d01"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""hotbar3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7625507-53a8-4506-9d20-bc91ec9b8f4a"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""hotbar4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e369c74-d27d-4e85-a8db-bd1236cb3820"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""hotbar5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e949e025-ce20-4156-856f-a1af59585373"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""hotbar6"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -775,6 +895,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_OnFoot_Interact = m_OnFoot.FindAction("Interact", throwIfNotFound: true);
         m_OnFoot_Inventory = m_OnFoot.FindAction("Inventory", throwIfNotFound: true);
         m_OnFoot_Escape = m_OnFoot.FindAction("Escape", throwIfNotFound: true);
+        m_OnFoot_hotbar1 = m_OnFoot.FindAction("hotbar1", throwIfNotFound: true);
+        m_OnFoot_hotbar2 = m_OnFoot.FindAction("hotbar2", throwIfNotFound: true);
+        m_OnFoot_hotbar3 = m_OnFoot.FindAction("hotbar3", throwIfNotFound: true);
+        m_OnFoot_hotbar4 = m_OnFoot.FindAction("hotbar4", throwIfNotFound: true);
+        m_OnFoot_hotbar5 = m_OnFoot.FindAction("hotbar5", throwIfNotFound: true);
+        m_OnFoot_hotbar6 = m_OnFoot.FindAction("hotbar6", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -856,6 +982,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Interact;
     private readonly InputAction m_OnFoot_Inventory;
     private readonly InputAction m_OnFoot_Escape;
+    private readonly InputAction m_OnFoot_hotbar1;
+    private readonly InputAction m_OnFoot_hotbar2;
+    private readonly InputAction m_OnFoot_hotbar3;
+    private readonly InputAction m_OnFoot_hotbar4;
+    private readonly InputAction m_OnFoot_hotbar5;
+    private readonly InputAction m_OnFoot_hotbar6;
     public struct OnFootActions
     {
         private @PlayerInput m_Wrapper;
@@ -868,6 +1000,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_OnFoot_Interact;
         public InputAction @Inventory => m_Wrapper.m_OnFoot_Inventory;
         public InputAction @Escape => m_Wrapper.m_OnFoot_Escape;
+        public InputAction @hotbar1 => m_Wrapper.m_OnFoot_hotbar1;
+        public InputAction @hotbar2 => m_Wrapper.m_OnFoot_hotbar2;
+        public InputAction @hotbar3 => m_Wrapper.m_OnFoot_hotbar3;
+        public InputAction @hotbar4 => m_Wrapper.m_OnFoot_hotbar4;
+        public InputAction @hotbar5 => m_Wrapper.m_OnFoot_hotbar5;
+        public InputAction @hotbar6 => m_Wrapper.m_OnFoot_hotbar6;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -901,6 +1039,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Escape.started += instance.OnEscape;
             @Escape.performed += instance.OnEscape;
             @Escape.canceled += instance.OnEscape;
+            @hotbar1.started += instance.OnHotbar1;
+            @hotbar1.performed += instance.OnHotbar1;
+            @hotbar1.canceled += instance.OnHotbar1;
+            @hotbar2.started += instance.OnHotbar2;
+            @hotbar2.performed += instance.OnHotbar2;
+            @hotbar2.canceled += instance.OnHotbar2;
+            @hotbar3.started += instance.OnHotbar3;
+            @hotbar3.performed += instance.OnHotbar3;
+            @hotbar3.canceled += instance.OnHotbar3;
+            @hotbar4.started += instance.OnHotbar4;
+            @hotbar4.performed += instance.OnHotbar4;
+            @hotbar4.canceled += instance.OnHotbar4;
+            @hotbar5.started += instance.OnHotbar5;
+            @hotbar5.performed += instance.OnHotbar5;
+            @hotbar5.canceled += instance.OnHotbar5;
+            @hotbar6.started += instance.OnHotbar6;
+            @hotbar6.performed += instance.OnHotbar6;
+            @hotbar6.canceled += instance.OnHotbar6;
         }
 
         private void UnregisterCallbacks(IOnFootActions instance)
@@ -929,6 +1085,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Escape.started -= instance.OnEscape;
             @Escape.performed -= instance.OnEscape;
             @Escape.canceled -= instance.OnEscape;
+            @hotbar1.started -= instance.OnHotbar1;
+            @hotbar1.performed -= instance.OnHotbar1;
+            @hotbar1.canceled -= instance.OnHotbar1;
+            @hotbar2.started -= instance.OnHotbar2;
+            @hotbar2.performed -= instance.OnHotbar2;
+            @hotbar2.canceled -= instance.OnHotbar2;
+            @hotbar3.started -= instance.OnHotbar3;
+            @hotbar3.performed -= instance.OnHotbar3;
+            @hotbar3.canceled -= instance.OnHotbar3;
+            @hotbar4.started -= instance.OnHotbar4;
+            @hotbar4.performed -= instance.OnHotbar4;
+            @hotbar4.canceled -= instance.OnHotbar4;
+            @hotbar5.started -= instance.OnHotbar5;
+            @hotbar5.performed -= instance.OnHotbar5;
+            @hotbar5.canceled -= instance.OnHotbar5;
+            @hotbar6.started -= instance.OnHotbar6;
+            @hotbar6.performed -= instance.OnHotbar6;
+            @hotbar6.canceled -= instance.OnHotbar6;
         }
 
         public void RemoveCallbacks(IOnFootActions instance)
@@ -1074,6 +1248,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
+        void OnHotbar1(InputAction.CallbackContext context);
+        void OnHotbar2(InputAction.CallbackContext context);
+        void OnHotbar3(InputAction.CallbackContext context);
+        void OnHotbar4(InputAction.CallbackContext context);
+        void OnHotbar5(InputAction.CallbackContext context);
+        void OnHotbar6(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
