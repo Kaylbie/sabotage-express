@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4855779723070608}
   - component: {fileID: 33956013492418462}
   - component: {fileID: 23055741742906218}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Assault_Rifle_01_Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4111954246492966}
   - component: {fileID: 33029372708599344}
   - component: {fileID: 23903626206078244}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Assault_Rifle_01_Iron_Sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 4688580131535408}
   - component: {fileID: 33200716571164942}
   - component: {fileID: 23187835727001738}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Assault_Rifle_01_Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,8 +263,8 @@ GameObject:
   - component: {fileID: 3397284807150271892}
   - component: {fileID: 2416455033696340900}
   - component: {fileID: 3809560787448760528}
-  m_Layer: 6
-  m_Name: Ak-47
+  m_Layer: 8
+  m_Name: AK-47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -361,7 +361,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

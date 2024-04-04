@@ -9,6 +9,7 @@ TagManager:
   - Dirt
   - Target
   - Concrete
+  - Port
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Interactable
   - InvisibleToCam
   - InvisibleToSelf
-  - 
+  - GunCam
   - 
   - 
   - 
