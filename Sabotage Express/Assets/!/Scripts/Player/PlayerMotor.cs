@@ -54,6 +54,10 @@ public class PlayerMotor : MonoBehaviour
         arms.SetPositionAndRotation(t.position, t.rotation);
         return arms;
     }
+    public void SetArmsTransform(Transform armsTransform)
+    {
+        arms = armsTransform;
+    }
     
     void Update()
     {

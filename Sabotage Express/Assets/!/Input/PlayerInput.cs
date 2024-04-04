@@ -152,6 +152,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DropItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""3c37910e-04a6-4eca-9cc4-40e0f64e6233"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -361,6 +370,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""hotbar6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d624203-be8b-4b73-9fd4-b6194b8ed00a"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -901,6 +921,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_OnFoot_hotbar4 = m_OnFoot.FindAction("hotbar4", throwIfNotFound: true);
         m_OnFoot_hotbar5 = m_OnFoot.FindAction("hotbar5", throwIfNotFound: true);
         m_OnFoot_hotbar6 = m_OnFoot.FindAction("hotbar6", throwIfNotFound: true);
+        m_OnFoot_DropItem = m_OnFoot.FindAction("DropItem", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -988,6 +1009,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_hotbar4;
     private readonly InputAction m_OnFoot_hotbar5;
     private readonly InputAction m_OnFoot_hotbar6;
+    private readonly InputAction m_OnFoot_DropItem;
     public struct OnFootActions
     {
         private @PlayerInput m_Wrapper;
@@ -1006,6 +1028,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @hotbar4 => m_Wrapper.m_OnFoot_hotbar4;
         public InputAction @hotbar5 => m_Wrapper.m_OnFoot_hotbar5;
         public InputAction @hotbar6 => m_Wrapper.m_OnFoot_hotbar6;
+        public InputAction @DropItem => m_Wrapper.m_OnFoot_DropItem;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1057,6 +1080,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @hotbar6.started += instance.OnHotbar6;
             @hotbar6.performed += instance.OnHotbar6;
             @hotbar6.canceled += instance.OnHotbar6;
+            @DropItem.started += instance.OnDropItem;
+            @DropItem.performed += instance.OnDropItem;
+            @DropItem.canceled += instance.OnDropItem;
         }
 
         private void UnregisterCallbacks(IOnFootActions instance)
@@ -1103,6 +1129,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @hotbar6.started -= instance.OnHotbar6;
             @hotbar6.performed -= instance.OnHotbar6;
             @hotbar6.canceled -= instance.OnHotbar6;
+            @DropItem.started -= instance.OnDropItem;
+            @DropItem.performed -= instance.OnDropItem;
+            @DropItem.canceled -= instance.OnDropItem;
         }
 
         public void RemoveCallbacks(IOnFootActions instance)
@@ -1254,6 +1283,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnHotbar4(InputAction.CallbackContext context);
         void OnHotbar5(InputAction.CallbackContext context);
         void OnHotbar6(InputAction.CallbackContext context);
+        void OnDropItem(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

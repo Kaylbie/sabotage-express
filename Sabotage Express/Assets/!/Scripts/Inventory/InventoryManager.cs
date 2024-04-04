@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -9,14 +11,18 @@ public class InventoryManager : MonoBehaviour
     public GameObject ItemPrefab;
     public GameObject mainInventoryUI;
     public int maxSlotSize=64;
-    
-
+    private Item currentItem;
+    private GunSpawner gunSpawner;
     int selecetedSlot =0;
     private InputManager inputManager;
+    private Transform itemHolder;
+    private GameObject currentHolding;
 
     void Start(){
         inputManager = GetComponent<InputManager>();
         selectSlot(selecetedSlot);
+        gunSpawner = GetComponent<GunSpawner>();
+        itemHolder=transform.Find("Armature/root/hips/spine/chest/shoulder_R/upper_arm_R/lower_arm_R/hand_R/ItemHolder");
     }
 
 
@@ -42,12 +48,76 @@ public class InventoryManager : MonoBehaviour
             inputManager.onFoot.Crouch.Enable();
             inputManager.onFoot.Sprint.Enable();
         }
+        
+    }
+
+    public Item GetCurrentItem()
+    {
+        return currentItem;
     }
 
     public void selectSlot(int slotNo){
+        if (gunSpawner != null && gunSpawner.spawnedGun != null)
+        {
+            Destroy(gunSpawner.spawnedGun);
+        }
+        if (currentHolding != null)
+        {
+            Destroy(currentHolding);
+        }
         inventorySlots[selecetedSlot].Deselect();
         inventorySlots[slotNo].Select();
         selecetedSlot=slotNo;
+        if (inventorySlots[selecetedSlot].GetComponentInChildren<Item>() != null)
+        {
+            currentItem = inventorySlots[selecetedSlot].GetComponentInChildren<Item>();
+            gunSpawner.SpawnGunBasedOnName(currentItem.item.itemName);
+            // if (currentHandItem != null)
+            // {
+            //     DestroyImmediate(currentHandItem, true);
+            // }
+            AddItemToHandItemHolder(currentItem.item.itemName);
+        }
+        
+    }
+    private GameObject LoadPrefab(string prefabPath)
+    {
+        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+        return prefab;
+    }
+    public void AddItemToHandItemHolder(String name){
+        string prefabPath = "Assets/!/Prefabs/Models_Only/Guns/"+name+".prefab";
+        GameObject prefab = LoadPrefab(prefabPath);
+        if (prefab != null)
+        {
+            int newLayer = LayerMask.NameToLayer("InvisibleToSelf");
+            SetLayerRecursively(prefab, newLayer);
+            Rigidbody rb = prefab.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = true;
+            }
+            currentHolding = Instantiate(prefab, itemHolder.position, gameObject.transform.rotation, itemHolder);
+        }
+        else
+        {
+            Debug.LogError("Not found " + name);
+        }
+        
+    }
+    void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        if (obj == null)
+        {
+            return;
+        }
+
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
     }
     public void HideInventory(){
        
@@ -68,6 +138,7 @@ public class InventoryManager : MonoBehaviour
             if (itemInSlot!=null&&itemInSlot.item==item&&itemInSlot.amount<maxSlotSize&&itemInSlot.item.stackable==true){
                 itemInSlot.amount++;
                 itemInSlot.RefreshAmount();
+                
                 return true;
             }
         }
@@ -79,6 +150,7 @@ public class InventoryManager : MonoBehaviour
             Item itemInSlot = slot.GetComponentInChildren<Item>();
             if (itemInSlot==null){
                 InsertItem(item,slot);
+                selectSlot(selecetedSlot);
                 return true;
             }
         }

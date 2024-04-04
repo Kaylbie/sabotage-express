@@ -10,6 +10,7 @@ public class ItemScript : ScriptableObject
 {
 
 public ItemType type;
+public int itemID;
 public string itemName;
 public ActionType actionType;
 public Sprite image;
