@@ -12,9 +12,10 @@ public class Item : Interactable
     public bool pickable;
     public int objectQuantity;
     public Sprite objectImage;
+    //private GunSpawner gunSpawner;
     void Start()
     {
-        
+        //gunSpawner = GameObject.Find("Player").GetComponent<GunSpawner>();
     }
 
     // Update is called once per frame
@@ -32,6 +33,15 @@ public class Item : Interactable
             {
                 inventory.AddItem(this);
                 
+                GunSpawner gunSpawner = player.GetComponent<GunSpawner>();
+                if (gunSpawner != null)
+                {
+                    gunSpawner.SpawnGunBasedOnName(objectName); 
+                }
+                else
+                {
+                    Debug.LogError("GunSpawner script not found on the specified GameObject.");
+                }
             }
         }
         else

@@ -614,12 +614,14 @@ public class HandgunScriptLPFP : MonoBehaviour {
 
 			//Add velocity to the bullet
 			bullet.GetComponent<Rigidbody>().velocity = 
-			bullet.transform.forward * bulletForce;
+				bullet.transform.forward * bulletForce;
+			Destroy(bullet.gameObject, 3f);
+			
 
-			//Spawn casing prefab at spawnpoint
-			Instantiate (Prefabs.casingPrefab, 
-				Spawnpoints.casingSpawnPoint.transform.position, 
-				Spawnpoints.casingSpawnPoint.transform.rotation);
+			// //Spawn casing prefab at spawnpoint
+			// Instantiate (Prefabs.casingPrefab, 
+			// 	Spawnpoints.casingSpawnPoint.transform.position, 
+			// 	Spawnpoints.casingSpawnPoint.transform.rotation);
 		}
 
 		//Inspect weapon when pressing T key
@@ -669,25 +671,6 @@ public class HandgunScriptLPFP : MonoBehaviour {
 				hasStartedSliderBack = true;
 				StartCoroutine (HandgunSliderBackDelay());
 			}
-		}
-
-		//Walking when pressing down WASD keys
-		if (Input.GetKey (KeyCode.W) && !isRunning || 
-			Input.GetKey (KeyCode.A) && !isRunning || 
-			Input.GetKey (KeyCode.S) && !isRunning || 
-			Input.GetKey (KeyCode.D) && !isRunning) 
-		{
-			anim.SetBool ("Walk", true);
-		} else {
-			anim.SetBool ("Walk", false);
-		}
-
-		//Running when pressing down W and Left Shift key
-		if ((Input.GetKey (KeyCode.W) && Input.GetKey (KeyCode.LeftShift))) 
-		{
-			isRunning = true;
-		} else {
-			isRunning = false;
 		}
 		
 		//Run anim toggle

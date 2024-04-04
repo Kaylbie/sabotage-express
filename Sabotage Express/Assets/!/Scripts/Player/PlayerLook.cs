@@ -6,6 +6,7 @@ using UnityEngine.SocialPlatforms;
 public class PlayerLook : MonoBehaviour
 {
     public Camera cam;
+    public Transform prefabToRotate;
     public GameObject spine;
     private float xRotation = 0f;
     public float xSensitivity = 30f;
@@ -24,6 +25,10 @@ public class PlayerLook : MonoBehaviour
         neck = chest != null ? chest.Find("neck") : null;
         head = neck != null ? neck.Find("head") : null;
     }
+    public void setPrafabRotate(Transform prefabRotate)
+    {
+        this.prefabToRotate = prefabRotate;
+    }
 
     public void ProcessLook(Vector2 input)
     {
@@ -36,6 +41,11 @@ public class PlayerLook : MonoBehaviour
 
         // Apply rotation to camera
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        if (prefabToRotate != null)
+        {
+            prefabToRotate.rotation = cam.transform.rotation;
+        }
+        
 
         // Rotate the player body
         transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);

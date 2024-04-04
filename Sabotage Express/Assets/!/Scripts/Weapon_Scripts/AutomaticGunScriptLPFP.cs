@@ -771,10 +771,12 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 				bullet.GetComponent<Rigidbody>().velocity = 
 					bullet.transform.forward * bulletForce;
 				
+				
+				Destroy(bullet.gameObject, 3f);
 				//Spawn casing prefab at spawnpoint
-				Instantiate (Prefabs.casingPrefab, 
-					Spawnpoints.casingSpawnPoint.transform.position, 
-					Spawnpoints.casingSpawnPoint.transform.rotation);
+				// Instantiate (Prefabs.casingPrefab, 
+				// 	Spawnpoints.casingSpawnPoint.transform.position, 
+				// 	Spawnpoints.casingSpawnPoint.transform.rotation);
 			}
 		}
 
