@@ -12,6 +12,7 @@ TagManager:
   - Port
   - Gun
   - Blood
+  - Enemy
   layers:
   - Default
   - TransparentFX

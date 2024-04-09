@@ -21,7 +21,8 @@ public class EnemyAI : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.stoppingDistance = attackRange - 0.5f;
+        agent.stoppingDistance = attackRange - 1f;
+        
     }
 
     private void Update()
