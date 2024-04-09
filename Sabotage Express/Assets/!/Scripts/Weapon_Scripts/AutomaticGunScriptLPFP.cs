@@ -228,7 +228,7 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 		
 	}
 
-	private GunSpawner gunSpawner;
+	private ItemSpawner itemSpawner;
 	private Transform bulletSpawnPointPlayer;
 	private void Start () {
 		GameObject parentObject = transform.parent.parent.gameObject;
@@ -236,10 +236,10 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 		{
 			//Debug.Log("Found Player GameObject");
 			//Debug.Log(parentObject);
-			gunSpawner = parentObject.GetComponent<GunSpawner>();
-			storedWeaponName = gunSpawner.gunName;
-			currentWeaponText.text = gunSpawner.gunName;
-			bulletSpawnPointPlayer = gunSpawner.bulletSpawnPoint;
+			itemSpawner = parentObject.GetComponent<ItemSpawner>();
+			storedWeaponName = itemSpawner.gunName;
+			currentWeaponText.text = itemSpawner.gunName;
+			bulletSpawnPointPlayer = itemSpawner.bulletSpawnPoint;
 			mainAudioSource = parentObject.GetComponent<AudioSource>();
 			shootAudioSource = parentObject.GetComponent<AudioSource>();
 			

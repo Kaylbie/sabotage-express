@@ -12,17 +12,18 @@ public class InventoryManager : MonoBehaviour
     public GameObject mainInventoryUI;
     public int maxSlotSize=64;
     private Item currentItem;
-    private GunSpawner gunSpawner;
+    private ItemSpawner itemSpawner;
     int selecetedSlot =0;
     private InputManager inputManager;
     private Transform itemHolder;
-    private GameObject currentHolding;
+    [SerializeField] private GameObject currentHolding;
 
     void Start(){
         inputManager = GetComponent<InputManager>();
         selectSlot(selecetedSlot);
-        gunSpawner = GetComponent<GunSpawner>();
+        itemSpawner = GetComponent<ItemSpawner>();
         itemHolder=transform.Find("Armature/root/hips/spine/chest/shoulder_R/upper_arm_R/lower_arm_R/hand_R/ItemHolder");
+        itemSpawner=GetComponent<ItemSpawner>();
     }
 
 
@@ -57,9 +58,9 @@ public class InventoryManager : MonoBehaviour
     }
 
     public void selectSlot(int slotNo){
-        if (gunSpawner != null && gunSpawner.spawnedGun != null)
+        if (itemSpawner != null && itemSpawner.spawnedItemArms != null)
         {
-            Destroy(gunSpawner.spawnedGun);
+            Destroy(itemSpawner.spawnedItemArms);
         }
         if (currentHolding != null)
         {
@@ -73,9 +74,12 @@ public class InventoryManager : MonoBehaviour
             currentItem = inventorySlots[selecetedSlot].GetComponentInChildren<Item>();
             if (currentItem.item.type == ItemScript.ItemType.Gun)
             {
-                gunSpawner.SpawnGunBasedOnName(currentItem.item.itemName);
+                itemSpawner.SpawnGunBasedOnName(currentItem.item.itemName);
             }
-            
+            else
+            {
+                itemSpawner.SpawnItemBasedOnName(currentItem.item.itemName);
+            }
             AddItemToHandItemHolder(currentItem.item.itemName);
         }
     }

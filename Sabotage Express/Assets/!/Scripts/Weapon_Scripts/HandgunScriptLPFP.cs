@@ -202,7 +202,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		muzzleflashLight.enabled = false;
 		
 	}
-	private GunSpawner gunSpawner;
+	private ItemSpawner itemSpawner;
 	private Transform bulletSpawnPointPlayer;
 	private void Start () {
 		GameObject parentObject = transform.parent.parent.gameObject;
@@ -210,10 +210,10 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		{
 			//Debug.Log("Found Player GameObject");
 			//Debug.Log(parentObject);
-			gunSpawner = parentObject.GetComponent<GunSpawner>();
-			bulletSpawnPointPlayer = gunSpawner.bulletSpawnPoint;
-			currentWeaponText.text = gunSpawner.gunName;
-			bulletSpawnPointPlayer = gunSpawner.bulletSpawnPoint;
+			itemSpawner = parentObject.GetComponent<ItemSpawner>();
+			bulletSpawnPointPlayer = itemSpawner.bulletSpawnPoint;
+			currentWeaponText.text = itemSpawner.gunName;
+			bulletSpawnPointPlayer = itemSpawner.bulletSpawnPoint;
 			mainAudioSource = parentObject.GetComponent<AudioSource>();
 			shootAudioSource = parentObject.GetComponent<AudioSource>();
 			
@@ -340,7 +340,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		else 
 		{
 			//When ammo is full, show weapon name again
-			currentWeaponText.text = gunSpawner.gunName;
+			currentWeaponText.text = itemSpawner.gunName;
 			outOfAmmo = false;
 			anim.SetLayerWeight (1, 0.0f);
 		}

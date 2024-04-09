@@ -142,7 +142,7 @@ public class RocketLauncherScriptLPFP : MonoBehaviour {
 
 		muzzleFlashLight.enabled = false;
 	}
-	private GunSpawner gunSpawner;
+	private ItemSpawner itemSpawner;
 	private Transform bulletSpawnPointPlayer;
 	private void Start () 
 	{
@@ -162,8 +162,8 @@ public class RocketLauncherScriptLPFP : MonoBehaviour {
 		{
 			Debug.Log("Found Player GameObject");
 			Debug.Log(parentObject);
-			gunSpawner = parentObject.GetComponent<GunSpawner>();
-			bulletSpawnPointPlayer = gunSpawner.bulletSpawnPoint;
+			itemSpawner = parentObject.GetComponent<ItemSpawner>();
+			bulletSpawnPointPlayer = itemSpawner.bulletSpawnPoint;
 			if (bulletSpawnPointPlayer != null)
 			{
 				// bulletSpawnPoint found, you can now access its Transform

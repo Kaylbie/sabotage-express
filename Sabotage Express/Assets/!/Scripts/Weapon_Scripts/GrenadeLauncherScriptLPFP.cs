@@ -337,7 +337,7 @@ public class GrenadeLauncherScriptLPFP : MonoBehaviour {
 			<SkinnedMeshRenderer> ().enabled = false;
 		}
 	}
-	private GunSpawner gunSpawner;
+	private ItemSpawner itemSpawner;
 	private Transform bulletSpawnPointPlayer;
 	private void Start () {
 		GameObject parentObject = transform.parent.parent.gameObject;
@@ -345,9 +345,9 @@ public class GrenadeLauncherScriptLPFP : MonoBehaviour {
 		{
 			//Debug.Log("Found Player GameObject");
 			//Debug.Log(parentObject);
-			gunSpawner = parentObject.GetComponent<GunSpawner>();
+			itemSpawner = parentObject.GetComponent<ItemSpawner>();
 			//storedWeaponName = gunSpawner.gunName;
-			currentWeaponText.text = gunSpawner.gunName;
+			currentWeaponText.text = itemSpawner.gunName;
 			//bulletSpawnPointPlayer = gunSpawner.bulletSpawnPoint;
 			//if (bulletSpawnPointPlayer != null)
 			//{
