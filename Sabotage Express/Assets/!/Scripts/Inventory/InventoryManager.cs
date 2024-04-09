@@ -17,14 +17,15 @@ public class InventoryManager : MonoBehaviour
     private InputManager inputManager;
     private Transform itemHolder;
     public GameObject currentHolding;
-
     void Start(){
         inputManager = GetComponent<InputManager>();
         selectSlot(selecetedSlot);
         itemSpawner = GetComponent<ItemSpawner>();
         itemHolder=transform.Find("Armature/root/hips/spine/chest/shoulder_R/upper_arm_R/lower_arm_R/hand_R/ItemHolder");
         itemSpawner=GetComponent<ItemSpawner>();
+        Cursor.lockState = CursorLockMode.Confined;
     }
+
 
 
         void Update()
@@ -52,12 +53,15 @@ public class InventoryManager : MonoBehaviour
         
     }
 
+  
+    
     public Item GetCurrentItem()
     {
         return currentItem;
     }
 
     public void selectSlot(int slotNo){
+        
         if (itemSpawner != null && itemSpawner.spawnedItemArms != null)
         {
             Destroy(itemSpawner.spawnedItemArms);
