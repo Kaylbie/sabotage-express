@@ -30,6 +30,20 @@ public class BulletScript : MonoBehaviour {
 	{
 		//If destroy on impact is false, start 
 		//coroutine with random destroy timer
+		if (collision.gameObject.tag == "Player" ) 
+		{
+			//Physics.IgnoreCollision (collision.collider);
+			Debug.LogWarning("Collides with player");
+
+			Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+			return;
+		}
+		if (collision.gameObject.CompareTag("Gun") || collision.gameObject.layer == LayerMask.NameToLayer("InvisibleToSelf")) {
+			// Ignore the collision
+			Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+			return;
+		}
+		//Debug.LogWarning("Collides with something"+collision.gameObject.name);
 		if (!destroyOnImpact) 
 		{
 			StartCoroutine (DestroyTimer ());
@@ -41,19 +55,7 @@ public class BulletScript : MonoBehaviour {
 		}
 
 		//Ignore collision if bullet collides with "Player" tag
-		if (collision.gameObject.tag == "Player" ) 
-		{
-			//Physics.IgnoreCollision (collision.collider);
-			Debug.LogWarning("Collides with player");
-
-			Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
-			return;
-		}
-		if (collision.gameObject.CompareTag("Gun") && collision.gameObject.layer == LayerMask.NameToLayer("InvisibleToSelf")) {
-			// Ignore the collision
-			Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
-			return;
-		}
+		
 
 		//If bullet collides with "Blood" tag
 		if (collision.transform.tag == "Blood") 
