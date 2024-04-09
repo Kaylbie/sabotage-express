@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Granade
   m_EditorClassIdentifier: 
   type: 2
+  itemID: 4
   itemName: Granade
   actionType: 1
   image: {fileID: 21300002, guid: 04e6792f470c37741aa02ec74be1777b, type: 3}

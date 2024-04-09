@@ -157,12 +157,11 @@ public class HandgunScriptLPFP : MonoBehaviour {
 
 	[Header("Audio Source")]
 	//Main audio source
-	public AudioSource mainAudioSource;
+	private AudioSource mainAudioSource;
 	//Audio source used for shoot sound
-	public AudioSource shootAudioSource;
+	private AudioSource shootAudioSource;
 
 	[Header("UI Components")]
-	public Text timescaleText;
 	public Text currentWeaponText;
 	public Text currentAmmoText;
 	public Text totalAmmoText;
@@ -172,25 +171,11 @@ public class HandgunScriptLPFP : MonoBehaviour {
 	{  
 		[Header("Prefabs")]
 		public Transform bulletPrefab;
-		public Transform casingPrefab;
 		public Transform grenadePrefab;
 	}
 	public prefabs Prefabs;
 	
-	[System.Serializable]
-	public class spawnpoints
-	{  
-		[Header("Spawnpoints")]
-		//Array holding casing spawn points 
-		//Casing spawn point array
-		public Transform casingSpawnPoint;
-		//Bullet prefab spawn from this point
-		
-		//Grenade prefab spawn from this point
-		
-	}
 	private Transform grenadeSpawnPoint;
-	public spawnpoints Spawnpoints;
 	private Transform bulletSpawnPoint;
 	[System.Serializable]
 	public class soundClips
@@ -215,103 +200,11 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		currentAmmo = ammo;
 
 		muzzleflashLight.enabled = false;
-
-		//Weapon attachments
-		//If scope 2 is true
-		if (scope2 == true) 
-		{
-			//If scope2 is true, enable scope renderer
-			WeaponAttachmentRenderers.scope2Renderer.GetComponent
-			<SkinnedMeshRenderer> ().enabled = true;
-			//Also enable the scope sight render mesh
-			WeaponAttachmentRenderers.scope2RenderMesh.SetActive(true);
-			//Set the scope sight texture
-			WeaponAttachmentRenderers.scope2SpriteRenderer.GetComponent
-			<SpriteRenderer>().sprite = scope2Texture;
-			//Set the scope texture size
-			WeaponAttachmentRenderers.scope2SpriteRenderer.transform.localScale = new Vector3 
-				(scope2TextureSize, scope2TextureSize, scope2TextureSize);
-		} 
-		else 
-		{
-			//If scope2 is false, disable scope renderer
-			WeaponAttachmentRenderers.scope2Renderer.GetComponent
-			<SkinnedMeshRenderer> ().enabled = false;
-			//Also disable the scope sight render mesh
-			WeaponAttachmentRenderers.scope2RenderMesh.SetActive(false);
-		}
-		//If scope 3 is true
-		if (scope3 == true) 
-		{
-			//If scope3 is true, enable scope renderer
-			WeaponAttachmentRenderers.scope3Renderer.GetComponent
-			<SkinnedMeshRenderer> ().enabled = true;
-			//Also enable the scope sight render mesh
-			WeaponAttachmentRenderers.scope3RenderMesh.SetActive(true);
-			//Set the scope sight texture
-			WeaponAttachmentRenderers.scope3SpriteRenderer.GetComponent
-			<SpriteRenderer>().sprite = scope3Texture;
-			//Set the scope texture size
-			WeaponAttachmentRenderers.scope3SpriteRenderer.transform.localScale = new Vector3 
-				(scope3TextureSize, scope3TextureSize, scope3TextureSize);
-		} 
-		else 
-		{
-			//If scope3 is false, disable scope renderer
-			WeaponAttachmentRenderers.scope3Renderer.GetComponent
-			<SkinnedMeshRenderer> ().enabled = false;
-			//Also disable the scope sight render mesh
-			WeaponAttachmentRenderers.scope3RenderMesh.SetActive(false);
-		}
-
-		//If alwaysShowIronSights is true
-		if (alwaysShowIronSights == true) {
-			WeaponAttachmentRenderers.ironSightsRenderer.GetComponent
-			<SkinnedMeshRenderer> ().enabled = true;
-		}
-
-		//If ironSights is true
-		if (ironSights == true) 
-		{
-			//If scope1 is true, enable scope renderer
-			WeaponAttachmentRenderers.ironSightsRenderer.GetComponent
-			<SkinnedMeshRenderer> ().enabled = true;
-		//If always show iron sights is enabled, don't disable 
-		//Do not use if iron sight renderer is not assigned in inspector
-		} else {
-			//If scope1 is false, disable scope renderer
-			WeaponAttachmentRenderers.ironSightsRenderer.GetComponent
-			<SkinnedMeshRenderer> ().enabled = false;
-		}
-		//If silencer is true and assigned in the inspector
-		if (silencer == true && 
-			WeaponAttachmentRenderers.silencerRenderer) 
-		{
-			//If scope1 is true, enable scope renderer
-			WeaponAttachmentRenderers.silencerRenderer.GetComponent
-			<SkinnedMeshRenderer> ().enabled = true;
-		} else {
-			//If scope1 is false, disable scope renderer
-			WeaponAttachmentRenderers.silencerRenderer.GetComponent
-			<SkinnedMeshRenderer> ().enabled = false;
-		}
+		
 	}
 	private GunSpawner gunSpawner;
 	private Transform bulletSpawnPointPlayer;
 	private void Start () {
-		//Save the weapon name
-		//storedWeaponName = weaponName;
-		//Get weapon name from string to text
-		//currentWeaponText.text = weaponName;
-		//Set total ammo text from total ammo int
-		totalAmmoText.text = ammo.ToString();
-
-		//Weapon sway
-		initialSwayPosition = transform.localPosition;
-
-		//Set the shoot sound to audio source
-		shootAudioSource.clip = SoundClips.shootSound;
-		
 		GameObject parentObject = transform.parent.parent.gameObject;
 		if (parentObject != null)
 		{
@@ -321,20 +214,19 @@ public class HandgunScriptLPFP : MonoBehaviour {
 			bulletSpawnPointPlayer = gunSpawner.bulletSpawnPoint;
 			currentWeaponText.text = gunSpawner.gunName;
 			bulletSpawnPointPlayer = gunSpawner.bulletSpawnPoint;
-			if (bulletSpawnPointPlayer != null)
-			{
-				// bulletSpawnPoint found, you can now access its Transform
-				//Debug.Log("Found bulletSpawnPoint on Player GameObject");
-
-				// Example: Set the position of bulletSpawnPoint
-				//bulletSpawnPoint.position = new Vector3(0, 0, 0);
-			}
-			else
-			{
-				Debug.LogError("bulletSpawnPoint not found on Player GameObject");
-			}
+			mainAudioSource = parentObject.GetComponent<AudioSource>();
+			shootAudioSource = parentObject.GetComponent<AudioSource>();
+			
 			bulletSpawnPoint= bulletSpawnPointPlayer;
+			
 		}
+		totalAmmoText.text = ammo.ToString();
+		
+		initialSwayPosition = transform.localPosition;
+
+		shootAudioSource.clip = SoundClips.shootSound;
+		
+		
 	}
 
 	private void LateUpdate () {
@@ -367,55 +259,17 @@ public class HandgunScriptLPFP : MonoBehaviour {
 				gunCamera.fieldOfView = Mathf.Lerp (gunCamera.fieldOfView,
 					ironSightsAimFOV, fovSpeed * Time.deltaTime);
 			}
-
-			if (scope2 == true) 
-			{
-				gunCamera.fieldOfView = Mathf.Lerp (gunCamera.fieldOfView,
-					scope2AimFOV, fovSpeed * Time.deltaTime);
-			}
-			if (scope3 == true) 
-			{
-				gunCamera.fieldOfView = Mathf.Lerp (gunCamera.fieldOfView,
-					scope3AimFOV, fovSpeed * Time.deltaTime);
-			}
-
 			isAiming = true;
-
-			//If iron sights are enabled, use normal aim
 			if (ironSights == true) 
 			{
 				anim.SetBool ("Aim", true);
 			}
-			//If scope 2 is enabled, use scope 2 aim in animation
-			if (scope2 == true) 
-			{
-				anim.SetBool ("Aim Scope 2", true);
-			}
-			//If scope 3 is enabled, use scope 3 aim in animation
-			if (scope3 == true) 
-			{
-				anim.SetBool ("Aim Scope 3", true);
-			}
-
 			if (!soundHasPlayed) 
 			{
 				mainAudioSource.clip = SoundClips.aimSound;
 				mainAudioSource.Play ();
 	
 				soundHasPlayed = true;
-			}
-				
-			//If scope 2 is true, show scope sight texture when aiming
-			if (scope2 == true) 
-			{
-				WeaponAttachmentRenderers.scope2SpriteRenderer.GetComponent
-				<SpriteRenderer> ().enabled = true;
-			}
-			//If scope 3 is true, show scope sight texture when aiming
-			if (scope3 == true) 
-			{
-				WeaponAttachmentRenderers.scope3SpriteRenderer.GetComponent
-				<SpriteRenderer> ().enabled = true;
 			}
 		} 
 		else 
@@ -425,37 +279,12 @@ public class HandgunScriptLPFP : MonoBehaviour {
 				defaultFov,fovSpeed * Time.deltaTime);
 
 			isAiming = false;
-
-			//If iron sights are enabled, use normal aim out
 			if (ironSights == true) 
 			{
 				anim.SetBool ("Aim", false);
 			}
-			//If scope 2 is enabled, use scope 2 aim out animation
-			if (scope2 == true) 
-			{
-				anim.SetBool ("Aim Scope 2", false);
-			}
-			//If scope 3 is enabled, use scope 3 aim out animation
-			if (scope3 == true) 
-			{
-				anim.SetBool ("Aim Scope 3", false) ;
-			}
-
 			soundHasPlayed = false;
 
-			//If scope 2 is true, disable scope sight texture when not aiming
-			if (scope2 == true) 
-			{
-				WeaponAttachmentRenderers.scope2SpriteRenderer.GetComponent
-				<SpriteRenderer> ().enabled = false;
-			}
-			//If scope 3 is true, disable scope sight texture when not aiming
-			if (scope3 == true) 
-			{
-				WeaponAttachmentRenderers.scope3SpriteRenderer.GetComponent
-				<SpriteRenderer> ().enabled = false;
-			}
 		}
 		//Aiming end
 
@@ -463,9 +292,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		if (randomMuzzleflash == true) {
 			randomMuzzleflashValue = Random.Range (minRandomValue, maxRandomValue);
 		}
-
 		
-
 		//Set current ammo text from ammo int
 		currentAmmoText.text = currentAmmo.ToString ();
 
@@ -514,15 +341,16 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		{
 			//When ammo is full, show weapon name again
 			currentWeaponText.text = gunSpawner.gunName;
-			//Toggle bool
 			outOfAmmo = false;
-			//anim.SetBool ("Out Of Ammo", false);
 			anim.SetLayerWeight (1, 0.0f);
 		}
 
 		//Shooting 
 		if (Input.GetMouseButtonDown (0) && !outOfAmmo && !isReloading && !isInspecting && !isRunning) 
 		{
+			muzzleParticles.transform.position = bulletSpawnPoint.transform.position; 
+			sparkParticles.transform.position =	bulletSpawnPoint.transform.position;
+			muzzleflashLight.transform.position = bulletSpawnPoint.transform.position;
 			anim.Play ("Fire", 0, 0f);
 			if (!silencer) 
 			{
@@ -531,19 +359,10 @@ public class HandgunScriptLPFP : MonoBehaviour {
 				
 			//Remove 1 bullet from ammo
 			currentAmmo -= 1;
-
-			//If silencer is enabled, play silencer shoot sound
-			if (silencer == true) 
-			{
-				shootAudioSource.clip = SoundClips.silencerShootSound;
-				shootAudioSource.Play ();
-			} 
-			//If silencer is not enabled, play default shoot sound
-			else 
-			{
-				shootAudioSource.clip = SoundClips.shootSound;
-				shootAudioSource.Play ();
-			}
+			
+			shootAudioSource.clip = SoundClips.shootSound;
+			shootAudioSource.Play ();
+			
 
 			//Light flash start
 			StartCoroutine(MuzzleFlashLight());
@@ -564,19 +383,6 @@ public class HandgunScriptLPFP : MonoBehaviour {
 			} 
 			else //if aiming
 			{
-				if (ironSights == true) 
-				{
-					anim.Play ("Aim Fire", 0, 0f);
-				}
-				if (scope2 == true) 
-				{
-					anim.Play ("Aim Fire Scope 2", 0, 0f);
-				}
-				if (scope3 == true) 
-				{
-					anim.Play ("Aim Fire Scope 3", 0, 0f);
-				}
-					
 				//If random muzzle is false
 				if (!randomMuzzleflash && !silencer) {
 					muzzleParticles.Emit (1);

@@ -17,7 +17,6 @@ public class InventoryManager : MonoBehaviour
     private InputManager inputManager;
     private Transform itemHolder;
     private GameObject currentHolding;
-    [SerializeField] private Transform itemPickUpPosition;
 
     void Start(){
         inputManager = GetComponent<InputManager>();
@@ -90,15 +89,12 @@ public class InventoryManager : MonoBehaviour
         GameObject prefab = LoadPrefab(prefabPath);
         if (prefab != null)
         {
-            
-            Rigidbody rb = prefab.GetComponent<Rigidbody>();
+            currentHolding = Instantiate(prefab, itemHolder.position, itemHolder.rotation, itemHolder);
+            Rigidbody rb = currentHolding.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.isKinematic = true;
             }
-            
-            
-            currentHolding = Instantiate(prefab, itemHolder.position, gameObject.transform.rotation, itemHolder);
             Transform handPosTransform = currentHolding.transform.Find("HandPos");
             if (handPosTransform != null)
             {

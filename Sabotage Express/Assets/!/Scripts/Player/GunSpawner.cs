@@ -20,9 +20,6 @@ public class GunSpawner : MonoBehaviour
     public GameObject spawnedGun;
     private void Start()
     {
-        //gunPrefabs.Add(1, gunPrefab1);
-        //gunPrefabs.Add(2, gunPrefab2);
-        //gunPrefabs.Add(3, gunPrefab3);
         playerLook = GetComponent<PlayerLook>();
         playerMotor = player.GetComponent<PlayerMotor>();
         

@@ -10,6 +10,7 @@ TagManager:
   - Target
   - Concrete
   - Port
+  - Gun
   layers:
   - Default
   - TransparentFX
