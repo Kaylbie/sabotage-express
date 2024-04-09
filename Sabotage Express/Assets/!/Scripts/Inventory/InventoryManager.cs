@@ -10,6 +10,7 @@ public class InventoryManager : MonoBehaviour
     public Slot[] inventorySlots;
     public GameObject ItemPrefab;
     public GameObject mainInventoryUI;
+    public GameObject healthBar;
     public int maxSlotSize=64;
     private Item currentItem;
     private ItemSpawner itemSpawner;
@@ -17,14 +18,16 @@ public class InventoryManager : MonoBehaviour
     private InputManager inputManager;
     private Transform itemHolder;
     public GameObject currentHolding;
-
+    public int health=100;
     void Start(){
         inputManager = GetComponent<InputManager>();
         selectSlot(selecetedSlot);
         itemSpawner = GetComponent<ItemSpawner>();
         itemHolder=transform.Find("Armature/root/hips/spine/chest/shoulder_R/upper_arm_R/lower_arm_R/hand_R/ItemHolder");
         itemSpawner=GetComponent<ItemSpawner>();
+        Cursor.lockState = CursorLockMode.Confined;
     }
+
 
 
         void Update()
@@ -52,12 +55,18 @@ public class InventoryManager : MonoBehaviour
         
     }
 
+    public void ChangeHealth(int amount){
+        health+=amount;
+        healthBar.GetComponent<UnityEngine.UI.Slider>().value=health;
+    }
+    
     public Item GetCurrentItem()
     {
         return currentItem;
     }
 
     public void selectSlot(int slotNo){
+        ChangeHealth(-10);
         if (itemSpawner != null && itemSpawner.spawnedItemArms != null)
         {
             Destroy(itemSpawner.spawnedItemArms);

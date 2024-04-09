@@ -2155,6 +2155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nickname: 
+  maxHealth: 100
 --- !u!114 &8940879910840034654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2295,7 +2296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1845373245
+  GlobalObjectIdHash: 2712144683
   InScenePlacedSourceGlobalObjectIdHash: 794988205
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -2349,7 +2350,10 @@ MonoBehaviour:
   - {fileID: 3992374537570400918}
   ItemPrefab: {fileID: 1237206640998341221, guid: 6a3c0ee750e02254aa5dbabeb3ef2dab, type: 3}
   mainInventoryUI: {fileID: 1345635940851097930}
+  healthBar: {fileID: 1600699271987861499}
   maxSlotSize: 64
+  currentHolding: {fileID: 0}
+  health: 100
 --- !u!114 &939205158926524898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2362,11 +2366,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d110c59de9dc541a1188374c441cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 6816400376388148896}
   gunName: 
   bulletSpawnPoint: {fileID: 6176258821368153473}
   handTransform: {fileID: 2056243084790602157}
-  spawnedGun: {fileID: 0}
+  spawnedItemArms: {fileID: 0}
 --- !u!114 &3984092529667260646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2379,6 +2382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e0c891c9e8148499deb65c53669017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  throwForce: 500
 --- !u!1 &6854802172528296412
 GameObject:
   m_ObjectHideFlags: 0
@@ -2973,9 +2977,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3464502474587044589, guid: dc5733a9d17e076408a17201bb606d3a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3464502474587044589, guid: dc5733a9d17e076408a17201bb606d3a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3716748214778644252, guid: dc5733a9d17e076408a17201bb606d3a, type: 3}
       propertyPath: m_Name
       value: InventoryUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317853214271103280, guid: dc5733a9d17e076408a17201bb606d3a, type: 3}
+      propertyPath: m_Direction
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5021109956135930550, guid: dc5733a9d17e076408a17201bb606d3a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3108,6 +3124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48e7ed84a66a41408a1024fcfc1ff26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1600699271987861499 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7393378305466859053, guid: dc5733a9d17e076408a17201bb606d3a, type: 3}
+  m_PrefabInstance: {fileID: 8118967463829203414}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1987454532438016932 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7726073296009767538, guid: dc5733a9d17e076408a17201bb606d3a, type: 3}
