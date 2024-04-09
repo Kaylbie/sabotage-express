@@ -157,7 +157,7 @@ public class RocketLauncherScriptLPFP : MonoBehaviour {
 		//Set the shoot sound to audio source
 		shootAudioSource.clip = SoundClips.shootSound;
 		
-		GameObject parentObject = transform.parent.parent.parent.gameObject;
+		GameObject parentObject = transform.parent.parent.gameObject;
 		if (parentObject != null)
 		{
 			Debug.Log("Found Player GameObject");
@@ -167,6 +167,11 @@ public class RocketLauncherScriptLPFP : MonoBehaviour {
 			if (bulletSpawnPointPlayer != null)
 			{
 				// bulletSpawnPoint found, you can now access its Transform
+				float spawnDistanceForward = 1.0f;
+				bulletSpawnPoint= bulletSpawnPointPlayer;
+				bulletSpawnPoint.position +=bulletSpawnPoint.forward * spawnDistanceForward;
+				
+
 				Debug.Log("Found bulletSpawnPoint on Player GameObject");
 
 				// Example: Set the position of bulletSpawnPoint
@@ -176,7 +181,8 @@ public class RocketLauncherScriptLPFP : MonoBehaviour {
 			{
 				Debug.LogError("bulletSpawnPoint not found on Player GameObject");
 			}
-			bulletSpawnPoint= bulletSpawnPointPlayer;
+			
+
 		}
 	}
 

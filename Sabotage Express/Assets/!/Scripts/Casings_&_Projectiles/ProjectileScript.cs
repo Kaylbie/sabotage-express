@@ -55,6 +55,7 @@ public class ProjectileScript : MonoBehaviour {
 
 		//Start the destroy timer
 		StartCoroutine (DestroyTimer ());
+		//Physics.IgnoreLayerCollision(LayerMask.NameToLayer("InvisibleToSelf"), true);
 	}
 		
 	private void FixedUpdate()
@@ -124,16 +125,25 @@ public class ProjectileScript : MonoBehaviour {
 	//If the projectile collides with anything
 	private void OnCollisionEnter (Collision collision) 
 	{
-		if (collision.gameObject.tag == "Player") 
+		if (collision.gameObject.tag == "Player" ) 
 		{
 			//Physics.IgnoreCollision (collision.collider);
 			Debug.LogWarning("Collides with player");
-			//Physics.IgnoreCollision(GetComponent<Collider>(), GetComponent<Collider>());
-
 
 			Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
 			return;
 		}
+		if (collision.gameObject.CompareTag("Gun") && collision.gameObject.layer == LayerMask.NameToLayer("InvisibleToSelf")) {
+			// Ignore the collision
+			Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+			return;
+		}
+		// if (collision.gameObject.layer == LayerMask.NameToLayer("InvisibleToSelf")) {
+		// 	// Ignore the collision
+		// 	Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+		// 	return;
+		// }
+		
 		hasCollided = true;
 
 		//Hide projectile

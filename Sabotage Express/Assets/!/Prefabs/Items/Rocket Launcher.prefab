@@ -181,8 +181,8 @@ GameObject:
   - component: {fileID: 8857132361022346356}
   - component: {fileID: -8962371838897945992}
   m_Layer: 8
-  m_Name: RocketLauncher
-  m_TagString: Untagged
+  m_Name: Rocket Launcher
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -202,6 +202,7 @@ Transform:
   m_Children:
   - {fileID: 4741522490371062}
   - {fileID: 4434633679123496}
+  - {fileID: 1736240682890783693}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33644578752606112
@@ -316,3 +317,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   promtMessage: Pick
   itemScript: {fileID: 11400000, guid: 003b3caa3b732194fa8a4b3f7daa9f1d, type: 2}
+--- !u!1 &3485407385875935888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1736240682890783693}
+  m_Layer: 8
+  m_Name: HandPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1736240682890783693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3485407385875935888}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.0805, z: 0.1318}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4713002887977738}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

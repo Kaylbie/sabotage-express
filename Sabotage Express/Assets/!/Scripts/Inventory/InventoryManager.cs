@@ -72,7 +72,11 @@ public class InventoryManager : MonoBehaviour
         if (inventorySlots[selecetedSlot].GetComponentInChildren<Item>() != null)
         {
             currentItem = inventorySlots[selecetedSlot].GetComponentInChildren<Item>();
-            gunSpawner.SpawnGunBasedOnName(currentItem.item.itemName);
+            if (currentItem.item.type == ItemScript.ItemType.Gun)
+            {
+                gunSpawner.SpawnGunBasedOnName(currentItem.item.itemName);
+            }
+            
             AddItemToHandItemHolder(currentItem.item.itemName);
         }
     }

@@ -993,7 +993,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7141107333901543116}
   m_Layer: 0
-  m_Name: RocketLauncher_Arms
+  m_Name: Rocket Launcher_Arms
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

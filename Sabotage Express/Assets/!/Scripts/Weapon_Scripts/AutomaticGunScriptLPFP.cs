@@ -387,9 +387,10 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 	private void Start () {
 		
 		//Save the weapon name
-		storedWeaponName = weaponName;
+		//storedWeaponName = weaponName;
+		
 		//Get weapon name from string to text
-		currentWeaponText.text = weaponName;
+		
 		//Set total ammo text from total ammo int
 		totalAmmoText.text = ammo.ToString();
 
@@ -399,26 +400,26 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 		//Set the shoot sound to audio source
 		shootAudioSource.clip = SoundClips.shootSound;
 		
-		
-		
 		GameObject parentObject = transform.parent.parent.gameObject;
 		if (parentObject != null)
 		{
-			Debug.Log("Found Player GameObject");
-			Debug.Log(parentObject);
+			//Debug.Log("Found Player GameObject");
+			//Debug.Log(parentObject);
 			gunSpawner = parentObject.GetComponent<GunSpawner>();
+			storedWeaponName = gunSpawner.gunName;
+			currentWeaponText.text = gunSpawner.gunName;
 			bulletSpawnPointPlayer = gunSpawner.bulletSpawnPoint;
 			if (bulletSpawnPointPlayer != null)
 			{
 				// bulletSpawnPoint found, you can now access its Transform
-				Debug.Log("Found bulletSpawnPoint on Player GameObject");
+				//Debug.Log("Found bulletSpawnPoint on Player GameObject");
 
 				// Example: Set the position of bulletSpawnPoint
 				//bulletSpawnPoint.position = new Vector3(0, 0, 0);
 			}
 			else
 			{
-				Debug.LogError("bulletSpawnPoint not found on Player GameObject");
+				//Debug.LogError("bulletSpawnPoint not found on Player GameObject");
 			}
 			bulletSpawnPoint= bulletSpawnPointPlayer;
 		}
@@ -773,7 +774,7 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 					bullet.transform.forward * bulletForce;
 				
 				
-				Destroy(bullet.gameObject, 3f);
+				//Destroy(bullet.gameObject, 3f);
 				//Spawn casing prefab at spawnpoint
 				// Instantiate (Prefabs.casingPrefab, 
 				// 	Spawnpoints.casingSpawnPoint.transform.position, 

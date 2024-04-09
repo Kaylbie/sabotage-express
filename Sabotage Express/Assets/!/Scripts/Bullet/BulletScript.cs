@@ -41,15 +41,18 @@ public class BulletScript : MonoBehaviour {
 		}
 
 		//Ignore collision if bullet collides with "Player" tag
-		if (collision.gameObject.tag == "Player") 
+		if (collision.gameObject.tag == "Player" ) 
 		{
 			//Physics.IgnoreCollision (collision.collider);
 			Debug.LogWarning("Collides with player");
-			//Physics.IgnoreCollision(GetComponent<Collider>(), GetComponent<Collider>());
-
 
 			Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
-
+			return;
+		}
+		if (collision.gameObject.CompareTag("Gun") && collision.gameObject.layer == LayerMask.NameToLayer("InvisibleToSelf")) {
+			// Ignore the collision
+			Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+			return;
 		}
 
 		//If bullet collides with "Blood" tag

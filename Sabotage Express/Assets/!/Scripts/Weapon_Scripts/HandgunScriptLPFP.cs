@@ -300,9 +300,9 @@ public class HandgunScriptLPFP : MonoBehaviour {
 	private Transform bulletSpawnPointPlayer;
 	private void Start () {
 		//Save the weapon name
-		storedWeaponName = weaponName;
+		//storedWeaponName = weaponName;
 		//Get weapon name from string to text
-		currentWeaponText.text = weaponName;
+		//currentWeaponText.text = weaponName;
 		//Set total ammo text from total ammo int
 		totalAmmoText.text = ammo.ToString();
 
@@ -312,12 +312,14 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		//Set the shoot sound to audio source
 		shootAudioSource.clip = SoundClips.shootSound;
 		
-		GameObject parentObject = transform.parent.parent.parent.gameObject;
+		GameObject parentObject = transform.parent.parent.gameObject;
 		if (parentObject != null)
 		{
 			//Debug.Log("Found Player GameObject");
 			//Debug.Log(parentObject);
 			gunSpawner = parentObject.GetComponent<GunSpawner>();
+			bulletSpawnPointPlayer = gunSpawner.bulletSpawnPoint;
+			currentWeaponText.text = gunSpawner.gunName;
 			bulletSpawnPointPlayer = gunSpawner.bulletSpawnPoint;
 			if (bulletSpawnPointPlayer != null)
 			{
@@ -511,7 +513,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		else 
 		{
 			//When ammo is full, show weapon name again
-			currentWeaponText.text = storedWeaponName.ToString ();
+			currentWeaponText.text = gunSpawner.gunName;
 			//Toggle bool
 			outOfAmmo = false;
 			//anim.SetBool ("Out Of Ammo", false);
@@ -609,7 +611,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 			//Add velocity to the bullet
 			bullet.GetComponent<Rigidbody>().velocity = 
 				bullet.transform.forward * bulletForce;
-			Destroy(bullet.gameObject, 3f);
+			
 			
 
 			// //Spawn casing prefab at spawnpoint

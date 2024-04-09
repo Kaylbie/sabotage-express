@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: RocketLauncher
   m_EditorClassIdentifier: 
   type: 0
-  itemID: 0
-  itemName: 
+  itemID: 3
+  itemName: Rocket Launcher
   actionType: 0
-  image: {fileID: 0}
+  image: {fileID: 21300016, guid: dccc05b8d01dde54f88f9910329187c2, type: 3}
   stackable: 1
