@@ -19,6 +19,8 @@ public class BulletScript : MonoBehaviour {
 	public Transform [] dirtImpactPrefabs;
 	public Transform []	concreteImpactPrefabs;
 
+	public int bulletDamage = 25;
+
 	private void Start () 
 	{
 		//Start destroy timer
@@ -28,8 +30,23 @@ public class BulletScript : MonoBehaviour {
 	//If the bullet collides with anything
 	private void OnCollisionEnter (Collision collision) 
 	{
-		//If destroy on impact is false, start 
-		//coroutine with random destroy timer
+		
+		if (collision.gameObject.tag == "Enemy")
+		{
+			EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
+			if (enemyHealth != null)
+			{
+				enemyHealth.TakeDamage(bulletDamage);
+			
+			}
+			//Instantiate random impact prefab from array
+			Instantiate (bloodImpactPrefabs [Random.Range 
+					(0, bloodImpactPrefabs.Length)], transform.position, 
+				Quaternion.LookRotation (collision.contacts [0].normal));
+			//Destroy bullet object
+			Destroy(gameObject);
+		}
+		
 		if (collision.gameObject.tag == "Player" ) 
 		{
 			//Physics.IgnoreCollision (collision.collider);
@@ -58,15 +75,6 @@ public class BulletScript : MonoBehaviour {
 		
 
 		//If bullet collides with "Blood" tag
-		if (collision.transform.tag == "Blood") 
-		{
-			//Instantiate random impact prefab from array
-			Instantiate (bloodImpactPrefabs [Random.Range 
-				(0, bloodImpactPrefabs.Length)], transform.position, 
-				Quaternion.LookRotation (collision.contacts [0].normal));
-			//Destroy bullet object
-			Destroy(gameObject);
-		}
 
 		//If bullet collides with "Metal" tag
 		if (collision.transform.tag == "Metal") 

@@ -7,6 +7,7 @@ public class EnemyAI : MonoBehaviour
 {
     public float detectionRange = 10f;
     public float attackRange = 2f;
+    public float fieldOfViewAngle = 110f; 
     public float attackRate = 2f;
     public int attackDamage = 10;
     public float wanderRadius = 7f; 
@@ -20,6 +21,7 @@ public class EnemyAI : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.stoppingDistance = attackRange - 0.5f;
     }
 
     private void Update()
@@ -29,7 +31,7 @@ public class EnemyAI : MonoBehaviour
         if (targetPlayer != null)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, targetPlayer.position);
-            if (distanceToPlayer <= detectionRange)
+            if (distanceToPlayer <= detectionRange && IsPlayerInFieldOfView())
             {
                 MoveTowardsTarget(targetPlayer);
                 if (distanceToPlayer <= attackRange)
@@ -62,6 +64,18 @@ public class EnemyAI : MonoBehaviour
         }
 
         return closestPlayer;
+    }
+
+    bool IsPlayerInFieldOfView()
+    {
+        Vector3 directionToPlayer = targetPlayer.position - transform.position;
+        float angle = Vector3.Angle(directionToPlayer, transform.forward);
+
+        if (angle < fieldOfViewAngle / 2)
+        {
+            return true;
+        }
+        return false;
     }
 
     void MoveTowardsTarget(Transform target)
