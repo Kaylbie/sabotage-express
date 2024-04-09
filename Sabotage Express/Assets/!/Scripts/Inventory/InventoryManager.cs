@@ -17,6 +17,7 @@ public class InventoryManager : MonoBehaviour
     private InputManager inputManager;
     private Transform itemHolder;
     private GameObject currentHolding;
+    [SerializeField] private Transform itemPickUpPosition;
 
     void Start(){
         inputManager = GetComponent<InputManager>();
@@ -72,13 +73,8 @@ public class InventoryManager : MonoBehaviour
         {
             currentItem = inventorySlots[selecetedSlot].GetComponentInChildren<Item>();
             gunSpawner.SpawnGunBasedOnName(currentItem.item.itemName);
-            // if (currentHandItem != null)
-            // {
-            //     DestroyImmediate(currentHandItem, true);
-            // }
             AddItemToHandItemHolder(currentItem.item.itemName);
         }
-        
     }
     private GameObject LoadPrefab(string prefabPath)
     {
@@ -86,36 +82,47 @@ public class InventoryManager : MonoBehaviour
         return prefab;
     }
     public void AddItemToHandItemHolder(String name){
-        string prefabPath = "Assets/!/Prefabs/Models_Only/Guns/"+name+".prefab";
+        string prefabPath = "Assets/!/Prefabs/Items/"+name+".prefab";
         GameObject prefab = LoadPrefab(prefabPath);
         if (prefab != null)
         {
-            int newLayer = LayerMask.NameToLayer("InvisibleToSelf");
-            SetLayerRecursively(prefab, newLayer);
+            
             Rigidbody rb = prefab.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.isKinematic = true;
             }
+            
+            
             currentHolding = Instantiate(prefab, itemHolder.position, gameObject.transform.rotation, itemHolder);
+            Transform handPosTransform = currentHolding.transform.Find("HandPos");
+            if (handPosTransform != null)
+            {
+                // Calculate how much we need to move the instantiated item so that HandPos aligns with the ItemHolder's position.
+                // This assumes HandPos's local position effectively represents the offset within the item that should match the ItemHolder's position.
+                Vector3 positionOffset = itemHolder.position - handPosTransform.position;
+                currentHolding.transform.position += positionOffset;
+
+                // No adjustments to rotation here since it's set correctly initially.
+            }
+            int invisibleLayer = LayerMask.NameToLayer("InvisibleToSelf");
+            SetLayerRecursively(currentHolding, invisibleLayer);
         }
         else
         {
             Debug.LogError("Not found " + name);
         }
-        
     }
-    void SetLayerRecursively(GameObject obj, int newLayer)
-    {
-        if (obj == null)
-        {
+    private void SetLayerRecursively(GameObject obj, int newLayer) {
+        if (null == obj) {
             return;
         }
 
+        // Set the layer of the current object
         obj.layer = newLayer;
 
-        foreach (Transform child in obj.transform)
-        {
+        // Recursively set the layer of all children
+        foreach (Transform child in obj.transform) {
             SetLayerRecursively(child.gameObject, newLayer);
         }
     }
@@ -159,6 +166,14 @@ public class InventoryManager : MonoBehaviour
     void InsertItem(ItemScript item,Slot slot){
         GameObject newItemGameObject = Instantiate(ItemPrefab,slot.transform);
         Item inventoryItem = newItemGameObject.GetComponent<Item>();
-        inventoryItem.InitializeItem(item);
+        if(inventoryItem!=null){
+            inventoryItem.InitializeItem(item);
+
+        }
+        else
+        {
+            Debug.LogError("Fix inventory item prefab");
+            
+        }
     }
 }

@@ -401,7 +401,7 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 		
 		
 		
-		GameObject parentObject = transform.parent.parent.parent.gameObject;
+		GameObject parentObject = transform.parent.parent.gameObject;
 		if (parentObject != null)
 		{
 			Debug.Log("Found Player GameObject");

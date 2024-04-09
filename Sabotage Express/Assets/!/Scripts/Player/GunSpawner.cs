@@ -51,7 +51,7 @@ public class GunSpawner : MonoBehaviour
             spawnedGun.transform.localScale = Vector3.one;
             
             playerMotor.SetArmsTransform(spawnedGun.transform);
-            spawnedGun.transform.parent = handTransform;
+            spawnedGun.transform.parent = player.transform;
             playerLook.prefabToRotate = spawnedGun.transform;
             spawnedGun.transform.localScale = Vector3.one;
             //ItemDropper itemDropper = player.GetComponent<ItemDropper>();
