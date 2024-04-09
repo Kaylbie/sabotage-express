@@ -21,7 +21,7 @@ public class EnemyAI : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.stoppingDistance = attackRange - 1f;
+        agent.stoppingDistance = attackRange - 0.5f;
         
     }
 
@@ -91,6 +91,7 @@ public class EnemyAI : MonoBehaviour
         {
             lastAttackTime = Time.time;
             Debug.Log($"Enemy attacks {target.name}!");
+            target.GetComponent<Player>().TakeDamage(attackDamage);
             // attack logic 
         }
     }

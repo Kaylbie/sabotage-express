@@ -42,6 +42,7 @@ public class ProjectileScript : MonoBehaviour {
 	[Tooltip("Added delay to let particle effects finish playing, " +
 		"before destroying object")]
 	public float destroyDelay;
+	public int rocketDamage = 100;
 
 	private void Start () 
 	{
@@ -125,6 +126,17 @@ public class ProjectileScript : MonoBehaviour {
 	//If the projectile collides with anything
 	private void OnCollisionEnter (Collision collision) 
 	{
+		if (collision.gameObject.tag == "Enemy")
+		{
+			EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
+			if (enemyHealth != null)
+			{
+				enemyHealth.TakeDamage(rocketDamage);
+			
+			}
+			
+			Destroy(gameObject);
+		}
 		if (collision.gameObject.tag == "Player" ) 
 		{
 			//Physics.IgnoreCollision (collision.collider);
