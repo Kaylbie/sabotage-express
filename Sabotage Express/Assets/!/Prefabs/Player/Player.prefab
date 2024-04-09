@@ -2156,6 +2156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nickname: 
   maxHealth: 100
+  healthBar: {fileID: 1600699271987861499}
 --- !u!114 &8940879910840034654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2350,10 +2351,8 @@ MonoBehaviour:
   - {fileID: 3992374537570400918}
   ItemPrefab: {fileID: 1237206640998341221, guid: 6a3c0ee750e02254aa5dbabeb3ef2dab, type: 3}
   mainInventoryUI: {fileID: 1345635940851097930}
-  healthBar: {fileID: 1600699271987861499}
   maxSlotSize: 64
   currentHolding: {fileID: 0}
-  health: 100
 --- !u!114 &939205158926524898
 MonoBehaviour:
   m_ObjectHideFlags: 0

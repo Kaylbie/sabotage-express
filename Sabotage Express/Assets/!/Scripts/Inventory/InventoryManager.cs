@@ -10,7 +10,6 @@ public class InventoryManager : MonoBehaviour
     public Slot[] inventorySlots;
     public GameObject ItemPrefab;
     public GameObject mainInventoryUI;
-    public GameObject healthBar;
     public int maxSlotSize=64;
     private Item currentItem;
     private ItemSpawner itemSpawner;
@@ -18,7 +17,6 @@ public class InventoryManager : MonoBehaviour
     private InputManager inputManager;
     private Transform itemHolder;
     public GameObject currentHolding;
-    public int health=100;
     void Start(){
         inputManager = GetComponent<InputManager>();
         selectSlot(selecetedSlot);
@@ -55,10 +53,7 @@ public class InventoryManager : MonoBehaviour
         
     }
 
-    public void ChangeHealth(int amount){
-        health+=amount;
-        healthBar.GetComponent<UnityEngine.UI.Slider>().value=health;
-    }
+  
     
     public Item GetCurrentItem()
     {
@@ -66,7 +61,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     public void selectSlot(int slotNo){
-        ChangeHealth(-10);
+        
         if (itemSpawner != null && itemSpawner.spawnedItemArms != null)
         {
             Destroy(itemSpawner.spawnedItemArms);

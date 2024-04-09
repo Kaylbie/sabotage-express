@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public string nickname;
     public int maxHealth = 100;
     private int currentHealth;
+    public GameObject healthBar;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,17 +17,22 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+    
     }
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         Debug.Log("Player takes " + damage + " damage. Current health: " + currentHealth);
-
+        ChangeHealthBar();
         if (currentHealth <= 0)
         {
             Die();
         }
+    }
+
+
+      public void ChangeHealthBar(){
+        healthBar.GetComponent<UnityEngine.UI.Slider>().value=currentHealth;
     }
 
     void Die()
