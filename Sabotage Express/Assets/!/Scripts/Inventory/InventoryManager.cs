@@ -16,7 +16,7 @@ public class InventoryManager : MonoBehaviour
     int selecetedSlot =0;
     private InputManager inputManager;
     private Transform itemHolder;
-    [SerializeField] private GameObject currentHolding;
+    public GameObject currentHolding;
 
     void Start(){
         inputManager = GetComponent<InputManager>();

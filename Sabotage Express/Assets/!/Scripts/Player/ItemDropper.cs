@@ -5,7 +5,66 @@ using UnityEngine;
 
 public class ItemDropper : MonoBehaviour
 {
+    private InventoryManager inventoryManager;
+    private InputManager inputManager;
+    private ItemSpawner itemSpawner;
+    public float throwForce = 500f; 
+
+    void Start()
+    {
+        inputManager = GetComponent<InputManager>();
+        inventoryManager=GetComponent<InventoryManager>();
+        itemSpawner = GetComponent<ItemSpawner>();
+    }
+    void Update()
+    {
+        if (inputManager.onFoot.DropItem.triggered)
+        {
+            DropItem();
+        }
     
+        //currentItem = inventoryManager.GetCurrentItem();
+    }
+
+    private void DropItem()
+    {
+        if (inventoryManager.currentHolding != null)
+        {
+            inventoryManager.currentHolding.transform.SetParent(null);
+            Rigidbody rb = inventoryManager.currentHolding.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = false;
+                rb.useGravity = true;
+            }
+            if (itemSpawner != null && itemSpawner.spawnedItemArms != null)
+            {
+                Destroy(itemSpawner.spawnedItemArms);
+            }
+            rb.AddForce(inventoryManager.currentHolding.transform.forward * throwForce);
+            int invisibleLayer = LayerMask.NameToLayer("Interactable");
+            SetLayerRecursively(inventoryManager.currentHolding, invisibleLayer);
+            inventoryManager.currentHolding = null;
+        }
+        else
+        {
+            Debug.Log("No item to drop");
+        }
+        
+    }
+    private void SetLayerRecursively(GameObject obj, int newLayer) {
+        if (null == obj) {
+            return;
+        }
+
+        // Set the layer of the current object
+        obj.layer = newLayer;
+
+        // Recursively set the layer of all children
+        foreach (Transform child in obj.transform) {
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
+    }
     // private GameObject modelPrefab;
     // private InputManager inputManager;
     // private string gunName;

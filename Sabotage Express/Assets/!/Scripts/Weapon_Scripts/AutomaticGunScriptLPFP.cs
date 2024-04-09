@@ -337,18 +337,18 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 		//is currently playing
 		AnimationCheck ();
 
-		//Play knife attack 1 animation when Q key is pressed
-		if (Input.GetKeyDown (KeyCode.Q) && !isInspecting) 
-		{
-			anim.Play ("Knife Attack 1", 0, 0f);
-		}
-		//Play knife attack 2 animation when F key is pressed
-		if (Input.GetKeyDown (KeyCode.F) && !isInspecting) 
-		{
-			anim.Play ("Knife Attack 2", 0, 0f);
-		}
-			
-		//Throw grenade when pressing G key
+		// //Play knife attack 1 animation when Q key is pressed
+		// if (Input.GetKeyDown (KeyCode.Q) && !isInspecting) 
+		// {
+		// 	anim.Play ("Knife Attack 1", 0, 0f);
+		// }
+		// //Play knife attack 2 animation when F key is pressed
+		// if (Input.GetKeyDown (KeyCode.F) && !isInspecting) 
+		// {
+		// 	anim.Play ("Knife Attack 2", 0, 0f);
+		// }
+		// 	
+		// //Throw grenade when pressing G key
 		if (Input.GetKeyDown (KeyCode.G) && !isInspecting) 
 		{
 			StartCoroutine (GrenadeSpawnDelay ());
@@ -482,30 +482,30 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 		}
 
 		//Inspect weapon when T key is pressed
-		if (Input.GetKeyDown (KeyCode.T)) 
-		{
-			anim.SetTrigger ("Inspect");
-		}
+		// if (Input.GetKeyDown (KeyCode.T)) 
+		// {
+		// 	anim.SetTrigger ("Inspect");
+		// }
 
 		//Toggle weapon holster when E key is pressed
-		if (Input.GetKeyDown (KeyCode.E) && !hasBeenHolstered) 
-		{
-			holstered = true;
-
-			mainAudioSource.clip = SoundClips.holsterSound;
-			mainAudioSource.Play();
-
-			hasBeenHolstered = true;
-		} 
-		else if (Input.GetKeyDown (KeyCode.E) && hasBeenHolstered) 
-		{
-			holstered = false;
-
-			mainAudioSource.clip = SoundClips.takeOutSound;
-			mainAudioSource.Play ();
-
-			hasBeenHolstered = false;
-		}
+		// if (Input.GetKeyDown (KeyCode.E) && !hasBeenHolstered) 
+		// {
+		// 	holstered = true;
+		//
+		// 	mainAudioSource.clip = SoundClips.holsterSound;
+		// 	mainAudioSource.Play();
+		//
+		// 	hasBeenHolstered = true;
+		// } 
+		// else if (Input.GetKeyDown (KeyCode.E) && hasBeenHolstered) 
+		// {
+		// 	holstered = false;
+		//
+		// 	mainAudioSource.clip = SoundClips.takeOutSound;
+		// 	mainAudioSource.Play ();
+		//
+		// 	hasBeenHolstered = false;
+		// }
 		//Holster anim toggle
 		if (holstered == true) 
 		{
