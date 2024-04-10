@@ -4,6 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class NetworkManagerUI : MonoBehaviour
 {
     [SerializeField] private Button serverButton;
@@ -12,6 +13,7 @@ public class NetworkManagerUI : MonoBehaviour
 
     private void Awake()
     {
+        
         serverButton.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartServer();
