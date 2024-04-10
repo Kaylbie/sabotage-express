@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour,IDropHandler
+public class Slot : NetworkBehaviour,IDropHandler
 {
     public Image image;
     public Color selecetedColor, notSelectedColor;
@@ -37,6 +38,6 @@ public class Slot : MonoBehaviour,IDropHandler
     // Update is called once per frame
     void Update()
     {
-        
+        if (!IsOwner) return;
     }
 }

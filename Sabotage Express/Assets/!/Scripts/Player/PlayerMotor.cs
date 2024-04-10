@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMotor : MonoBehaviour
+public class PlayerMotor : NetworkBehaviour
 {
     private CharacterController controller;
     private PlayerLook playerLook;
@@ -61,6 +62,8 @@ public class PlayerMotor : MonoBehaviour
     
     void Update()
     {
+        //if (!IsOwner) return;
+        
         if (lerpCrouch)
         {
             crouchTimer += Time.deltaTime;

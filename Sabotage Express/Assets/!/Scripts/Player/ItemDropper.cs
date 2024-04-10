@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
 
-public class ItemDropper : MonoBehaviour
+public class ItemDropper : NetworkBehaviour
 {
     private InventoryManager inventoryManager;
     private InputManager inputManager;
@@ -18,6 +19,7 @@ public class ItemDropper : MonoBehaviour
     }
     void Update()
     {
+        if (!IsOwner) return;
         if (inputManager.onFoot.DropItem.triggered)
         {
             DropItem();

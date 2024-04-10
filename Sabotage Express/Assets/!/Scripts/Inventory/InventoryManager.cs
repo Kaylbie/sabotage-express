@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : NetworkBehaviour
 {
     // Start is called before the first frame update
     public Slot[] inventorySlots;
@@ -28,8 +29,8 @@ public class InventoryManager : MonoBehaviour
 
 
 
-        void Update()
-    {
+        void Update() {
+            if (!IsOwner) return;
         if (inputManager.onFoot.Inventory.triggered)
         {
             ShowInventory();
@@ -89,11 +90,11 @@ public class InventoryManager : MonoBehaviour
     }
     private GameObject LoadPrefab(string prefabPath)
     {
-        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+        GameObject prefab = Resources.Load<GameObject>(prefabPath);
         return prefab;
     }
     public void AddItemToHandItemHolder(String name){
-        string prefabPath = "Assets/!/Prefabs/Items/"+name+".prefab";
+        string prefabPath = "Prefabs/Items/"+name;
         GameObject prefab = LoadPrefab(prefabPath);
         if (prefab != null)
         {
@@ -113,8 +114,9 @@ public class InventoryManager : MonoBehaviour
 
                 // No adjustments to rotation here since it's set correctly initially.
             }
-            int invisibleLayer = LayerMask.NameToLayer("InvisibleToSelf");
-            SetLayerRecursively(currentHolding, invisibleLayer);
+            int layerIndex = gameObject.layer;
+            
+            SetLayerRecursively(currentHolding, layerIndex);
         }
         else
         {
