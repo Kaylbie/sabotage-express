@@ -171,7 +171,7 @@ public class PlayerMotor : NetworkBehaviour
     {
         if (controller.isGrounded && !isFalling && timeSinceLastJump >= jumpTimeoutDuration || controller.isGrounded && !isFalling && bhop)
         {
-            playerVelocity.y = Mathf.Sqrt(jumpHeight * -3f * gravity);
+            playerVelocity.y = Mathf.Sqrt(jumpHeight * -0.2f * gravity);
             timeSinceLastJump = 0;
             if (bhop && !isBhopping) 
             {
