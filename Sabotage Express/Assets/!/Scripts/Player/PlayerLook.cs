@@ -23,16 +23,7 @@ public class PlayerLook : NetworkBehaviour
         if (!IsOwner) { return; } // ALL players will read this method, only player owner will execute past this line
         base.OnNetworkSpawn();
         cam.enabled = true;
-        // string layerName = "Player" + NetworkManagerCustom.Instance.getPlayerCount();
-        // //Debug.Log(layerName);
-        // int layer = LayerMask.NameToLayer(layerName);
-        // SetLayerRecursively(gameObject, layer);
-        //
-        // //int playerLayer = gameObject.layer;
-        // int layerMask = 1 << layer;
-        // cam.cullingMask &= ~layerMask;
-        // NetworkManagerCustom.Instance.addCount();
-        // Debug.Log(layerName);
+        Debug.Log("cam on");
     }
     
     void SetLayerRecursively(GameObject obj, int newLayer)

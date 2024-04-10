@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Slot : NetworkBehaviour,IDropHandler
+public class Slot : MonoBehaviour,IDropHandler
 {
     public Image image;
     public Color selecetedColor, notSelectedColor;
@@ -14,11 +14,11 @@ public class Slot : NetworkBehaviour,IDropHandler
     }
 
     public void Select(){
-        Debug.Log("Selected color");
+        //Debug.Log("Selected color");
         image.color=selecetedColor;
     }
     public void Deselect(){
-        Debug.Log("Deselected color");
+        //Debug.Log("Deselected color");
         image.color=notSelectedColor;
     }
     public void OnDrop(PointerEventData eventData)
@@ -38,6 +38,6 @@ public class Slot : NetworkBehaviour,IDropHandler
     // Update is called once per frame
     void Update()
     {
-        if (!IsOwner) return;
+        //if (!IsOwner) return;
     }
 }

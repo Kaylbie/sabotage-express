@@ -3590,7 +3590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1971538890
+  GlobalObjectIdHash: 3775716677
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 0
@@ -3664,7 +3664,7 @@ MonoBehaviour:
   speed: 5
   croachSpeed: 2
   gravity: -9.8
-  jumpHeight: 5
+  jumpHeight: 10
   bhop: 0
   transitionSpeed: 2
   crouchCenterY: 0.6
@@ -4481,7 +4481,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 15735
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

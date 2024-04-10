@@ -25,6 +25,10 @@ public class PlayerMotor : NetworkBehaviour
     private float jumpTimeoutDuration = 0.35f;
     private float timeSinceLastJump = 0;
     public bool bhop;
+    public float bhopSpeedMultiplier = 1.5f; 
+    public float maxBhopSpeed = 10f; 
+    private float normalSpeed;
+    private bool isBhopping = false;
     public float transitionSpeed = 5f; // How fast the height changes from standing to crouching and vice versa
     public float crouchCenterY = 0.5f; // Center Y position when crouching
     public float standCenterY = 1f;
@@ -167,8 +171,19 @@ public class PlayerMotor : NetworkBehaviour
     {
         if (controller.isGrounded && !isFalling && timeSinceLastJump >= jumpTimeoutDuration || controller.isGrounded && !isFalling && bhop)
         {
-            playerVelocity.y = Mathf.Sqrt(jumpHeight * -0.3f * gravity);
+            playerVelocity.y = Mathf.Sqrt(jumpHeight * -3f * gravity);
             timeSinceLastJump = 0;
+            if (bhop && !isBhopping) 
+            {
+                isBhopping = true;
+                normalSpeed = speed;
+                speed *= bhopSpeedMultiplier; 
+            }
+        }
+        else if (!bhop && isBhopping) 
+        {
+            isBhopping = false;
+            speed = normalSpeed; 
         }
     }
     public void Crouch()
