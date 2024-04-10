@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BoxManager : MonoBehaviour
 {
-    [SerializeField] private BlockSpawner blockSpawner;
+    [SerializeField] private RoundLock roundLock;
     [SerializeField] private RotatePanel rotatePanel;
 
     [SerializeField] private bool unlocked = false;
@@ -23,7 +23,7 @@ public class BoxManager : MonoBehaviour
     {
         if (!unlocked)
         {
-            unlocked = blockSpawner.IsAccessGranted();
+            unlocked = roundLock.IsAccessGranted();
 
         }
         rotatePanel.enabled = unlocked;
