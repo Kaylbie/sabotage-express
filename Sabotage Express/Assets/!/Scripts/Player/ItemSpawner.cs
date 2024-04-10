@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
 
-public class ItemSpawner : MonoBehaviour
+public class ItemSpawner : NetworkBehaviour
 {
 
     //private Camera cam;
@@ -35,13 +36,13 @@ public class ItemSpawner : MonoBehaviour
     }
     private GameObject LoadPrefab(string prefabPath)
     {
-        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+        GameObject prefab = Resources.Load<GameObject>(prefabPath);
         return prefab;
     }
     public void SpawnGunBasedOnName(string name)
     {
         gunName = name;
-        string prefabPath = "Assets/!/Prefabs/ARM PREFABS feature/"+gunName+"_Arms.prefab";
+        string prefabPath = "Prefabs/ARM PREFABS feature/"+gunName+"_Arms";
         GameObject prefab = LoadPrefab(prefabPath);
         if (prefab != null)
         {
@@ -64,7 +65,7 @@ public class ItemSpawner : MonoBehaviour
     }
     public void SpawnItemBasedOnName(string name)
     {
-        string prefabPath = "Assets/!/Prefabs/ARM PREFABS feature/Item_Arms.prefab";
+        string prefabPath = "Prefabs/ARM PREFABS feature/Item_Arms";
         GameObject prefab = LoadPrefab(prefabPath);
         if (prefab != null)
         {
@@ -78,7 +79,7 @@ public class ItemSpawner : MonoBehaviour
             playerLook.prefabToRotate = spawnedItemArms.transform;
             spawnedItemArms.transform.localScale = Vector3.one;
             
-            string prefabPath2 = "Assets/!/Prefabs/Items/"+name+".prefab";
+            string prefabPath2 = "Prefabs/Items/"+name;
             GameObject prefab2 = LoadPrefab(prefabPath2);
             if (prefab2 != null)
             {
@@ -137,6 +138,7 @@ public class ItemSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         ChangeSpawnLocation();
     }
 }

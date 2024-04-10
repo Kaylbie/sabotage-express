@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using Unity.Netcode;
 
 
-public class Item : MonoBehaviour, IBeginDragHandler,IDragHandler,IEndDragHandler
+public class Item : NetworkBehaviour, IBeginDragHandler,IDragHandler,IEndDragHandler
 {
     public ItemScript item;
     public Image image;
@@ -16,6 +17,11 @@ public class Item : MonoBehaviour, IBeginDragHandler,IDragHandler,IEndDragHandle
 
     private void Awake(){
         RefreshAmount();
+    }
+
+    void Update()
+    {
+        if (!IsOwner) return;
     }
 
     public void InitializeItem(ItemScript newItem){

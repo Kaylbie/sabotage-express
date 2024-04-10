@@ -55,7 +55,7 @@ public class BulletScript : MonoBehaviour {
 			Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
 			return;
 		}
-		if (collision.gameObject.CompareTag("Gun") || collision.gameObject.layer == LayerMask.NameToLayer("InvisibleToSelf")) {
+		if (collision.gameObject.CompareTag("Gun")) {
 			// Ignore the collision
 			Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
 			return;
