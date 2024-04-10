@@ -24,10 +24,10 @@ TagManager:
   - InvisibleToCam
   - InvisibleToSelf
   - GunCam
-  - 
-  - 
-  - 
-  - 
+  - Player1
+  - Player2
+  - Player3
+  - Player4
   - 
   - 
   - 

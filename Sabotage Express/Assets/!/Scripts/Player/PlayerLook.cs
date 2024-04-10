@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
-public class PlayerLook : MonoBehaviour
+public class PlayerLook : NetworkBehaviour
 {
     public Camera cam;
     public Transform prefabToRotate;
@@ -11,19 +12,52 @@ public class PlayerLook : MonoBehaviour
     private float xRotation = 0f;
     public float xSensitivity = 30f;
     public float ySensitivity = 30f;
+    private string playerLayerName;
 
     // Reference to child transforms
     private Transform chest;
     private Transform neck;
     private Transform head;
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner) { return; } // ALL players will read this method, only player owner will execute past this line
+        base.OnNetworkSpawn();
+        cam.enabled = true;
+        Debug.Log("cam on");
+    }
+    
+    void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        if (null == obj)
+        {
+            return;
+        }
+   
+        obj.layer = newLayer;
+   
+        foreach (Transform child in obj.transform)
+        {
+            if (null == child)
+            {
+                continue;
+            }
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
+    }
 
     void Start()
     {
+        
         // Assuming the names of the child objects are exactly "spine", "chest", "neck", "head"
         // Find them as children of the spine GameObject
         chest = spine.transform.Find("chest");
         neck = chest != null ? chest.Find("neck") : null;
         head = neck != null ? neck.Find("head") : null;
+    }
+
+    void Update()
+    {
+        //if (!IsOwner) return;
     }
     public void setPrafabRotate(Transform prefabRotate)
     {

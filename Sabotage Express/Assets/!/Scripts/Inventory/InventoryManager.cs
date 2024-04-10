@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : NetworkBehaviour
 {
     // Start is called before the first frame update
     public Slot[] inventorySlots;
@@ -28,32 +29,30 @@ public class InventoryManager : MonoBehaviour
 
 
 
-        void Update()
-    {
-        if (inputManager.onFoot.Inventory.triggered)
-        {
-            ShowInventory();
-            inputManager.onFoot.Movement.Disable();
-            inputManager.onFoot.Look.Disable();
-            inputManager.onFoot.Jump.Disable();
-            inputManager.onFoot.Crouch.Disable();
-            inputManager.onFoot.Sprint.Disable();
-                    
-        }
+        void Update() {
+            if (!IsOwner) return;
+            if (inputManager.onFoot.Inventory.triggered)
+            {
+                ShowInventory();
+                inputManager.onFoot.Movement.Disable();
+                inputManager.onFoot.Look.Disable();
+                inputManager.onFoot.Jump.Disable();
+                inputManager.onFoot.Crouch.Disable();
+                inputManager.onFoot.Sprint.Disable();
+                        
+            }
 
-        if (inputManager.onFoot.Escape.triggered)
-        {
-            HideInventory();
-            inputManager.onFoot.Movement.Enable();
-            inputManager.onFoot.Look.Enable();
-            inputManager.onFoot.Jump.Enable();
-            inputManager.onFoot.Crouch.Enable();
-            inputManager.onFoot.Sprint.Enable();
-        }
+            if (inputManager.onFoot.Escape.triggered)
+            {
+                HideInventory();
+                inputManager.onFoot.Movement.Enable();
+                inputManager.onFoot.Look.Enable();
+                inputManager.onFoot.Jump.Enable();
+                inputManager.onFoot.Crouch.Enable();
+                inputManager.onFoot.Sprint.Enable();
+            }
         
     }
-
-  
     
     public Item GetCurrentItem()
     {
@@ -84,16 +83,21 @@ public class InventoryManager : MonoBehaviour
             {
                 itemSpawner.SpawnItemBasedOnName(currentItem.item.itemName);
             }
-            AddItemToHandItemHolder(currentItem.item.itemName);
+            RequestAddItemToHand(currentItem.item.itemName);
         }
     }
     private GameObject LoadPrefab(string prefabPath)
     {
-        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+        GameObject prefab = Resources.Load<GameObject>(prefabPath);
         return prefab;
     }
-    public void AddItemToHandItemHolder(String name){
-        string prefabPath = "Assets/!/Prefabs/Items/"+name+".prefab";
+    public void RequestAddItemToHand(string itemName)
+    {
+        AddItemToHand(itemName);
+    }
+    
+    void AddItemToHand(String name){
+        string prefabPath = "Prefabs/Items/"+name;
         GameObject prefab = LoadPrefab(prefabPath);
         if (prefab != null)
         {
@@ -110,11 +114,10 @@ public class InventoryManager : MonoBehaviour
                 // This assumes HandPos's local position effectively represents the offset within the item that should match the ItemHolder's position.
                 Vector3 positionOffset = itemHolder.position - handPosTransform.position;
                 currentHolding.transform.position += positionOffset;
-
-                // No adjustments to rotation here since it's set correctly initially.
             }
-            int invisibleLayer = LayerMask.NameToLayer("InvisibleToSelf");
-            SetLayerRecursively(currentHolding, invisibleLayer);
+            int layerIndex = gameObject.layer;
+            
+            SetLayerRecursively(currentHolding, layerIndex);
         }
         else
         {
@@ -144,39 +147,57 @@ public class InventoryManager : MonoBehaviour
         mainInventoryUI.SetActive(true);
       
     }
-    public bool AddItem(ItemScript item){
-
+    [ServerRpc]
+    public void AddItemServerRpc(int itemId){
         //Stacking
-        for (int i=0; i<inventorySlots.Length;i++){
-            Slot slot=inventorySlots[i];
-            Item itemInSlot = slot.GetComponentInChildren<Item>();
-            if (itemInSlot!=null&&itemInSlot.item==item&&itemInSlot.amount<maxSlotSize&&itemInSlot.item.stackable==true){
-                itemInSlot.amount++;
-                itemInSlot.RefreshAmount();
-                
-                return true;
+        ItemScript item = FindItemById(itemId);
+        bool stop = false;
+        Debug.Log(itemId);
+        if (item != null)
+        {
+            for (int i=0; i<inventorySlots.Length;i++){
+                Slot slot=inventorySlots[i];
+                Item itemInSlot = slot.GetComponentInChildren<Item>();
+                if (itemInSlot!=null&&itemInSlot.item==item&&itemInSlot.amount<maxSlotSize&&itemInSlot.item.stackable==true){
+                    itemInSlot.amount++;
+                    itemInSlot.RefreshAmount();
+                    
+                    stop = true;
+                    break;
+                    //return true;
+                }
             }
+//Check for empty slots
+            if (stop == false)
+            {
+                for (int i=0; i<inventorySlots.Length;i++){
+                    Slot slot=inventorySlots[i];
+                    Item itemInSlot = slot.GetComponentInChildren<Item>();
+                    if (itemInSlot==null){
+                        InsertItem(item,slot);
+                        selectSlot(selecetedSlot);
+                        break;
+                        
+                    }
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("No item found with id " + itemId);
         }
         
-
-        //Check for empty slots
-        for (int i=0; i<inventorySlots.Length;i++){
-            Slot slot=inventorySlots[i];
-            Item itemInSlot = slot.GetComponentInChildren<Item>();
-            if (itemInSlot==null){
-                InsertItem(item,slot);
-                selectSlot(selecetedSlot);
-                return true;
-            }
-        }
-        return false;
+        //return false;
+    }
+    private ItemScript FindItemById(int itemId)
+    {
+        return ItemDatabase.Instance.FindItemById(itemId);
     }
     void InsertItem(ItemScript item,Slot slot){
         GameObject newItemGameObject = Instantiate(ItemPrefab,slot.transform);
         Item inventoryItem = newItemGameObject.GetComponent<Item>();
         if(inventoryItem!=null){
             inventoryItem.InitializeItem(item);
-
         }
         else
         {

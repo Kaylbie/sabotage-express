@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [CreateAssetMenu(menuName ="Scriptable object/Item")]
-public class ItemScript : ScriptableObject
+public class ItemScript : ScriptableObject 
 {
 
 public ItemType type;
