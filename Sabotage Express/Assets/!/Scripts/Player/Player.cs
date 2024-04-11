@@ -13,8 +13,10 @@ public class Player : NetworkBehaviour
     public Transform enemy;
     [SerializeField] private Camera cam; // Assign in the Inspector
     private NetworkVariable<int> playerId = new NetworkVariable<int>();
+    
     public override void OnNetworkSpawn()
     {
+        
         if (IsServer)
         {
             // Only the server assigns player IDs
@@ -23,10 +25,16 @@ public class Player : NetworkBehaviour
 
         if (IsClient)
         {
+            
             StartCoroutine(WaitAndSetLayer());
+            
         }
     }
-
+    [ServerRpc]
+    private void setSpawnLocationServerRpc()
+    {
+        transform.position = new Vector3(-5.469f, 0.231f, 1.504f);
+    }
     IEnumerator WaitAndSetLayer()
     {
         // Wait until the playerId has been synchronized to this client
@@ -76,9 +84,11 @@ public class Player : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        setSpawnLocationServerRpc();
+
         //int playerCount = NetworkManagerCustom.Instance.getPlayerCount();
         //string layerName = "Player" + playerCount;
-        
+        //int layer = LayerMask.NameToLayer(layerName); // Get the layer ID
         cam = gameObject.GetComponent<PlayerLook>().cam;
         // Debug.Log(gameObject);
         // if (cam != null)
@@ -102,10 +112,10 @@ public class Player : NetworkBehaviour
     void Update()
     {
         if (!IsOwner) return;
-
         if (Input.GetKeyDown(KeyCode.P))
         {
             SpawnEnemyServerRpc();
+            
         }
     }
   
