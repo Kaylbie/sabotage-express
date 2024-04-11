@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-public class BlockSpawner : MonoBehaviour
+public class BlockSpawner : NetworkBehaviour
 {
     public GameObject[] spawnPoints;
     [SerializeField] public GameObject blockParent;
@@ -70,7 +71,13 @@ public class BlockSpawner : MonoBehaviour
             }
         }
         ShowMistakes();
+        RequestOpenDoorServerRpc();
+    }
+    [ServerRpc]
+    private void RequestOpenDoorServerRpc()
+    {
         door.GetComponent<Animator>().SetBool("IsOpen", accessGranted);
+
     }
 
     public bool IsAccessGranted()
