@@ -31,7 +31,7 @@ public class BulletScript : MonoBehaviour {
 			EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
 			if (enemyHealth != null)
 			{
-				enemyHealth.TakeDamage(bulletDamage);
+				enemyHealth.TakeDamageServerRpc(bulletDamage);
 			
 			}
 			Instantiate (bloodImpactPrefabs [Random.Range 

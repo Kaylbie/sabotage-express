@@ -88,7 +88,7 @@ public class ProjectileScript : MonoBehaviour {
 			EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
 			if (enemyHealth != null)
 			{
-				enemyHealth.TakeDamage(rocketDamage);
+				enemyHealth.TakeDamageServerRpc(rocketDamage);
 			
 			}
 			
