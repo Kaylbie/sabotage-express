@@ -7,7 +7,6 @@ public class SpawnPoints : NetworkBehaviour
 {
     public List<Transform> spawnPoints;
     public Transform enemy;
-    // Start is called before the first frame update
     void Start()
     {
         

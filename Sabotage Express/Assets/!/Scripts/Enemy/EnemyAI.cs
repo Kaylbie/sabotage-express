@@ -111,7 +111,6 @@ public class EnemyAI : MonoBehaviour
             lastAttackTime = Time.time;
             Debug.Log($"Enemy attacks {target.name}!");
             target.GetComponent<Player>().TakeDamage(attackDamage);
-            // attack logic 
         }
     }
 

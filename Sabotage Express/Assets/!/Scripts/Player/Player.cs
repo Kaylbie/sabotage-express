@@ -11,7 +11,7 @@ public class Player : NetworkBehaviour
     private int currentHealth;
     public GameObject healthBar;
     
-    [SerializeField] private Camera cam; // Assign in the Inspector
+    [SerializeField] private Camera cam; 
     private NetworkVariable<int> playerId = new NetworkVariable<int>();
     
     
@@ -20,7 +20,6 @@ public class Player : NetworkBehaviour
         
         if (IsServer)
         {
-            // Only the server assigns player IDs
             playerId.Value = NetworkManagerCustom.Instance.GetNextPlayerId();
         }
 
@@ -39,7 +38,6 @@ public class Player : NetworkBehaviour
     }
     IEnumerator WaitAndSetLayer()
     {
-        // Wait until the playerId has been synchronized to this client
         yield return new WaitUntil(() => playerId.Value != 0);
 
         SetLayerBasedOnPlayerId(playerId.Value);
@@ -47,20 +45,17 @@ public class Player : NetworkBehaviour
 
     private void SetLayerBasedOnPlayerId(int id)
     {
-        // Construct the layer name based on the player ID
         string layerName = "Player" + id.ToString();
         int layer = LayerMask.NameToLayer(layerName);
 
         if (layer == -1)
         {
             Debug.LogError($"Layer {layerName} not found. Check if the layer is correctly defined in the Layer settings.");
-            return; // Exit if the layer was not found
+            return; 
         }
 
-        // Set the layer for this GameObject and all its children
         SetLayerRecursively(gameObject, layer);
 
-        // Adjust the camera's culling mask to ignore this player's layer
         if (cam != null)
         {
             cam.cullingMask &= ~(1 << layer);
@@ -83,7 +78,6 @@ public class Player : NetworkBehaviour
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         setSpawnLocationServerRpc();
@@ -152,7 +146,6 @@ public class Player : NetworkBehaviour
     void Die()
     {
         Debug.Log("Player dies!");
-        // Here, handle the player's death (e.g., show a retry screen)
     }
 
     [ServerRpc]

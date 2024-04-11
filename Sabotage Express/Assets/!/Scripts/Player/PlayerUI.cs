@@ -7,7 +7,6 @@ using Unity.Netcode;
 
 public class PlayerUI : NetworkBehaviour
 {
-    //[SerializeField]
     private TextMeshProUGUI promptText;
 
     void Awake()
@@ -20,7 +19,6 @@ public class PlayerUI : NetworkBehaviour
         //if (!IsOwner) return;
     }
 
-    // Update is called once per frame
     public void UpdateText(string promptMessage)
     {
         promptText.text = promptMessage;

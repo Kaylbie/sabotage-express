@@ -14,7 +14,6 @@ public class PlayerInteract : NetworkBehaviour
     private InputManager inputManager;
     public RaycastHit hitInfo;
     
-    // Start is called before the first frame update
     void Start()
     {
         cam = GetComponent<PlayerLook>().cam;
@@ -22,7 +21,6 @@ public class PlayerInteract : NetworkBehaviour
         inputManager = GetComponent<InputManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!IsOwner) return;

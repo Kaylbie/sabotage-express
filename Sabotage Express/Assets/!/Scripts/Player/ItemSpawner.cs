@@ -47,7 +47,6 @@ public class ItemSpawner : NetworkBehaviour
         if (prefab != null)
         {
             Vector3 playerCoordinates = gameObject.transform.position;
-            //Vector3 cameraCoordinates = playerLook.cam.transform.localPosition;
             spawnedItemArms = Instantiate(prefab, playerCoordinates, Quaternion.identity);
             spawnedItemArms.transform.localScale = Vector3.one;
             
@@ -97,12 +96,9 @@ public class ItemSpawner : NetworkBehaviour
                      {
                          if (handPosTransform != null)
                          {
-                             // Calculate how much we need to move the instantiated item so that HandPos aligns with the ItemHolder's position.
-                            // This assumes HandPos's local position effectively represents the offset within the item that should match the ItemHolder's position.
                              Vector3 positionOffset = itemHolder.position - handPosTransform.position;
                              currentHolding.transform.position += positionOffset;
                 
-                             // No adjustments to rotation here since it's set correctly initially.
                          }
                          int invisibleLayer = LayerMask.NameToLayer("GunCam");
                          SetLayerRecursively(currentHolding, invisibleLayer);
@@ -126,10 +122,8 @@ public class ItemSpawner : NetworkBehaviour
             return;
         }
 
-        // Set the layer of the current object
         obj.layer = newLayer;
 
-        // Recursively set the layer of all children
         foreach (Transform child in obj.transform) {
             SetLayerRecursively(child.gameObject, newLayer);
         }

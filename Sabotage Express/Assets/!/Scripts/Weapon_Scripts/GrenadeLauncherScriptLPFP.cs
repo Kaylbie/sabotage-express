@@ -4,88 +4,71 @@ using UnityEngine.UI;
 
 public class GrenadeLauncherScriptLPFP : MonoBehaviour {
 
-	//Animator component attached to weapon
+	
 	Animator anim;
 
-	[Header("Gun Camera")]
-	//Main gun camera
+	
 	public Camera gunCamera;
 
-	[Header("Gun Camera Options")]
-	//How fast the camera field of view changes when aiming 
-	[Tooltip("How fast the camera field of view changes when aiming.")]
+	
 	public float fovSpeed = 15.0f;
-	//Default camera field of view
-	[Tooltip("Default value for camera field of view (40 is recommended).")]
+	
 	public float defaultFov = 40.0f;
 
-	[Header("UI Weapon Name")]
-	[Tooltip("Name of the current weapon, shown in the game UI.")]
+	
 	public string weaponName;
 
-	[Header("Weapon Attachments (Only use one scope attachment)")]
-	[Space(10)]
-	//Toggle weapon attachments (loads at start)
-	//Toggle scope 01
+	
 	public bool scope1;
 	public Sprite scope1Texture;
 	public float scope1TextureSize = 0.0045f;
-	//Scope 01 camera fov
+	
 	[Range(5, 40)]
 	public float scope1AimFOV = 10;
 	[Space(10)]
-	//Toggle scope 02
+	
 	public bool scope2;
 	public Sprite scope2Texture;
 	public float scope2TextureSize = 0.01f;
-	//Scope 02 camera fov
+	
 	[Range(5, 40)]
 	public float scope2AimFOV = 25;
 	[Space(10)]
-	//Toggle scope 03
 	public bool scope3;
 	public Sprite scope3Texture;
 	public float scope3TextureSize = 0.006f;
-	//Scope 03 camera fov
 	[Range(5, 40)]
 	public float scope3AimFOV = 20;
 	[Space(10)]
-	//Toggle scope 04
 	public bool scope4;
 	public Sprite scope4Texture;
 	public float scope4TextureSize = 0.0025f;
-	//Scope 04 camera fov
+	
 	[Range(5, 40)]
 	public float scope4AimFOV = 12;
 	[Space(10)]
-	//Toggle iron sights
+	
 	public bool ironSights;
 	public bool alwaysShowIronSights;
-	//Iron sights camera fov
+	
 	[Range(5, 40)]
 	public float ironSightsAimFOV = 16;
-	//Weapon attachments components
+	
 	[System.Serializable]
 	public class weaponAttachmentRenderers 
 	{
-		[Header("Scope Model Renderers")]
-		[Space(10)]
-		//All attachment renderer components
+		
 		public SkinnedMeshRenderer scope1Renderer;
 		public SkinnedMeshRenderer scope2Renderer;
 		public SkinnedMeshRenderer scope3Renderer;
 		public SkinnedMeshRenderer scope4Renderer;
 		public SkinnedMeshRenderer ironSightsRenderer;
-		[Header("Scope Sight Mesh Renderers")]
-		[Space(10)]
-		//Scope render meshes
+		
 		public GameObject scope1RenderMesh;
 		public GameObject scope2RenderMesh;
 		public GameObject scope3RenderMesh;
 		public GameObject scope4RenderMesh;
-		[Header("Scope Sight Sprite Renderers")]
-		[Space(10)]
-		//Scope sight textures
+		
 		public SpriteRenderer scope1SpriteRenderer;
 		public SpriteRenderer scope2SpriteRenderer;
 		public SpriteRenderer scope3SpriteRenderer;
@@ -93,9 +76,7 @@ public class GrenadeLauncherScriptLPFP : MonoBehaviour {
 	}
 	public weaponAttachmentRenderers WeaponAttachmentRenderers;
 
-	[Header("Weapon Sway")]
-	//Enables weapon sway
-	[Tooltip("Toggle weapon sway.")]
+	
 	public bool weaponSway;
 
 	public float swayAmount = 0.02f;
@@ -104,39 +85,39 @@ public class GrenadeLauncherScriptLPFP : MonoBehaviour {
 
 	private Vector3 initialSwayPosition;
 
-	[Header("Weapon Settings")]
+	
 
 	public float autoReloadDelay;
 
-	//Check if reloading
+	
 	private bool isReloading;
 
-	//Holstering weapon
+	
 	private bool hasBeenHolstered = false;
-	//If weapon is holstered
+	
 	private bool holstered;
-	//Check if running
+	
 	private bool isRunning;
-	//Check if aiming
+	
 	private bool isAiming;
-	//Check if walking
+	
 	private bool isWalking;
-	//Check if inspecting weapon
+	
 	private bool isInspecting;
 
-	//How much ammo is currently left
+	
 	private int currentAmmo;
-	//Totalt amount of ammo
+	
 	private int ammo = 1;
-	//Check if out of ammo
+	
 	private bool outOfAmmo;
 
-	[Header("Grenade Settings")]
+	
 	public float grenadeSpawnDelay = 0.35f;
 
-	[Header("Muzzleflash Settings")]
+	
 	public bool randomMuzzleflash = false;
-	//min should always bee 1
+	
 	private int minRandomValue = 1;
 
 	[Range(2, 25)]
@@ -151,17 +132,16 @@ public class GrenadeLauncherScriptLPFP : MonoBehaviour {
 	public int minSparkEmission = 1;
 	public int maxSparkEmission = 7;
 
-	[Header("Muzzleflash Light Settings")]
+	
 	public Light muzzleFlashLight;
 	public float lightDuration = 0.02f;
 
-	[Header("Audio Source")]
-	//Main audio source
+	
 	public AudioSource mainAudioSource;
-	//Audio source used for shoot sound
+	
 	public AudioSource shootAudioSource;
 
-	[Header("UI Components")]
+	
 	public Text timescaleText;
 	public Text currentWeaponText;
 	public Text currentAmmoText;
@@ -170,7 +150,7 @@ public class GrenadeLauncherScriptLPFP : MonoBehaviour {
 	[System.Serializable]
 	public class prefabs
 	{  
-		[Header("Prefabs")]
+		
 		public Transform projectilePrefab;
 		public Transform grenadePrefab;
 	}
@@ -179,10 +159,7 @@ public class GrenadeLauncherScriptLPFP : MonoBehaviour {
 	[System.Serializable]
 	public class spawnpoints
 	{  
-		[Header("Spawnpoints")]
-		//Array holding casing spawn points 
-		//(some weapons use more than one casing spawn)
-		//Bullet prefab spawn from this point
+		
 		public Transform bulletSpawnPoint;
 
 		public Transform grenadeSpawnPoint;
@@ -204,46 +181,36 @@ public class GrenadeLauncherScriptLPFP : MonoBehaviour {
 
 	private void Awake () {
 		
-		//Set the animator component
+		
 		anim = GetComponent<Animator>();
-		//Set current ammo to total ammo value
+		
 		currentAmmo = ammo;
 
 		muzzleFlashLight.enabled = false;
+		
+		
 
-		//Show in log if another scope is being used with iron sights
-		if (ironSights && scope1 == true || 
-			ironSights && scope2 == true || 
-			ironSights && scope3 == true || 
-			ironSights && scope4) 
-		{
-			Debug.Log 
-			("Only use one scope attachment, animations won't work " +
-				"properly if several scope attachments are being used");
-		}
-
-		//Weapon attachments
-		//If scope1 is true
+		
 		if (scope1 == true && WeaponAttachmentRenderers.scope1Renderer != null) 
 		{
-			//If scope1 is true, enable scope renderer
+			
 			WeaponAttachmentRenderers.scope1Renderer.GetComponent
 			<SkinnedMeshRenderer> ().enabled = true;
-			//Also enable the scope sight render mesh
+			
 			WeaponAttachmentRenderers.scope1RenderMesh.SetActive(true);
-			//Set the scope sight texture
+			
 			WeaponAttachmentRenderers.scope1SpriteRenderer.GetComponent
 			<SpriteRenderer>().sprite = scope1Texture;
-			//Set the scope texture size
+			
 			WeaponAttachmentRenderers.scope1SpriteRenderer.transform.localScale = new Vector3 
 				(scope1TextureSize, scope1TextureSize, scope1TextureSize);
 		} 
 		else if (WeaponAttachmentRenderers.scope1Renderer != null)
 		{
-			//If scope1 is false, disable scope renderer
+			
 			WeaponAttachmentRenderers.scope1Renderer.GetComponent<
 			SkinnedMeshRenderer> ().enabled = false;
-			//Also disable the scope sight render mesh
+			
 			WeaponAttachmentRenderers.scope1RenderMesh.SetActive(false);
 		}
 		//If scope 2 is true

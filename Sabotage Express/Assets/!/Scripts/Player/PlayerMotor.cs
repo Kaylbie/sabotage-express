@@ -29,24 +29,21 @@ public class PlayerMotor : NetworkBehaviour
     public float maxBhopSpeed = 10f; 
     private float normalSpeed;
     private bool isBhopping = false;
-    public float transitionSpeed = 5f; // How fast the height changes from standing to crouching and vice versa
-    public float crouchCenterY = 0.5f; // Center Y position when crouching
+    public float transitionSpeed = 5f; 
+    public float crouchCenterY = 0.5f; 
     public float standCenterY = 1f;
     
-    public float crouchCameraYOffset = -0.5f; // Camera height offset when crouching
-    public float standCameraYOffset = 0.0f; // Camera height offset when standing
+    public float crouchCameraYOffset = -0.5f; 
+    public float standCameraYOffset = 0.0f; 
 
     
-    /// <summary>
     [SerializeField] private Transform arms;
 
     [SerializeField] private Vector3 armPosition;
-    /// </summary>
     void Start()
     {
         anim = gameObject.GetComponent<Animator> ();
         controller = GetComponent<CharacterController>();
-        //assign camera
         playerLook = GetComponent<PlayerLook>();
         if (playerLook != null)
         {
@@ -72,19 +69,16 @@ public class PlayerMotor : NetworkBehaviour
         {
             crouchTimer += Time.deltaTime;
             float p = crouchTimer / transitionSpeed;
-            p = Mathf.Clamp01(p); // Ensure p is clamped between 0 and 1
+            p = Mathf.Clamp01(p); 
 
-            // Determine the target height and center based on the crouching state
             float targetHeight = crouching ? 1.5f : 2f;
             float targetCenterY = crouching ? crouchCenterY : standCenterY;
 
-            // Smoothly interpolate the height and center of the controller
             controller.height = Mathf.Lerp(controller.height, targetHeight, p);
             Vector3 newCenter = controller.center;
             newCenter.y = Mathf.Lerp(newCenter.y, targetCenterY, p);
             controller.center = newCenter;
             
-            //camera crouch
             if (cam != null)
             {
                 Vector3 cameraPosition = cam.transform.localPosition;
@@ -128,11 +122,11 @@ public class PlayerMotor : NetworkBehaviour
         }
         else if (playerVelocity.y > 0)
         {
-            anim.SetBool("IsJumping", true); // Jumping up
+            anim.SetBool("IsJumping", true); 
         }
         if (isFalling)
         {
-            anim.SetBool("IsFalling", true); // Falling
+            anim.SetBool("IsFalling", true); 
         }
         else
         {

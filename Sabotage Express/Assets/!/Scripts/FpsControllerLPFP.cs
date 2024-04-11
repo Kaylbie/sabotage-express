@@ -8,49 +8,32 @@ namespace FPSControllerLPFP
     public class FpsControllerLPFP : MonoBehaviour
     {
 #pragma warning disable 649
-		[Header("Arms")]
-        [Tooltip("The transform component that holds the gun camera."), SerializeField]
         private Transform arms;
 
-        [Tooltip("The position of the arms and gun camera relative to the fps controller GameObject."), SerializeField]
         private Vector3 armPosition;
 
-		[Header("Audio Clips")]
-        [Tooltip("The audio clip that is played while walking."), SerializeField]
         private AudioClip walkingSound;
 
-        [Tooltip("The audio clip that is played while running."), SerializeField]
         private AudioClip runningSound;
 
-		[Header("Movement Settings")]
-        [Tooltip("How fast the player moves while walking and strafing."), SerializeField]
         private float walkingSpeed = 5f;
 
-        [Tooltip("How fast the player moves while running."), SerializeField]
         private float runningSpeed = 9f;
 
-        [Tooltip("Approximately the amount of time it will take for the player to reach maximum running or walking speed."), SerializeField]
         private float movementSmoothness = 0.125f;
 
-        [Tooltip("Amount of force applied to the player when jumping."), SerializeField]
-        private float jumpForce = 35f;
+        //private float jumpForce = 35f;
 
-		[Header("Look Settings")]
-        [Tooltip("Rotation speed of the fps controller."), SerializeField]
         private float mouseSensitivity = 7f;
 
-        [Tooltip("Approximately the amount of time it will take for the fps controller to reach maximum rotation speed."), SerializeField]
         private float rotationSmoothness = 0.05f;
 
-        [Tooltip("Minimum rotation of the arms and camera on the x axis."),
-         SerializeField]
+        
         private float minVerticalAngle = -90f;
 
-        [Tooltip("Maximum rotation of the arms and camera on the axis."),
-         SerializeField]
+        
         private float maxVerticalAngle = 90f;
 
-        [Tooltip("The names of the axes and buttons for Unity's Input Manager."), SerializeField]
         private FpsInput input;
 #pragma warning restore 649
 
@@ -66,7 +49,6 @@ namespace FPSControllerLPFP
         private readonly RaycastHit[] _groundCastResults = new RaycastHit[8];
         private readonly RaycastHit[] _wallCastResults = new RaycastHit[8];
 
-        /// Initializes the FpsController on start.
         private void Start()
         {
             //_rigidbody = GetComponent<Rigidbody>();
@@ -91,14 +73,12 @@ namespace FPSControllerLPFP
 			return arms;
         }
         
-        /// Clamps <see cref="minVerticalAngle"/> and <see cref="maxVerticalAngle"/> to valid values and
-        /// ensures that <see cref="minVerticalAngle"/> is less than <see cref="maxVerticalAngle"/>.
+        
         private void ValidateRotationRestriction()
         {
             minVerticalAngle = ClampRotationRestriction(minVerticalAngle, -90, 90);
             maxVerticalAngle = ClampRotationRestriction(maxVerticalAngle, -90, 90);
             if (maxVerticalAngle >= minVerticalAngle) return;
-            Debug.LogWarning("maxVerticalAngle should be greater than minVerticalAngle.");
             var min = minVerticalAngle;
             minVerticalAngle = maxVerticalAngle;
             maxVerticalAngle = min;
@@ -107,12 +87,9 @@ namespace FPSControllerLPFP
         private static float ClampRotationRestriction(float rotationRestriction, float min, float max)
         {
             if (rotationRestriction >= min && rotationRestriction <= max) return rotationRestriction;
-            var message = string.Format("Rotation restrictions should be between {0} and {1} degrees.", min, max);
-            Debug.LogWarning(message);
             return Mathf.Clamp(rotationRestriction, min, max);
         }
 			
-        /// Checks if the character is on the ground.
         private void OnCollisionStay()
         {
             var bounds = _collider.bounds;
@@ -129,16 +106,13 @@ namespace FPSControllerLPFP
             _isGrounded = true;
         }
 			
-        /// Processes the character movement and the camera rotation every fixed framerate frame.
         private void FixedUpdate()
         {
-            // FixedUpdate is used instead of Update because this code is dealing with physics and smoothing.
             RotateCameraAndCharacter();
             MoveCharacter();
             _isGrounded = false;
         }
 			
-        /// Moves the camera to the character, processes jumping and plays sounds every frame.
         private void Update()
         {
 			arms.position = transform.position + transform.TransformVector(armPosition);
@@ -160,20 +134,17 @@ namespace FPSControllerLPFP
 			arms.rotation = rotation;
         }
 			
-        /// Returns the target rotation of the camera around the y axis with no smoothing.
         private float RotationXRaw
         {
             get { return input.RotateX * mouseSensitivity; }
         }
 			
-        /// Returns the target rotation of the camera around the x axis with no smoothing.
         private float RotationYRaw
         {
             get { return input.RotateY * mouseSensitivity; }
         }
 			
-        /// Clamps the rotation of the camera around the x axis
-        /// between the <see cref="minVerticalAngle"/> and <see cref="maxVerticalAngle"/> values.
+        
         private float RestrictVerticalRotation(float mouseY)
         {
 			var currentAngle = NormalizeAngle(arms.eulerAngles.x);
@@ -182,9 +153,7 @@ namespace FPSControllerLPFP
             return Mathf.Clamp(mouseY, minY + 0.01f, maxY - 0.01f);
         }
 			
-        /// Normalize an angle between -180 and 180 degrees.
-        /// <param name="angleDegrees">angle to normalize</param>
-        /// <returns>normalized angle</returns>
+        
         private static float NormalizeAngle(float angleDegrees)
         {
             while (angleDegrees > 180f)
@@ -205,7 +174,6 @@ namespace FPSControllerLPFP
             var direction = new Vector3(input.Move, 0f, input.Strafe).normalized;
             var worldDirection = transform.TransformDirection(direction);
             var velocity = worldDirection * (input.Run ? runningSpeed : walkingSpeed);
-            //Checks for collisions so that the character does not stuck when jumping against walls.
             var intersectsWall = CheckCollisionsWithWalls(velocity);
             if (intersectsWall)
             {
@@ -215,9 +183,7 @@ namespace FPSControllerLPFP
 
             var smoothX = _velocityX.Update(velocity.x, movementSmoothness);
             var smoothZ = _velocityZ.Update(velocity.z, movementSmoothness);
-            //var rigidbodyVelocity = _rigidbody.velocity;
-            //var force = new Vector3(smoothX - rigidbodyVelocity.x, 0f, smoothZ - rigidbodyVelocity.z);
-            //_rigidbody.AddForce(force, ForceMode.VelocityChange);
+            
         }
 
         private bool CheckCollisionsWithWalls(Vector3 velocity)
@@ -246,7 +212,6 @@ namespace FPSControllerLPFP
         {
             if (!_isGrounded || !input.Jump) return;
             _isGrounded = false;
-            //.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
         private void PlayFootstepSounds()
@@ -268,7 +233,6 @@ namespace FPSControllerLPFP
             }
         }
 			
-        /// A helper for assistance with smoothing the camera rotation.
         private class SmoothRotation
         {
             private float _current;
@@ -279,7 +243,7 @@ namespace FPSControllerLPFP
                 _current = startAngle;
             }
 				
-            /// Returns the smoothed rotation.
+            
             public float Update(float target, float smoothTime)
             {
                 return _current = Mathf.SmoothDampAngle(_current, target, ref _currentVelocity, smoothTime);
@@ -291,13 +255,11 @@ namespace FPSControllerLPFP
             }
         }
 			
-        /// A helper for assistance with smoothing the movement.
         private class SmoothVelocity
         {
             private float _current;
             private float _currentVelocity;
 
-            /// Returns the smoothed velocity.
             public float Update(float target, float smoothTime)
             {
                 return _current = Mathf.SmoothDamp(_current, target, ref _currentVelocity, smoothTime);
@@ -309,7 +271,6 @@ namespace FPSControllerLPFP
             }
         }
 			
-        /// Input mappings
         [Serializable]
         private class FpsInput
         {
