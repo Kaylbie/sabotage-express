@@ -10,9 +10,10 @@ public class Player : NetworkBehaviour
     public int maxHealth = 100;
     private int currentHealth;
     public GameObject healthBar;
-    public Transform enemy;
+    
     [SerializeField] private Camera cam; // Assign in the Inspector
     private NetworkVariable<int> playerId = new NetworkVariable<int>();
+    
     
     public override void OnNetworkSpawn()
     {
@@ -25,11 +26,12 @@ public class Player : NetworkBehaviour
 
         if (IsClient)
         {
-            
+            currentHealth = maxHealth;
             StartCoroutine(WaitAndSetLayer());
             
         }
     }
+    
     [ServerRpc]
     private void setSpawnLocationServerRpc()
     {
@@ -111,39 +113,12 @@ public class Player : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IsOwner) return;
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            SpawnEnemyServerRpc();
-            
-        }
+        
     }
   
     
 
-    [ServerRpc]
-    private void SpawnEnemyServerRpc()
-    {
-        Transform newEnemy = Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-        if (newEnemy != null)
-        {
-            NetworkObject netObj = newEnemy.GetComponent<NetworkObject>();
-            if (netObj != null)
-            {
-                netObj.Spawn();
-                Debug.Log("Enemy spawned");
-            }
-            else
-            {
-                Debug.LogError("Spawn failed: NetworkObject component not found on the instantiated enemy prefab.");
-            }
-        }
-        else
-        {
-            Debug.LogError("Spawn failed: Instantiation of the enemy prefab returned null.");
-        }
-
-    }
+    
     
     public void TakeDamage(int damage)
     {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ControlUnit : MonoBehaviour
 {
@@ -9,6 +10,16 @@ public class ControlUnit : MonoBehaviour
     [SerializeField] private GameObject door;
     [SerializeField] private string password;
     [SerializeField] private bool isAccessGranted = false;
+    private NavMeshObstacle obstacle;
+
+    void Start()
+    {
+        obstacle = door.GetComponent<NavMeshObstacle>();
+        if (obstacle != null)
+        {
+            Debug.Log("obstacle found");
+        }
+    }
 
     private void Update()
     {
@@ -20,6 +31,8 @@ public class ControlUnit : MonoBehaviour
         else if (keypadManager.AccessGranted() || matchSystemManager.AccessGranted())
         {
             isAccessGranted = true;
+            door.GetComponent<NavMeshObstacle>().enabled = false;
+            door.GetComponent<Animator>().enabled = false;
         }
 
         door.GetComponent<Animator>().SetBool("IsOpen", isAccessGranted);

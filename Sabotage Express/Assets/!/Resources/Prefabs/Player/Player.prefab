@@ -3616,6 +3616,8 @@ MonoBehaviour:
   healthBar: {fileID: 2089222704868851444}
   enemy: {fileID: 2212069678050476021, guid: ece63a5f87efb2c45b1cf459d41d6376, type: 3}
   cam: {fileID: 3471501351091296787}
+  spawnPoints:
+  - {fileID: 0}
 --- !u!114 &8046911962039426492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3666,6 +3668,8 @@ MonoBehaviour:
   gravity: -9.8
   jumpHeight: 10
   bhop: 0
+  bhopSpeedMultiplier: 1.5
+  maxBhopSpeed: 10
   transitionSpeed: 2
   crouchCenterY: 0.6
   standCenterY: 1

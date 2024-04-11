@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class BlockSpawner : MonoBehaviour
@@ -29,10 +30,13 @@ public class BlockSpawner : MonoBehaviour
     [SerializeField] private GameObject door;
 
     [SerializeField] bool accessGranted = false;
+    private NavMeshObstacle obstacle;
 
     private void Start()
     {
         InitializePool();
+        obstacle= door.GetComponent<NavMeshObstacle>();
+        
     }
 
     private void Update()
@@ -46,6 +50,7 @@ public class BlockSpawner : MonoBehaviour
             {
                 accessGranted = true;
                 ShowSuccess();
+                obstacle.enabled = false;
                 foreach (GameObject gameObject in fallingPool)
                 {
                     ReturnBlockToPool(gameObject);
