@@ -141,10 +141,5 @@ public class Player : NetworkBehaviour
     {
         Debug.Log("Player dies!");
     }
-
-    [ServerRpc]
-    private void ServerRpc()
-    {
-        
-    }
+    
 }

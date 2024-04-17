@@ -9,21 +9,20 @@ public class SpawnPoints : NetworkBehaviour
     public Transform enemy;
     void Start()
     {
-        
+        SpawnEnemyServerRpc();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!IsOwner) return;
         if (Input.GetKeyDown(KeyCode.P))
         {
             SpawnEnemyServerRpc();
             
         }
     }
-    [ServerRpc]
-    private void SpawnEnemyServerRpc()
+    [ServerRpc(RequireOwnership = false)]
+    public void SpawnEnemyServerRpc()
     {
         if (spawnPoints.Count < 2)
         {

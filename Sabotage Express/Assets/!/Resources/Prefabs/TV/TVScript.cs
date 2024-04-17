@@ -30,7 +30,7 @@ public class TVScript : NetworkBehaviour
     }
 
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void PlayNextVideoServerRpc()
     {
         if (videoClips.Length == 0) return;
@@ -39,7 +39,7 @@ public class TVScript : NetworkBehaviour
         currentVideoIndex.Value = newIndex; 
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void PlayRandomVideoServerRpc()
     {
         if (videoClips.Length == 0) return;
@@ -48,7 +48,7 @@ public class TVScript : NetworkBehaviour
         currentVideoIndex.Value = index; 
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void PauseVideoServerRpc()
     {
         if (videoPlayer.isPlaying)

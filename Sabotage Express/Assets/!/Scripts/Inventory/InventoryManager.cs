@@ -147,7 +147,7 @@ public class InventoryManager : NetworkBehaviour
         mainInventoryUI.SetActive(true);
       
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void AddItemServerRpc(int itemId){
         //Stacking
         ItemScript item = FindItemById(itemId);

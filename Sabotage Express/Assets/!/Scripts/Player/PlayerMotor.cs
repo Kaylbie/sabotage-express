@@ -182,6 +182,8 @@ public class PlayerMotor : NetworkBehaviour
     }
     public void Crouch()
     {
+        if (!IsOwner) return;
+        
         crouching = !crouching;
         anim.SetBool("IsCrouching", crouching);
         crouchTimer = 0;

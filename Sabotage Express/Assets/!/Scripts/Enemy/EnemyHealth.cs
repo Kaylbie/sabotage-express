@@ -12,7 +12,7 @@ public class EnemyHealth : NetworkBehaviour
     {
         currentHealth = maxHealth;
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void TakeDamageServerRpc(int damage)
     {
         currentHealth -= damage;
@@ -23,11 +23,11 @@ public class EnemyHealth : NetworkBehaviour
             DieServerRpc();
         }
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     void DieServerRpc()
     {
         Debug.Log($"{gameObject.name} died.");
-        gameObject.SetActive(false); 
-        
+        Destroy(gameObject);
+            
     }
 }
