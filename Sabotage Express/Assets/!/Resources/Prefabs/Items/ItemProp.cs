@@ -15,7 +15,7 @@ public class ItemProp : Interactable
         InventoryManager inventory = player.GetComponent<InventoryManager>();
         if (inventory != null)
         {
-            inventory.AddItem(itemScript.itemID);
+            inventory.AddItemClientRpc(itemScript.itemID);
             
             DestroyItemServerRpc();
         }
