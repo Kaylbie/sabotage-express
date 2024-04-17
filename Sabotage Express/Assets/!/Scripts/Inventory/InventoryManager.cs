@@ -148,8 +148,8 @@ public class InventoryManager : NetworkBehaviour
         mainInventoryUI.SetActive(true);
       
     }
-    [ClientRpc]
-    public void AddItemClientRpc(int itemId){
+    [ServerRpc]
+    public void AddItemServerRpc(int itemId){
         //Stacking
         int layerIndex = gameObject.layer;
         Debug.Log(LayerMask.LayerToName(layerIndex));
