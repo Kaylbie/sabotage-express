@@ -150,6 +150,8 @@ public class InventoryManager : NetworkBehaviour
     }
     public void AddItem(int itemId){
         //Stacking
+        int layerIndex = gameObject.layer;
+        Debug.Log(LayerMask.LayerToName(layerIndex));
         ItemScript item = FindItemById(itemId);
         bool stop = false;
         //Debug.Log(itemId);

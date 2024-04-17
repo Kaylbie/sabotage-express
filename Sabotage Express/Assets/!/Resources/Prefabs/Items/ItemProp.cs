@@ -10,12 +10,13 @@ public class ItemProp : Interactable
 
     protected override void Interact(GameObject player)
     {
-        if (!IsOwner) return;
+        //if (!IsOwner) return;
         Debug.Log($"Interacted with {itemScript.itemName}");
         InventoryManager inventory = player.GetComponent<InventoryManager>();
         if (inventory != null)
         {
             inventory.AddItem(itemScript.itemID);
+            
             DestroyItemServerRpc();
         }
         else
