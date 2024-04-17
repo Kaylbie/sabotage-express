@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class BoxManager : MonoBehaviour
+public class BoxManager : NetworkBehaviour
 {
     [SerializeField] private RoundLock roundLock;
     [SerializeField] private RotatePanel rotatePanel;
@@ -15,8 +16,7 @@ public class BoxManager : MonoBehaviour
 
     void Start()
     {
-        GameObject obj = Instantiate(objectToSpawn, spanwpoint.transform);
-        obj.transform.localPosition = new Vector3(0, 0, 0);
+        SpawnObjectServerRpc();
     }
 
     void Update()
@@ -27,5 +27,12 @@ public class BoxManager : MonoBehaviour
 
         }
         rotatePanel.enabled = unlocked;
+    }
+
+    [ServerRpc]
+    private void SpawnObjectServerRpc()
+    {
+        GameObject obj = Instantiate(objectToSpawn, spanwpoint.transform);
+        obj.transform.localPosition = new Vector3(0, 0, 0);
     }
 }

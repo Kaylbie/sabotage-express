@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : NetworkBehaviour
 {
@@ -93,10 +94,10 @@ public class InventoryManager : NetworkBehaviour
     }
     public void RequestAddItemToHand(string itemName)
     {
-        AddItemToHand(itemName);
+        AddItemToHandServerRpc(itemName);
     }
-    
-    void AddItemToHand(String name){
+    [ServerRpc(RequireOwnership = false)]
+    void AddItemToHandServerRpc(String name){
         string prefabPath = "Prefabs/Items/"+name;
         GameObject prefab = LoadPrefab(prefabPath);
         if (prefab != null)
@@ -147,12 +148,11 @@ public class InventoryManager : NetworkBehaviour
         mainInventoryUI.SetActive(true);
       
     }
-    [ServerRpc(RequireOwnership = false)]
-    public void AddItemServerRpc(int itemId){
+    public void AddItem(int itemId){
         //Stacking
         ItemScript item = FindItemById(itemId);
         bool stop = false;
-        Debug.Log(itemId);
+        //Debug.Log(itemId);
         if (item != null)
         {
             for (int i=0; i<inventorySlots.Length;i++){
@@ -174,8 +174,9 @@ public class InventoryManager : NetworkBehaviour
                     Slot slot=inventorySlots[i];
                     Item itemInSlot = slot.GetComponentInChildren<Item>();
                     if (itemInSlot==null){
-                        InsertItem(item,slot);
+                        InsertItemServerRpc(item.itemID,i);
                         selectSlot(selecetedSlot);
+                        Debug.Log("inserted item");
                         break;
                         
                     }
@@ -193,16 +194,27 @@ public class InventoryManager : NetworkBehaviour
     {
         return ItemDatabase.Instance.FindItemById(itemId);
     }
-    void InsertItem(ItemScript item,Slot slot){
+    
+    [ServerRpc]
+    void InsertItemServerRpc(int itemID,int i)
+    {
+        
+        Slot slot = inventorySlots[i];
         GameObject newItemGameObject = Instantiate(ItemPrefab,slot.transform);
-        Item inventoryItem = newItemGameObject.GetComponent<Item>();
-        if(inventoryItem!=null){
-            inventoryItem.InitializeItem(item);
-        }
-        else
-        {
-            Debug.LogError("Fix inventory item prefab");
-            
-        }
+        newItemGameObject.GetComponent<Image>().sprite=FindItemById(itemID).image;
+        newItemGameObject.GetComponent<Item>().item = FindItemById(itemID);
+
+        //Item inventoryItem = newItemGameObject.GetComponent<Item>();
+        // if(inventoryItem!=null){
+        //     
+        //     //inventoryItem.InitializeItemClientRpc();
+        //     
+        //     Debug.Log("item not null");
+        // }
+        // else
+        // {
+        //     Debug.LogError("Fix inventory item prefab");
+        //     
+        // }
     }
 }

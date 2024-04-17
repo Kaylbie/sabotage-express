@@ -21,10 +21,21 @@ public class Item : NetworkBehaviour, IBeginDragHandler,IDragHandler,IEndDragHan
 
     void Update()
     {
-        if (!IsOwner) return;
+        
     }
-
-    public void InitializeItem(ItemScript newItem){
+    private ItemScript FindItemById(int itemId)
+    {
+        Debug.Log("Found item with NAME - " + ItemDatabase.Instance.FindItemById(itemId).itemName);
+        return ItemDatabase.Instance.FindItemById(itemId);
+    }
+    [ClientRpc]
+    public void InitializeItemClientRpc()
+    {
+        Debug.Log("started to initialize item");
+        ItemScript newItem=FindItemById(1);
+        
+        Debug.Log(1+"NEW ITEM ID");
+        Debug.Log(newItem.itemID);
         item=newItem;
         image.sprite=newItem.image;
         RefreshAmount();

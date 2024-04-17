@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 23598256546927380}
   - component: {fileID: -4007177520196908393}
   - component: {fileID: 6912280129760738950}
+  - component: {fileID: -8064837262183109018}
   - component: {fileID: 5699134065662472379}
   m_Layer: 6
   m_Name: Glock
@@ -304,6 +305,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.027766205, y: 0.13337004, z: 0.22312883}
   m_Center: {x: 0.00002830103, y: -0.021096118, z: 0.016558815}
+--- !u!114 &-8064837262183109018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669814075106190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3458113033
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &5699134065662472379
 MonoBehaviour:
   m_ObjectHideFlags: 0
