@@ -4808,7 +4808,7 @@ MonoBehaviour:
     TimeResyncInterval: 30
     EnsureNetworkVariableLengthSafety: 0
     EnableSceneManagement: 1
-    ForceSamePrefabs: 1
+    ForceSamePrefabs: 0
     RecycleNetworkIds: 1
     NetworkIdRecycleDelay: 120
     RpcHashSize: 0
@@ -6277,6 +6277,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2090534195938953753, guid: 79b206f3d5b0ea045a80be27d2756cab, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2044138045
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090534195938953753, guid: 79b206f3d5b0ea045a80be27d2756cab, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2379406693
+      objectReference: {fileID: 0}
     - target: {fileID: 2868926710851697753, guid: 79b206f3d5b0ea045a80be27d2756cab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.199001
@@ -6409,6 +6417,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2090534195938953753, guid: 79b206f3d5b0ea045a80be27d2756cab, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 745661707
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090534195938953753, guid: 79b206f3d5b0ea045a80be27d2756cab, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2379406693
+      objectReference: {fileID: 0}
     - target: {fileID: 2868926710851697753, guid: 79b206f3d5b0ea045a80be27d2756cab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 45.384
@@ -6566,6 +6582,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2090534195938953753, guid: 79b206f3d5b0ea045a80be27d2756cab, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 527822262
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090534195938953753, guid: 79b206f3d5b0ea045a80be27d2756cab, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2379406693
+      objectReference: {fileID: 0}
     - target: {fileID: 2868926710851697753, guid: 79b206f3d5b0ea045a80be27d2756cab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 35.59
