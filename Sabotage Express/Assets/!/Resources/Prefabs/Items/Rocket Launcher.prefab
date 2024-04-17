@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4741522490371062}
   - component: {fileID: 33264368347999310}
   - component: {fileID: 23835518130363506}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Rocket_Launcher_01_Iron_Sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4434633679123496}
   - component: {fileID: 33915248036543834}
   - component: {fileID: 23675464014335906}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Rocket_Launcher_01_Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 5207152353291716722}
   - component: {fileID: 8857132361022346356}
   - component: {fileID: -8962371838897945992}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Rocket Launcher
   m_TagString: Gun
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1736240682890783693}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: HandPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

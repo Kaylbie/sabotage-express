@@ -3,60 +3,35 @@ using System.Collections;
 
 public class LightningScript : MonoBehaviour {
 
-	[Header("Light Intensity")]
 	public float minIntensity = 1.0f;
 	public float maxIntensity = 3.0f;
 
-	[Header("Light Duration")]
-	//How long the light should be visible
 	public float lightDuration = 0.025f;
 
-	[Header("Delay Between Flashes")]
-	//Delay between lightning flashes
 	public float minFlashDelay = 0.05f;
 	public float maxFlashDelay = 2.0f;
 
-	[Header("Total Delay")]
-	//Time between ligthing effect
-	//15 seconds default
 	public float minDelay = 5.0f;
 	public float maxDelay = 15.0f;
 
-	//Total delay time
 	float delay;
-	//Delay time between lightning one
-	//and lightning two
 	float flashDelay;
 
 	bool isWaiting = false;
 
-	[Header("Background Color")]
-	//Default background color
 	public Color mainBackgroundColor;
-	//Lightning background color
 	public Color lightningBackgroundColor;
 
-	[Header("Lightning Size")]
-	//Minimum size of the lightning sprite
 	public float minSize;
-	//Maximum size of the lightning sprite
 	public float maxSize;
 
-	[Header("Components")]
-	//Gun camera
 	public Camera gunCamera;
-	//The light component
 	public Light lightObject;
-	//Audio source
 	public AudioSource lightningSound;
 
-	//Array holding the lightning sprites
 	public Sprite[] lightningSprites;
-	//Sprite renderer
 	public SpriteRenderer lightningSpriteRenderer;
 
-	//Position and scale values for 
-	//the lightning sprite renderer
 	float x;
 	float y;
 	Vector3 lightningPos;

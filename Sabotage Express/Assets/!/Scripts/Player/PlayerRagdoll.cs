@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerRagdoll : MonoBehaviour
 {
-    // Start is called before the first frame update
     private GameObject rig;
     Collider[] ragDollColliders;
     private Rigidbody[] limbsRigidbodies;
@@ -18,20 +17,17 @@ public class PlayerRagdoll : MonoBehaviour
         RagdollModeOff();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
     void GetRagdollBits()
     {
-        // Get all colliders, then filter out the one attached to the GameObject with a CharacterController
         var allColliders = rig.GetComponentsInChildren<Collider>();
         var characterController = rig.GetComponent<CharacterController>();
 
         if (characterController != null)
         {
-            // Exclude the CharacterController's collider from ragDollColliders
             ragDollColliders = allColliders.Where(col => col != characterController).ToArray();
         }
         else

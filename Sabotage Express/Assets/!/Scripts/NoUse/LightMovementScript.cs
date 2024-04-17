@@ -6,7 +6,6 @@ public class LightMovementScript : MonoBehaviour {
 	Vector3 StartPos;
 	Vector3 randomPos;
 
-	//Min and max light intensity values
 	public float minIntensity = 0.25f;
 	public float maxIntensity = 0.5f;
 
@@ -14,7 +13,6 @@ public class LightMovementScript : MonoBehaviour {
 	float TimeSinceRandomRefresh = 9999.0f;
 
 	private void Start ()	{
-		//Start at lights position
 		StartPos = transform.position;
 		random = Random.Range(0.0f, 25000.0f);
 	}

@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-public class BlockSpawner : MonoBehaviour
+public class BlockSpawner : NetworkBehaviour
 {
     public GameObject[] spawnPoints;
     [SerializeField] public GameObject blockParent;
@@ -27,14 +29,36 @@ public class BlockSpawner : MonoBehaviour
     private int score = 0;
     private bool gameOver = true;
     [SerializeField] private GameObject door;
-
-    [SerializeField] bool accessGranted = false;
+    //[SerializeField] bool accessGranted = false;
+    private NavMeshObstacle obstacle;
+    
+    
+    private NetworkVariable<bool> accessGranted = new NetworkVariable<bool>();
 
     private void Start()
     {
         InitializePool();
+        obstacle= door.GetComponent<NavMeshObstacle>();
+        accessGranted.OnValueChanged += HandleAccessGrantedChanged;
     }
-
+    [ServerRpc(RequireOwnership = false)]
+    public void SetDoorStateServerRpc(bool isOpen)
+    {
+        accessGranted.Value = isOpen;
+        UpdateDoorState();
+    }
+    private void HandleAccessGrantedChanged(bool oldValue, bool newValue)
+    {
+        UpdateDoorState();
+    }
+    private void UpdateDoorState()
+    {
+        door.GetComponent<Animator>().SetBool("IsOpen", accessGranted.Value);
+    }
+    private void OnDestroy()
+    {
+        accessGranted.OnValueChanged -= HandleAccessGrantedChanged;
+    }
     private void Update()
     {
         if (mistakes >= errorFeedback.Length || score >= scoreToBeat)
@@ -44,8 +68,9 @@ public class BlockSpawner : MonoBehaviour
             ClearFeedback();
             if (score >= scoreToBeat)
             {
-                accessGranted = true;
+                SetDoorStateServerRpc(true);
                 ShowSuccess();
+                obstacle.enabled = false;
                 foreach (GameObject gameObject in fallingPool)
                 {
                     ReturnBlockToPool(gameObject);
@@ -65,13 +90,9 @@ public class BlockSpawner : MonoBehaviour
             }
         }
         ShowMistakes();
-        door.GetComponent<Animator>().SetBool("IsOpen", accessGranted);
+        //door.GetComponent<Animator>().SetBool("IsOpen", accessGranted);
     }
-
-    public bool IsAccessGranted()
-    {
-        return accessGranted;
-    }
+    
     private void ShowMistakes()
     {
         for (int i = 0; i < mistakes; i++)

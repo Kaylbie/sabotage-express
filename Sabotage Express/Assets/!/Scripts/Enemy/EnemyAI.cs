@@ -11,7 +11,10 @@ public class EnemyAI : MonoBehaviour
     public float attackRate = 2f;
     public int attackDamage = 10;
     public float wanderRadius = 7f; 
-    public float wanderInterval = 4f; 
+    public float wanderInterval = 4f;
+    private LeverManager leverManager;
+    private GameObject lever;
+    
 
     private Transform targetPlayer;
     private NavMeshAgent agent;
@@ -22,7 +25,12 @@ public class EnemyAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = attackRange - 0.5f;
-        
+        leverManager = GameObject.Find("LeverEntity").GetComponent<LeverManager>();
+        if (leverManager != null)
+        {
+            
+            //Debug.Log("found");
+        }
     }
 
     private void Update()
@@ -42,9 +50,20 @@ public class EnemyAI : MonoBehaviour
             }
             else
             {
-                Wander();
+                
+                if (leverManager.isActivated == true)
+                {
+                    MoveTowardsTarget(leverManager.transform);
+                }
+                else
+                {
+                    Wander();
+                }
             }
         }
+        
+        
+        
     }
 
     Transform FindClosestPlayer()
@@ -92,7 +111,6 @@ public class EnemyAI : MonoBehaviour
             lastAttackTime = Time.time;
             Debug.Log($"Enemy attacks {target.name}!");
             target.GetComponent<Player>().TakeDamage(attackDamage);
-            // attack logic 
         }
     }
 

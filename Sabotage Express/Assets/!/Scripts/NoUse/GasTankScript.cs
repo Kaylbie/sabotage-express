@@ -8,34 +8,18 @@ public class GasTankScript : MonoBehaviour {
 
 	bool routineStarted = false;
 
-	//Used to check if the gas tank 
-	//has been hit
 	public bool isHit = false;
 
-	[Header("Prefabs")]
-	//Explosion prefab
 	public Transform explosionPrefab;
-	//The destroyed gas tank prefab
 	public Transform destroyedGasTankPrefab;
 
-	[Header("Customizable Options")]
-	//Time before the gas tank explodes, 
-	//after being hit
 	public float explosionTimer;
-	//How fast the gas tank rotates
 	public float rotationSpeed;
-	//The maximum rotation speed of the
-	//gast tank
 	public float maxRotationSpeed;
-	//How fast the gast tank moves
 	public float moveSpeed;
-	//How fast the audio pitch should increase
 	public float audioPitchIncrease = 0.5f;
 
-	[Header("Explosion Options")]
-	//How far the explosion will reach
 	public float explosionRadius = 12.5f;
-	//How powerful the explosion is
 	public float explosionForce = 4000.0f;
 
 	[Header("Light")]
@@ -48,13 +32,10 @@ public class GasTankScript : MonoBehaviour {
 	[Header("Audio")]
 	public AudioSource flameSound;
 	public AudioSource impactSound;
-	//Used to check if the audio has played
 	bool audioHasPlayed = false;
 	
 	private void Start () {
-		//Make sure the light is off at start
 		lightObject.intensity = 0;
-		//Get a random value for the rotation
 		randomValue = Random.Range (-50, 50);
 	}
 

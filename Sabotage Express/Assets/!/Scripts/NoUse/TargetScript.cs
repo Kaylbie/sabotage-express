@@ -6,16 +6,11 @@ public class TargetScript : MonoBehaviour {
 	float randomTime;
 	bool routineStarted = false;
 
-	//Used to check if the target has been hit
 	public bool isHit = false;
 
-	[Header("Customizable Options")]
-	//Minimum time before the target goes back up
 	public float minTime;
-	//Maximum time before the target goes back up
 	public float maxTime;
 
-	[Header("Audio")]
 	public AudioClip upSound;
 	public AudioClip downSound;
 
@@ -23,22 +18,17 @@ public class TargetScript : MonoBehaviour {
 	
 	private void Update () {
 		
-		//Generate random time based on min and max time values
 		randomTime = Random.Range (minTime, maxTime);
 
-		//If the target is hit
 		if (isHit == true) 
 		{
 			if (routineStarted == false) 
 			{
-				//Animate the target "down"
 				gameObject.GetComponent<Animation> ().Play("target_down");
 
-				//Set the downSound as current sound, and play it
 				audioSource.GetComponent<AudioSource>().clip = downSound;
 				audioSource.Play();
 
-				//Start the timer
 				StartCoroutine(DelayTimer());
 				routineStarted = true;
 			} 

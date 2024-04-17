@@ -349,6 +349,7 @@ MonoBehaviour:
   attackDamage: 10
   wanderRadius: 7
   wanderInterval: 4
+  lever: {fileID: 0}
 --- !u!195 &4011791390718336315
 NavMeshAgent:
   m_ObjectHideFlags: 0

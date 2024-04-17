@@ -7,6 +7,7 @@ public class NetworkManagerCustom : NetworkBehaviour
 {
     private int nextPlayerId = 1; // Start from 1
     public static NetworkManagerCustom Instance { get; private set; }
+    
 
     private void Awake()
     {

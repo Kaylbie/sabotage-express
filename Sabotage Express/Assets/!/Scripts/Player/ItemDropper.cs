@@ -59,10 +59,8 @@ public class ItemDropper : NetworkBehaviour
             return;
         }
 
-        // Set the layer of the current object
         obj.layer = newLayer;
 
-        // Recursively set the layer of all children
         foreach (Transform child in obj.transform) {
             SetLayerRecursively(child.gameObject, newLayer);
         }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class LeverManager : MonoBehaviour
 {
     [SerializeField] public MovableLever movableLever;
-    [SerializeField] private bool isActivated = false;
+    [SerializeField] public bool isActivated = false;
     [SerializeField] private RotatePanel rotatePanel;
     public void Start()
     {
@@ -16,4 +16,9 @@ public class LeverManager : MonoBehaviour
         rotatePanel.SetIsActivated(movableLever.GetIsConnected());
         isActivated = movableLever.GetIsConnected();
     }
+
+    // public bool GetIsActivated()
+    // {
+    //     return isActivated;
+    // }
 }

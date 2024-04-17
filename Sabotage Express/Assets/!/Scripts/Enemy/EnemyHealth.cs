@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+public class EnemyHealth : NetworkBehaviour
 {
     public int maxHealth = 100;
     private int currentHealth;
@@ -11,19 +12,19 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
     }
-
-    public void TakeDamage(int damage)
+    [ServerRpc]
+    public void TakeDamageServerRpc(int damage)
     {
         currentHealth -= damage;
         Debug.Log($"{gameObject.name} took {damage} damage.");
 
         if (currentHealth <= 0)
         {
-            Die();
+            DieServerRpc();
         }
     }
-
-    void Die()
+    [ServerRpc]
+    void DieServerRpc()
     {
         Debug.Log($"{gameObject.name} died.");
         gameObject.SetActive(false); 
