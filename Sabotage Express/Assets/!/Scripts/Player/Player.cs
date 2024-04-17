@@ -31,11 +31,6 @@ public class Player : NetworkBehaviour
         }
     }
     
-    [ServerRpc]
-    private void setSpawnLocationServerRpc()
-    {
-        transform.position = new Vector3(-5.469f, 0.231f, 1.504f);
-    }
     IEnumerator WaitAndSetLayer()
     {
         yield return new WaitUntil(() => playerId.Value != 0);
@@ -80,7 +75,6 @@ public class Player : NetworkBehaviour
 
     void Start()
     {
-        setSpawnLocationServerRpc();
 
         //int playerCount = NetworkManagerCustom.Instance.getPlayerCount();
         //string layerName = "Player" + playerCount;
